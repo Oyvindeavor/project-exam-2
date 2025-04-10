@@ -3,16 +3,6 @@ export interface Media {
   alt: string
 }
 
-export interface Avatar {
-  url: string
-  alt: string
-}
-
-export interface Banner {
-  url: string
-  alt: string
-}
-
 export interface Meta {
   isFirstPage: boolean
   isLastPage: boolean
@@ -27,8 +17,8 @@ export interface Owner {
   name: string
   email: string
   bio: string
-  avatar: Avatar
-  banner: Banner
+  avatar: Media
+  banner: Media
 }
 
 export interface Location {

@@ -1,15 +1,15 @@
-import { Meta } from './shared'
-import { Booking } from './bookings'
+import { Meta } from '../shared'
+import { Bookings } from '../bookingTypes'
 
 // /holidaze/bookings Get all bookings
 export interface BookingsResponse {
-  data: Booking[]
+  data: Bookings[]
   meta: Meta
 }
 
 // /holidaze/bookings/[id] Get a single booking by id
 export interface BookingSingleResponse {
-  data: Booking
+  data: Bookings
   meta: Meta
 }
 

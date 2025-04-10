@@ -1,7 +1,7 @@
-import { Meta, Media } from './shared'
-import { Profile } from './profiles'
-import { Booking } from './bookings'
-import { Venues } from './venues'
+import { Meta, Media } from '../shared'
+import { Profile } from '../profileTypes'
+import { Bookings } from '../bookingTypes'
+import { Venues } from '../venueTypes'
 
 // /holidaze/profiles Get all profiles
 export interface ProfileResponse {
@@ -18,7 +18,7 @@ export interface ProfileSingleResponse {
 // /holidaze/profiles/[name]/bookings Get all bookings for a profile
 // Response is the same as the bookings in bookings.ts
 export interface ProfileBookingsResponse {
-  data: Booking[]
+  data: Bookings[]
   meta: Meta
 }
 

@@ -1,4 +1,4 @@
-import { Avatar, Banner } from '@/types/api/shared'
+import { Media } from '@/types/api/shared'
 
 export interface loginRequest {
   email: string
@@ -9,8 +9,8 @@ export interface loginResponse {
   data: {
     name: string
     email: string
-    avatar: Avatar
-    banner: Banner
+    avatar: Media
+    banner: Media
     accessToken: string
   }
 }
@@ -20,7 +20,7 @@ export interface registerRequest {
   email: string
   password: string
   bio?: string
-  avatar?: Avatar
-  banner?: Banner
+  avatar?: Media
+  banner?: Media
   venueManager?: boolean
 }

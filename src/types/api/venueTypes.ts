@@ -1,9 +1,4 @@
-import { Media, Owner, MetaVenue, Avatar, Banner, Meta } from './shared'
-
-export interface VenuesResponse {
-  data: Venues
-  meta: Meta
-}
+import { Media, Owner, MetaVenue } from './shared'
 
 export interface Venues {
   id: string
@@ -21,7 +16,7 @@ export interface Venues {
   meta: MetaVenue
 }
 
-interface Booking {
+export interface Booking {
   id: string
   dateFrom: string
   dateTo: string
@@ -31,10 +26,10 @@ interface Booking {
   customer: Customer
 }
 
-interface Customer {
+export interface Customer {
   name: string
   email: string
   bio: string
-  avatar: Avatar
-  banner: Banner
+  avatar: Media
+  banner: Media
 }

@@ -1,11 +1,11 @@
-import { Avatar, Banner, Media, MetaVenue, Location, Count } from './shared'
+import { Media, MetaVenue, Location, Count } from './shared'
 
 export interface Profile {
   name: string
   email: string
   bio: string
-  avatar: Avatar
-  banner: Banner
+  avatar: Media
+  banner: Media
   venueManager: boolean
   venues?: Venues[]
   bookings?: Bookings[]

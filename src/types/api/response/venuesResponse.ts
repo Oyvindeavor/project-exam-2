@@ -1,5 +1,5 @@
-import { Venues } from './venues'
-import { Meta, Media } from './shared'
+import { Venues } from '../venueTypes'
+import { Meta, Media } from '../shared'
 
 // /holidaze/venues Get all venues GET
 export interface VenuesResponse {

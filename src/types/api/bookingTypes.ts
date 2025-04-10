@@ -1,23 +1,18 @@
-import type { Media, Avatar, Banner, Meta, Owner, Location, MetaVenue } from './shared'
+import type { Media, Owner, Location, MetaVenue } from './shared'
 
-export interface BookingsResponse {
-  data: Booking
-  meta: Meta
-}
-
-export interface Booking {
+export interface Bookings {
   id: string
   dateFrom: string
   dateTo: string
   guests: number
   created: string
   updated: string
-  venue?: venue // optional
-  customer?: customer // optional
+  venue?: Venue // optional
+  customer?: Customer // optional
 }
 
 // venue optional parameter if you include _venue
-interface venue {
+interface Venue {
   id: string
   name: string
   description: string
@@ -33,10 +28,10 @@ interface venue {
 }
 
 // customer (customer) _customer
-interface customer {
+interface Customer {
   name: string
   email: string
   bio: string
-  avatar: Avatar
-  banner: Banner
+  avatar: Media
+  banner: Media
 }
