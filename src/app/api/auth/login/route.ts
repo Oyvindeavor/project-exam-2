@@ -1,6 +1,7 @@
 import { ENDPOINTS } from '@/utils/constants/apiConstants'
 import { NextResponse } from 'next/server'
 import type { loginRequest, loginResponse } from '@/types/auth'
+import type { ApiErrorItem } from '@/types/api/errorMessage'
 import { cookies } from 'next/headers'
 
 export async function POST(request: Request) {
@@ -20,7 +21,7 @@ export async function POST(request: Request) {
     })
 
     if (!authResponse.ok) {
-      const errorData = await authResponse.json()
+      const errorData: ApiErrorItem = await authResponse.json()
       return NextResponse.json(
         { error: errorData.message || 'Login failed' },
         { status: authResponse.status }
