@@ -42,7 +42,7 @@ export async function POST(request: Request) {
         sameSite: 'strict',
       })
 
-      return NextResponse.json({ message: 'Login successful', user: loginData }, { status: 200 })
+      return NextResponse.json({ message: 'Login successful' }, { status: 200 })
     } else {
       return NextResponse.json({ error: 'Access token not received' }, { status: 500 })
     }
