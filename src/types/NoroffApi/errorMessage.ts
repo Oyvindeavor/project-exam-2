@@ -4,6 +4,6 @@ export interface ApiError {
   statusCode: number
 }
 
-export interface ApiErrorItem {
+interface ApiErrorItem {
   message: string
 }
