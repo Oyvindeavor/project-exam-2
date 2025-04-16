@@ -1,6 +1,6 @@
-import { Media } from '@/types/api/shared'
+import { Media } from '@/types/NoroffApi/shared'
 
-export interface loginRequest {
+export interface NoroffLoginRequest {
   email: string
   password: string
 }
@@ -12,6 +12,7 @@ export interface loginResponse {
     avatar: Media
     banner: Media
     accessToken: string
+    venueManager?: boolean
   }
 }
 

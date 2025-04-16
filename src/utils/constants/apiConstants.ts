@@ -4,7 +4,7 @@ export const BASE_URL_HOLIDAZE = `${BASE_URL}/holidaze`
 
 export const ENDPOINTS = {
   // AUTH
-  login: `${BASE_URL}/auth/login`,
+  login: `${BASE_URL}/auth/login?_holidaze=true`, // Login endpoint Including the _holidaze optional parameter to get venue manager.
   register: `${BASE_URL}/auth/register`,
 
   // PROFILES
