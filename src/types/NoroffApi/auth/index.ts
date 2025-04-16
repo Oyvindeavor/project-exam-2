@@ -5,7 +5,7 @@ export interface NoroffLoginRequest {
   password: string
 }
 
-export interface loginResponse {
+export interface NoroffloginResponse {
   data: {
     name: string
     email: string

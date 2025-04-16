@@ -1,8 +1,5 @@
-import type {
-  ApiLoginRequestBody,
-  ApiLoginSuccessResponse,
-  ApiLoginErrorResponse,
-} from '@/types/MyApi/auth'
+import type { ApiLoginRequestBody, ApiLoginSuccessResponse } from '@/types/MyApi/auth'
+import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
 
 export type LoginUtilityResult =
   | {
@@ -29,7 +26,7 @@ export default async function Login(email: string, password: string): Promise<Lo
     if (!response.ok) {
       let errorMessage = `Login failed with status: ${response.status}`
       try {
-        const errorData: ApiLoginErrorResponse = await response.json()
+        const errorData: ApiErrorResponse = await response.json()
         errorMessage = errorData.error || errorMessage
       } catch (e) {
         console.error('Could not parse error JSON from /api/auth/login:', e)

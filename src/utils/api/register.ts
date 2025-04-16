@@ -1,8 +1,5 @@
-import type {
-  ApiRegisterSuccessResponse,
-  ApiRegisterErrorResponse,
-  ApiRegisterRequestBody,
-} from '@/types/MyApi/auth'
+import type { ApiRegisterSuccessResponse, ApiRegisterRequestBody } from '@/types/MyApi/auth'
+import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
 
 export default async function Register(
   name: string,
@@ -29,7 +26,7 @@ export default async function Register(
     if (!response.ok) {
       let errorMessage = `Registration failed with status: ${response.status}`
       try {
-        const errorData: ApiRegisterErrorResponse = await response.json()
+        const errorData: ApiErrorResponse = await response.json()
         errorMessage = errorData?.error ?? errorMessage
       } catch (e) {
         console.error('Could not parse error JSON from /api/auth/register:', e)

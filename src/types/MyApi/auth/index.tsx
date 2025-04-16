@@ -11,13 +11,6 @@ export type ApiLoginSuccessResponse = {
 }
 
 /**
- * Shape of the error JSON response FROM the internal /api/auth/login endpoint.
- */
-export type ApiLoginErrorResponse = {
-  error: string
-}
-
-/**
  * Shape of the request body sent TO the internal /api/auth/login endpoint.
  */
 export type ApiLoginRequestBody = {
@@ -34,13 +27,6 @@ export type ApiRegisterSuccessResponse = {
   message: string
   name: string
   venueManager: boolean
-}
-
-/**
- * Shape of the error JSON response FROM the internal /api/auth/register endpoint.
- */
-export type ApiRegisterErrorResponse = {
-  error: string
 }
 
 /**

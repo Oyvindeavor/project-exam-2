@@ -22,7 +22,7 @@ export const getAuthHeaders = async () => {
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
-    'X-API-Key': apiKey || '',
+    'X-Noroff-API-Key': apiKey || '',
   }
 
   if (accessToken) {
