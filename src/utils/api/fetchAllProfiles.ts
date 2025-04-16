@@ -4,9 +4,36 @@ import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
 import type { NoroffApiError } from '@/types/NoroffApi/errorMessage'
 import type { ProfileResponse } from '@/types/NoroffApi/response/profileResponse'
 
-export default async function fetchAllProfiles() {
+interface fetchAllProfilesOptions {
+  sort?: string
+  sortOrder?: 'asc' | 'desc'
+  limit?: number
+  page?: number
+  bookings?: boolean
+  venues?: boolean
+}
+
+export default async function fetchAllProfiles({
+  sort = 'created',
+  sortOrder = 'desc',
+  limit = 10,
+  page = 1,
+  bookings = false,
+  venues = false,
+}: fetchAllProfilesOptions = {}) {
   try {
-    const response = await fetch(`${ENDPOINTS.getProfiles}`, {
+    const queryParams: URLSearchParams = new URLSearchParams()
+    queryParams.append('sort', sort)
+    queryParams.append('sortOrder', sortOrder)
+    queryParams.append('limit', limit.toString())
+    queryParams.append('page', page.toString())
+
+    if (bookings) queryParams.append('_bookings', 'true')
+    if (venues) queryParams.append('_venues', 'true')
+
+    const url = `${ENDPOINTS.getProfiles}?${queryParams.toString()}`
+
+    const response = await fetch(url, {
       method: 'GET',
       headers: await getAuthHeaders(),
     })
