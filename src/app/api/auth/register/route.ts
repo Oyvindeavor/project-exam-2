@@ -1,13 +1,20 @@
 import { NextResponse } from 'next/server'
 import { ENDPOINTS } from '@/utils/constants/apiConstants'
-import type { registerRequest } from '@/types/auth'
-import type { ApiErrorItem } from '@/types/api/errorMessage'
+import type {
+  ApiRegisterRequestBody,
+  ApiRegisterSuccessResponse,
+  ApiRegisterErrorResponse,
+} from '@/types/MyApi/auth'
+import type { ApiError } from '@/types/NoroffApi/errorMessage'
 
 export async function POST(request: Request) {
-  const { name, email, password }: registerRequest = await request.json()
+  const { name, email, password, venueManager }: ApiRegisterRequestBody = await request.json()
 
   if (!name || !email || !password) {
-    return NextResponse.json({ error: 'Name, email, and password are required' }, { status: 400 })
+    const errorResponse: ApiRegisterErrorResponse = {
+      error: 'Name, email, and password are required',
+    }
+    return NextResponse.json(errorResponse, { status: 400 })
   }
 
   try {
@@ -16,20 +23,27 @@ export async function POST(request: Request) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({ name, email, password, venueManager }),
     })
 
     if (!response.ok) {
-      const errorData: ApiErrorItem = await response.json()
-      return NextResponse.json(
-        { error: errorData.message || 'Registration failed' },
-        { status: response.status }
-      )
+      const errorData: ApiError = await response.json()
+      const errorResponse: ApiRegisterErrorResponse = {
+        error: errorData.errors?.[0]?.message || 'Registration failed',
+      }
+      return NextResponse.json(errorResponse, { status: response.status })
     }
 
-    return NextResponse.json({ message: 'Registration successful' }, { status: 201 })
+    const successResponse: ApiRegisterSuccessResponse = {
+      message: 'Registration successful',
+      name,
+      venueManager,
+    }
+
+    return NextResponse.json(successResponse, { status: 201 })
   } catch (error) {
     console.error('Registration error:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    const errorResponse: ApiRegisterErrorResponse = { error: 'Internal server error' }
+    return NextResponse.json(errorResponse, { status: 500 })
   }
 }
