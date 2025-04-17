@@ -14,6 +14,9 @@ export interface Venues {
   owner?: Owner
   bookings?: Booking[]
   meta: MetaVenue
+  _count: {
+    bookings: number
+  }
 }
 
 export interface Booking {

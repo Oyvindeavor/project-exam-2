@@ -1,7 +1,7 @@
-import { Meta, Media } from '../shared'
-import { Profile } from '../profileTypes'
-import { Bookings } from '../bookingTypes'
-import { Venues } from '../venueTypes'
+import { Meta, Media } from '@/types/NoroffApi/shared'
+import { Profile } from '@/types/NoroffApi/profileTypes'
+import { Bookings } from '@/types/NoroffApi/profileTypes'
+import { Venues } from '@/types/NoroffApi/profileTypes'
 
 // /holidaze/profiles Get all profiles
 export interface ProfileResponse {

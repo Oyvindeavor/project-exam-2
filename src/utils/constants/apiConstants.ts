@@ -12,7 +12,7 @@ export const ENDPOINTS = {
   getProfileByName: (name: string) => `${BASE_URL_HOLIDAZE}/profiles/${name}`, // Get a profile by name.
   updateProfileByName: (name: string) => `${BASE_URL_HOLIDAZE}/profiles/${name}`, // Update a profile (bio, venue manager, etc.).
   searchProfiles: (query: string) => `${BASE_URL_HOLIDAZE}/profiles/search?q=${query}`, // Search for profiles.
-  getVenuesByProfile: (name: string) => `${BASE_URL_HOLIDAZE}/profiles/${name}/venues`, // Get venues for a profile.
+  getVenuesByProfileName: (name: string) => `${BASE_URL_HOLIDAZE}/profiles/${name}/venues`, // Get venues for a profile.
   getBookingsByProfile: (name: string) => `${BASE_URL_HOLIDAZE}/profiles/${name}/bookings`, // Get bookings for a profile.
 
   // VENUES

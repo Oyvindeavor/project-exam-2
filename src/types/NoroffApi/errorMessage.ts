@@ -1,4 +1,4 @@
-export interface ApiError {
+export interface NoroffApiError {
   errors: ApiErrorItem[]
   status: string
   statusCode: number
