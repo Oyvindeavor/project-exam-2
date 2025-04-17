@@ -1,4 +1,4 @@
-import type { Media, Owner, Location, MetaVenue } from './shared'
+import type { Media, Owner, Location, MetaVenue, Customer } from './shared'
 
 export interface Bookings {
   id: string
@@ -25,13 +25,4 @@ interface Venue {
   location: Location
   owner: Owner
   meta: MetaVenue
-}
-
-// customer (customer) _customer
-interface Customer {
-  name: string
-  email: string
-  bio: string
-  avatar: Media
-  banner: Media
 }

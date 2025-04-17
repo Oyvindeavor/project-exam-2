@@ -19,6 +19,9 @@ export interface Owner {
   bio: string
   avatar: Media
   banner: Media
+  _count: {
+    bookings: number
+  }
 }
 
 export interface Location {
@@ -41,4 +44,12 @@ export interface MetaVenue {
 export interface Count {
   venues: number
   bookings: number
+}
+
+export interface Customer {
+  name: string
+  email: string
+  bio: string
+  avatar: Media
+  banner: Media
 }

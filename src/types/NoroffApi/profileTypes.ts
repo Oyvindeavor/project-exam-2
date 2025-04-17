@@ -1,4 +1,4 @@
-import { Media, MetaVenue, Location, Count } from './shared'
+import { Media, MetaVenue, Location, Count, Owner, Customer } from './shared'
 
 export interface Profile {
   name: string
@@ -12,8 +12,8 @@ export interface Profile {
   _count: Count
 }
 
-// optional
-interface Venues {
+// optional paramet you can pass
+export interface Venues {
   id: string
   name: string
   description: string
@@ -25,21 +25,29 @@ interface Venues {
   updated: string
   meta: MetaVenue
   location: Location
+  owner?: Owner
+  bookings?: Bookings[]
+  _count: {
+    bookings: number
+  }
 }
 
-// optional
-interface Bookings {
+// optional parameter you can pass
+export interface Bookings {
   id: string
   dateFrom: string
   dateTo: string
   guests: number
   created: string
   updated: string
+  customer: Customer
   venue: Venue
+  _count: {
+    bookings: number
+  }
 }
 
-// belong to bookings
-interface Venue {
+export interface Venue {
   id: string
   name: string
   description: string
@@ -49,6 +57,11 @@ interface Venue {
   rating: number
   created: string
   updated: string
-  location: Location
   meta: MetaVenue
+  location: Location
+  owner: Owner
+  _count: {
+    bookings: number
+  }
+  customer: Customer
 }
