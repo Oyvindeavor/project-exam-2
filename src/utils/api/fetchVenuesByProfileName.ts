@@ -51,7 +51,7 @@ export default async function fetchVenuesByProfileName(
     }
 
     const data: ProfileVenuesResponse = await response.json()
-    return { venues: data.data, meta: data.meta, count: data._count }
+    return { venues: data.data, meta: data.meta }
   } catch (error) {
     console.error('Unexpected error fetching venues:', error)
     return { error: { error: 'An unexpected error occurred while fetching venues' } }
