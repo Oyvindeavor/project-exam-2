@@ -1,4 +1,4 @@
-import { Media, Owner, MetaVenue } from './shared'
+import { Media, Owner, MetaVenue, Location } from './shared'
 
 export interface Venues {
   id: string
