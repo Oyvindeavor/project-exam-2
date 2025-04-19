@@ -2,7 +2,7 @@
 
 import searchVenues from '@/utils/api/venues/searchVenues'
 
-export async function searchVenuesAction(prevState: any, formData: FormData) {
+export async function searchVenuesAction(prevState: unknown, formData: FormData) {
   const query = formData.get('q') as string
   if (!query) return { venues: [], query: '', message: 'No query provided' }
 
