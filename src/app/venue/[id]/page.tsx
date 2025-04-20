@@ -1,7 +1,8 @@
 import fetchVenueById from '@/utils/api/venues/fetchVenueById'
 import type { VenuesResponseSingle } from '@/types/NoroffApi/response/venuesResponse'
 
-export default async function VenuePage({ params }: { params: { id: string } }) {
+export default async function VenuePage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const { id } = params
   let venueData: VenuesResponseSingle | null = null
   let fetchError: string | null = null
