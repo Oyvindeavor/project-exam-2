@@ -3,6 +3,7 @@
 import { createVenue } from '@/utils/api/venues/createVenue'
 
 import type { CreateVenueRequest } from '@/types/NoroffApi/response/venuesResponse'
+import { revalidatePath } from 'next/cache'
 
 type ActionResult = {
   error?: string
@@ -143,6 +144,8 @@ export default async function createVenueFormAction(
     const message = error instanceof Error ? error.message : 'An unexpected error occurred.'
     return { error: `Submission failed: ${message}` }
   }
+
+  revalidatePath('/profile')
 
   return { error: 'An unexpected error occurred.' }
 }

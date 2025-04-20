@@ -1,5 +1,7 @@
 import LogoutButton from '@/components/LogoutButton'
 import fetchVenuesByProfileName from '@/utils/api/fetchVenuesByProfileName'
+import DeleteVenueButton from '@/components/DeleteVenueFormButton'
+import CreateVenueForm from '@/components/CreateVenueForm'
 import Link from 'next/link'
 import { cookies } from 'next/headers'
 export default async function Profile() {
@@ -20,6 +22,8 @@ export default async function Profile() {
               <Link href={`/venue/edit/${venue.id}`}>
                 <button className='ml-2 text-sm text-gray-500'>Edit</button>
               </Link>
+
+              <DeleteVenueButton id={venue.id} />
             </li>
           ))}
         </ul>
@@ -27,6 +31,7 @@ export default async function Profile() {
         <p className='mt-4'>No venues found for this profile.</p>
       )}
       <LogoutButton />
+      <CreateVenueForm />
     </div>
   )
 }
