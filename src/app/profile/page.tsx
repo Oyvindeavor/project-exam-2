@@ -3,6 +3,7 @@ import fetchVenuesByProfileName from '@/utils/api/fetchVenuesByProfileName'
 import DeleteVenueButton from '@/components/DeleteVenueFormButton'
 import CreateVenueForm from '@/components/CreateVenueForm'
 import fetchBookingById from '@/utils/api/bookings/fetchBookingById'
+import UpdateBookingForm from '@/components/updateBookingForm'
 import Link from 'next/link'
 import { cookies } from 'next/headers'
 export default async function Profile() {
@@ -40,9 +41,11 @@ export default async function Profile() {
       <p>Booking by id:</p>
       <h1>{data?.id}</h1>
       <h1>{data?.dateTo}</h1>
+      <h2>max Guests: {data?.guests}</h2>
 
       <LogoutButton />
       <CreateVenueForm />
+      {data && <UpdateBookingForm booking={data} />}
     </div>
   )
 }
