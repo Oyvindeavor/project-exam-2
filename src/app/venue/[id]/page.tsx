@@ -1,8 +1,9 @@
 import fetchVenueById from '@/utils/api/venues/fetchVenueById'
 import type { VenuesResponseSingle } from '@/types/NoroffApi/response/venuesResponse'
+import CreateBookingForm from '@/components/CreateBookingForm'
 
 export default async function VenuePage(props: { params: Promise<{ id: string }> }) {
-  const params = await props.params;
+  const params = await props.params
   const { id } = params
   let venueData: VenuesResponseSingle | null = null
   let fetchError: string | null = null
@@ -10,7 +11,7 @@ export default async function VenuePage(props: { params: Promise<{ id: string }>
   console.log(`VenuePage: Fetching data for venue ID: ${id} using external function`)
 
   try {
-    const { venue, meta } = await fetchVenueById(id, { _owner: true })
+    const { venue, meta } = await fetchVenueById(id, { _owner: true, _bookings: true })
     venueData = { data: venue, meta: meta }
     console.log(`VenuePage: Successfully fetched venue ${id}`)
   } catch (error) {
@@ -77,6 +78,20 @@ export default async function VenuePage(props: { params: Promise<{ id: string }>
       <p>Continent: {venueData.data.location.continent}</p>
       <p>Lat: {venueData.data.location.lat}</p>
       <p>Lng: {venueData.data.location.lng}</p>
+
+      <h2>Bookings</h2>
+      {venueData.data.bookings && venueData.data.bookings.length > 0 ? (
+        <>
+          <p>Bookings id: {venueData.data.bookings[0].id}</p>
+          <p>Booking by: {venueData.data.bookings[0].customer.name}</p>
+          <p>From: {venueData.data.bookings[0].dateFrom}</p>
+          <p>To: {venueData.data.bookings[0].dateTo}</p>
+        </>
+      ) : (
+        <p>No bookings available</p>
+      )}
+
+      <CreateBookingForm venueId={venueData.data.id} />
     </div>
   )
 }
