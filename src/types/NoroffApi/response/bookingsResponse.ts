@@ -51,3 +51,12 @@ export interface UpdateBookingResponse {
   }
   meta: Meta
 }
+
+export interface DeleteBookingRequest {
+  id: string
+}
+
+export interface DeleteBookingResponse {
+  success: boolean
+  status: number
+}
