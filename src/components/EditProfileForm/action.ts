@@ -1,6 +1,6 @@
 'use server'
 
-import updateProfileByName from '@/utils/api/updateProfileByName'
+import updateProfileByName from '@/utils/api/profiles/updateProfileByName'
 import type { UpdateProfileRequest } from '@/types/NoroffApi/response/profileResponse'
 import { revalidatePath } from 'next/cache'
 

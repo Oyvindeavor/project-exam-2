@@ -1,6 +1,6 @@
 'use server'
 
-import Register from '@/utils/api/register'
+import Register from '@/utils/api/auth/register'
 import { redirect } from 'next/navigation'
 
 type ActionResult = {
