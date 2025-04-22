@@ -4,6 +4,7 @@ import DeleteVenueButton from '@/components/DeleteVenueFormButton'
 import CreateVenueForm from '@/components/CreateVenueForm'
 import fetchBookingById from '@/utils/api/bookings/fetchBookingById'
 import UpdateBookingForm from '@/components/updateBookingForm'
+import DeleteBookingButton from '@/components/DeleteBookingButton'
 import Link from 'next/link'
 import { cookies } from 'next/headers'
 export default async function Profile() {
@@ -11,7 +12,7 @@ export default async function Profile() {
   const profileName = cookieStore.get('name')?.value
 
   const { venues } = await fetchVenuesByProfileName(profileName as string)
-  const { data } = await fetchBookingById('bdb3f1f3-6eb6-469c-bd7d-200e0c2ebff8', {
+  const { data } = await fetchBookingById('725335f3-d19b-4596-9be0-d69e9ce2f0aa', {
     _customer: true,
     _venue: true,
   })
@@ -42,6 +43,7 @@ export default async function Profile() {
       <h1>{data?.id}</h1>
       <h1>{data?.dateTo}</h1>
       <h2>max Guests: {data?.guests}</h2>
+      {data?.id && <DeleteBookingButton bookingId={data.id} />}
 
       <LogoutButton />
       <CreateVenueForm />
