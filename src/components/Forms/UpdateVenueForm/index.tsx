@@ -2,7 +2,10 @@
 
 import React, { useActionState, useEffect } from 'react'
 import { useFormStatus } from 'react-dom'
-import { updateVenueAction, UpdateVenueFormState } from '@/components/UpdateVenueForm/venueActions'
+import {
+  updateVenueAction,
+  UpdateVenueFormState,
+} from '@/components/Forms/UpdateVenueForm/updateVenueActions'
 import type { VenuesResponseSingle } from '@/types/NoroffApi/response/venuesResponse'
 
 interface UpdateVenueFormProps {

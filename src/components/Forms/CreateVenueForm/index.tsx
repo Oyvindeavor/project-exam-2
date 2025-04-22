@@ -1,8 +1,8 @@
 'use client'
 
 import { useActionState } from 'react'
-import createVenueFormAction from './action'
-import { CreateVenueButton } from './createVenueButton'
+import createVenueFormAction from './createVenueFormAction'
+import { CreateVenueButton } from './CreateVenueButton'
 
 export default function CreateVenueForm() {
   const [state, formAction] = useActionState(createVenueFormAction, {

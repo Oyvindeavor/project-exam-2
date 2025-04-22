@@ -2,7 +2,7 @@
 
 import { useActionState } from 'react'
 import CreateBookingButton from './CreateBookingButton'
-import createBookingFormAction from './action'
+import createBookingFormAction from './createBookingFormAction'
 
 const initialState: { error?: string } = { error: undefined }
 
@@ -47,13 +47,3 @@ export default function CreateBookingForm({ venueId }: CreateBookingFormProps) {
     </form>
   )
 }
-
-// function CreateBookingButton() {
-//   const { pending } = useFormStatus()
-
-//   return (
-//     <button type='submit' className='btn btn-primary w-100' disabled={pending}>
-//       {pending ? 'Creating Booking…' : 'Create Booking'}
-//     </button>
-//   )
-// }
