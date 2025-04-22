@@ -1,4 +1,4 @@
-import { getAuthHeaders } from '@/utils/getAuthHeaders'
+import { getAuthHeaders } from '@/utils/auth/getAuthHeaders'
 import { ENDPOINTS } from '@/utils/constants/apiConstants'
 import type { NoroffApiError } from '@/types/NoroffApi/errorMessage'
 import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
@@ -36,7 +36,7 @@ export default async function fetchBookingById(
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to fetch booking',
       }
-      console.warn('Error fetching booking:', errorMessage.error)
+      console.log('Error fetching booking:', errorMessage.error)
       return {
         data: null,
         meta: null,
@@ -47,7 +47,7 @@ export default async function fetchBookingById(
     const data = json as BookingSingleResponse
     return { data: data.data, meta: data.meta, error: null }
   } catch (err) {
-    console.error('Unexpected error fetching booking:', err)
+    console.log('Unexpected error fetching booking:', err)
     return {
       data: null,
       meta: null,

@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation'
 import Login from '@/utils/api/login'
-import { setAuthCookies } from '@/utils/setCookies'
+import { setAuthCookies } from '@/utils/auth/setCookies'
 
 type ActionResult = {
   error?: string

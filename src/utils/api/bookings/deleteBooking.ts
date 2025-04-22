@@ -1,4 +1,4 @@
-import { getAuthHeaders } from '@/utils/getAuthHeaders'
+import { getAuthHeaders } from '@/utils/auth/getAuthHeaders'
 import { ENDPOINTS } from '@/utils/constants/apiConstants'
 import type { NoroffApiError } from '@/types/NoroffApi/errorMessage'
 import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
@@ -25,7 +25,7 @@ export default async function deleteBooking(
       status: response.status,
     }
   } catch (error) {
-    console.error('Error deleting booking:', error)
+    console.log('Error deleting booking:', error)
     throw error
   }
 }

@@ -29,7 +29,7 @@ export default async function Login(email: string, password: string): Promise<Lo
         const errorData: ApiErrorResponse = await response.json()
         errorMessage = errorData.error || errorMessage
       } catch (e) {
-        console.error('Could not parse error JSON from /api/auth/login:', e)
+        console.log('Could not parse error JSON from /api/auth/login:', e)
       }
       return { ok: false, status: response.status, error: errorMessage }
     }
@@ -37,7 +37,7 @@ export default async function Login(email: string, password: string): Promise<Lo
     const data: ApiLoginSuccessResponse = await response.json()
     return { ok: true, status: response.status, data }
   } catch (error) {
-    console.error('Network or fetch error during login utility:', error)
+    console.log('Network or server error during login:', error)
     return {
       ok: false,
       status: 500,

@@ -1,5 +1,5 @@
-import { getAuthHeaders } from '@/utils/getAuthHeaders'
-import { ENDPOINTS } from '../constants/apiConstants'
+import { getAuthHeaders } from '@/utils/auth/getAuthHeaders'
+import { ENDPOINTS } from '../../constants/apiConstants'
 import type { NoroffApiError } from '@/types/NoroffApi/errorMessage'
 import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
 import type { ProfileSingleResponse } from '@/types/NoroffApi/response/profileResponse'
@@ -32,14 +32,14 @@ export default async function fetchProfileByName(
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to fetch profile',
       }
-      console.error('Error fetching profile:', errorResponse.errors)
+      console.log('Error fetching profile:', errorResponse.errors)
       return { error: errorMessage }
     }
 
     const data: ProfileSingleResponse = await response.json()
     return { profile: data.data, meta: data.meta }
   } catch (error) {
-    console.error('Unexpected error fetching profile:', error)
+    console.log('Unexpected error fetching profile:', error)
     return { error: { error: 'An unexpected error occurred' } }
   }
 }

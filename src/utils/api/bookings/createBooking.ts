@@ -1,4 +1,4 @@
-import { getAuthHeaders } from '@/utils/getAuthHeaders'
+import { getAuthHeaders } from '@/utils/auth/getAuthHeaders'
 import { ENDPOINTS } from '@/utils/constants/apiConstants'
 import type { NoroffApiError } from '@/types/NoroffApi/errorMessage'
 import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
@@ -22,14 +22,14 @@ export default async function createBooking(
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to create booking',
       }
-      console.error('Error creating booking:', errorResponse.errors)
+      console.log('Error creating booking:', errorResponse.errors)
       return errorMessage
     } else {
       const data: CreateBookingResponse = await response.json()
       return data
     }
   } catch (error) {
-    console.error('Error creating booking:', error)
+    console.log('Error creating booking:', error)
     return { error: 'An unexpected error occurred' }
   }
 }

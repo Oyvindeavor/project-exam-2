@@ -1,5 +1,5 @@
 import { ENDPOINTS } from '@/utils/constants/apiConstants'
-import { getAuthHeaders } from '@/utils/getAuthHeaders'
+import { getAuthHeaders } from '@/utils/auth/getAuthHeaders'
 import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
 import type { NoroffApiError } from '@/types/NoroffApi/errorMessage'
 import type { ProfileVenuesResponse } from '@/types/NoroffApi/response/profileResponse'
@@ -46,14 +46,14 @@ export default async function fetchVenuesByProfileName(
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to fetch venues',
       }
-      console.error('Error fetching venues:', errorResponse.errors)
+      console.log('Error fetching venues:', errorResponse.errors)
       return { error: errorMessage }
     }
 
     const data: ProfileVenuesResponse = await response.json()
     return { venues: data.data, meta: data.meta }
   } catch (error) {
-    console.error('Unexpected error fetching venues:', error)
+    console.log('Unexpected error fetching venues:', error)
     return { error: { error: 'An unexpected error occurred while fetching venues' } }
   }
 }

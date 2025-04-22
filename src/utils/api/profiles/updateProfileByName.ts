@@ -1,4 +1,4 @@
-import { getAuthHeaders } from '@/utils/getAuthHeaders'
+import { getAuthHeaders } from '@/utils/auth/getAuthHeaders'
 import { ENDPOINTS } from '@/utils/constants/apiConstants'
 import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
 import type { NoroffApiError } from '@/types/NoroffApi/errorMessage'
@@ -25,14 +25,14 @@ export default async function updateProfileByName(
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to update profile',
       }
-      console.error('Error updating profile:', errorResponse.errors)
+      console.log('Error updating profile:', errorResponse.errors)
       return errorMessage
     }
 
     const updatedData: UpdateProfileResponse = await response.json()
     return updatedData
   } catch (error) {
-    console.error('Error updating profile:', error)
+    console.log('Error updating profile:', error)
     throw error
   }
 }

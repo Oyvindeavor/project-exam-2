@@ -1,4 +1,4 @@
-import { getAuthHeaders } from '@/utils/getAuthHeaders'
+import { getAuthHeaders } from '@/utils/auth/getAuthHeaders'
 import { ENDPOINTS } from '@/utils/constants/apiConstants'
 import type { CreateVenueRequest } from '@/types/NoroffApi/response/venuesResponse'
 import type { CreateVenueResponse } from '@/types/NoroffApi/response/venuesResponse'
@@ -28,7 +28,7 @@ export async function createVenue(
     const errorMessage: ApiErrorResponse = {
       error: errorResponse.errors?.[0]?.message || 'Failed to create venue',
     }
-    console.error('Error creating venue:', errorResponse.errors)
+    console.log('Error creating venue:', errorResponse.errors)
     console.log('Error message:', errorMessage)
     throw new Error(errorMessage.error)
   }

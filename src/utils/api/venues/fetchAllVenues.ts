@@ -1,4 +1,4 @@
-import { getAuthHeaders } from '@/utils/getAuthHeaders'
+import { getAuthHeaders } from '@/utils/auth/getAuthHeaders'
 import { ENDPOINTS } from '@/utils/constants/apiConstants'
 import type { VenuesResponse } from '@/types/NoroffApi/response/venuesResponse'
 import type { NoroffApiError } from '@/types/NoroffApi/errorMessage'
@@ -40,7 +40,7 @@ export default async function fetchAllVenues({
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to fetch venues',
       }
-      console.error('Error fetching venues:', errorResponse.errors)
+      console.log('Error fetching venues:', errorResponse.errors)
       console.log('Error message:', errorMessage)
       throw new Error(errorMessage.error)
     }
@@ -48,7 +48,7 @@ export default async function fetchAllVenues({
     const data: VenuesResponse = await response.json()
     return { venues: data.data, meta: data.meta }
   } catch (error) {
-    console.error('Error fetching venues:', error)
+    console.log('Error fetching venues:', error)
     throw error
   }
 }

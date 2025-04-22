@@ -1,4 +1,4 @@
-import { getAuthHeaders } from '@/utils/getAuthHeaders'
+import { getAuthHeaders } from '@/utils/auth/getAuthHeaders'
 import { ENDPOINTS } from '@/utils/constants/apiConstants'
 import type {
   UpdateVenueRequest,
@@ -25,14 +25,14 @@ export default async function updateVenueById(
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to update venue',
       }
-      console.error('Error updating venue:', errorResponse.errors)
+      console.log('Error updating venue:', errorResponse.errors)
       return errorMessage
     }
 
     const updatedData: UpdateVenueResponse = await response.json()
     return updatedData
   } catch (error) {
-    console.error('Error updating venue:', error)
+    console.log('Error updating venue:', error)
     throw error
   }
 }

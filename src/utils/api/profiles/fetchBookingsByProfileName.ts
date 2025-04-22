@@ -1,28 +1,28 @@
-import { getAuthHeaders } from '@/utils/getAuthHeaders'
+import { getAuthHeaders } from '@/utils/auth/getAuthHeaders'
 import { ENDPOINTS } from '@/utils/constants/apiConstants'
 import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
 import type { NoroffApiError } from '@/types/NoroffApi/errorMessage'
-import type { SearchProfileResponse } from '@/types/NoroffApi/response/profileResponse'
+import type { ProfileBookingsResponse } from '@/types/NoroffApi/response/profileResponse'
 
-interface SearchProfilesOptions {
+interface FetchBookingsOptions {
   sort?: string
   sortOrder?: 'asc' | 'desc'
   limit?: number
   page?: number
-  bookings?: boolean
-  venues?: boolean
+  customer?: boolean
+  venue?: boolean
 }
 
-export default async function searchProfiles(
-  query: string,
+export default async function fetchBookingsByProfile(
+  name: string,
   {
     sort = 'created',
     sortOrder = 'desc',
     limit = 10,
     page = 1,
-    bookings = false,
-    venues = false,
-  }: SearchProfilesOptions = {}
+    customer = false,
+    venue = false,
+  }: FetchBookingsOptions = {}
 ) {
   try {
     const queryParams: URLSearchParams = new URLSearchParams()
@@ -31,10 +31,10 @@ export default async function searchProfiles(
     queryParams.append('limit', limit.toString())
     queryParams.append('page', page.toString())
 
-    if (bookings) queryParams.append('_bookings', 'true')
-    if (venues) queryParams.append('_venues', 'true')
-    const baseUrl = ENDPOINTS.searchProfiles(query)
-    const url = `${baseUrl}&${queryParams.toString()}`
+    if (customer) queryParams.append('_customer', 'true')
+    if (venue) queryParams.append('_venue', 'true')
+
+    const url = `${ENDPOINTS.getBookingsByProfile(name)}?${queryParams.toString()}`
 
     const response = await fetch(url, {
       method: 'GET',
@@ -44,17 +44,16 @@ export default async function searchProfiles(
     if (!response.ok) {
       const errorResponse: NoroffApiError = await response.json()
       const errorMessage: ApiErrorResponse = {
-        error: errorResponse.errors?.[0]?.message || 'Failed to fetch profiles',
+        error: errorResponse.errors?.[0]?.message || 'Failed to fetch bookings for profile',
       }
-      console.error('Error fetching profiles:', errorResponse.errors)
+      console.log('Error fetching bookings:', errorResponse.errors)
       return { error: errorMessage }
     }
 
-    const data: SearchProfileResponse = await response.json()
-    console.log('Data:', data)
-    return { profiles: data.data, meta: data.meta }
+    const data: ProfileBookingsResponse = await response.json()
+    return { bookings: data.data, meta: data.meta }
   } catch (error) {
-    console.error('Error fetching profiles:', error)
+    console.log('Error fetching bookings:', error)
     throw error
   }
 }
