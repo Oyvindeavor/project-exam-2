@@ -1,4 +1,3 @@
-// LocationMap.tsx
 'use client'
 import { Map as GoogleMap, APIProvider, Marker } from '@vis.gl/react-google-maps'
 import styles from './map.module.scss'
