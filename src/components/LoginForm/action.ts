@@ -1,7 +1,7 @@
 'use server'
 
 import { redirect } from 'next/navigation'
-import Login from '@/utils/api/login'
+import Login from '@/utils/api/auth/login'
 import { setAuthCookies } from '@/utils/auth/setCookies'
 
 type ActionResult = {

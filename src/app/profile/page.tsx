@@ -1,5 +1,5 @@
 import LogoutButton from '@/components/LogoutButton'
-import fetchVenuesByProfileName from '@/utils/api/fetchVenuesByProfileName'
+import fetchVenuesByProfileName from '@/utils/api/profiles/fetchVenuesByProfileName'
 import DeleteVenueButton from '@/components/DeleteVenueFormButton'
 import CreateVenueForm from '@/components/CreateVenueForm'
 import fetchBookingById from '@/utils/api/bookings/fetchBookingById'
