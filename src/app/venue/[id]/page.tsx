@@ -1,12 +1,14 @@
 import fetchVenueById from '@/utils/api/venues/fetchVenueById'
 import type { VenuesResponseSingle } from '@/types/NoroffApi/response/venuesResponse'
 import CreateBookingForm from '@/components/CreateBookingForm'
+import LocationMap from '@/components/Map'
 
 export default async function VenuePage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params
   const { id } = params
   let venueData: VenuesResponseSingle | null = null
   let fetchError: string | null = null
+  const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY // Getting api key from env Server side
 
   console.log(`VenuePage: Fetching data for venue ID: ${id} using external function`)
 
@@ -92,6 +94,18 @@ export default async function VenuePage(props: { params: Promise<{ id: string }>
       )}
 
       <CreateBookingForm venueId={venueData.data.id} />
+
+      <h2>Location Map</h2>
+      {venueData.data.location.lat && venueData.data.location.lng ? (
+        <LocationMap
+          lat={venueData.data.location.lat}
+          lng={venueData.data.location.lng}
+          zoom={14}
+          apiKey={googleMapsApiKey || ''}
+        />
+      ) : (
+        <p>Location coordinates not available</p>
+      )}
     </div>
   )
 }
