@@ -1,7 +1,7 @@
 import fetchVenueById from '@/utils/api/venues/fetchVenueById'
 import type { VenuesResponseSingle } from '@/types/NoroffApi/response/venuesResponse'
-import CreateBookingForm from '@/components/CreateBookingForm'
-import LocationMap from '@/components/Map'
+import CreateBookingForm from '@/components/Forms/CreateBookingForm'
+import LocationMap from '@/components/LocationMap'
 
 export default async function VenuePage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params

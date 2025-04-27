@@ -4,6 +4,7 @@ import React, { useActionState, useEffect } from 'react'
 import { useFormStatus } from 'react-dom'
 import { updateBookingAction, UpdateBookingFormState } from './updateBookingFormAction'
 import type { BookingSingleResponse } from '@/types/NoroffApi/response/bookingsResponse'
+import DatePickerInput from '../../DatePickerInput/DatePickerInput'
 
 interface UpdateBookingFormProps {
   booking: BookingSingleResponse['data']
@@ -19,6 +20,9 @@ function SubmitButton() {
 }
 
 export default function UpdateBookingForm({ booking }: UpdateBookingFormProps) {
+  // Extracting id from the booking by venue
+  const venueId = booking.venue?.id
+
   const initialState: UpdateBookingFormState = {
     message: '',
     errors: {},
@@ -86,7 +90,7 @@ export default function UpdateBookingForm({ booking }: UpdateBookingFormProps) {
       )}
       {/* General Message Display  */}
       {state?.message && !state.success && !state.errors?.apiError && (
-        <div className='alert alert-warning' role='alert'>
+        <div className='alert alert-danger' role='alert'>
           {state.message}
         </div>
       )}
@@ -98,7 +102,7 @@ export default function UpdateBookingForm({ booking }: UpdateBookingFormProps) {
       )}
 
       {/* Date From */}
-      <div className='mb-3'>
+      {/* <div className='mb-3'>
         <label htmlFor='dateFrom' className='form-label'>
           Check-in Date
         </label>
@@ -116,10 +120,20 @@ export default function UpdateBookingForm({ booking }: UpdateBookingFormProps) {
             {state?.errors.dateFrom.join(', ')}
           </div>
         )}
-      </div>
+      </div> */}
+
+      <DatePickerInput
+        id='dateFrom'
+        label='Check-in Date'
+        name='dateFrom'
+        defaultValue={getDefaultValue('dateFrom') as string}
+        error={state?.errors?.dateFrom}
+        required
+        venueId={venueId ?? ''}
+      />
 
       {/* Date To */}
-      <div className='mb-3'>
+      {/* <div className='mb-3'>
         <label htmlFor='dateTo' className='form-label'>
           Check-out Date
         </label>
@@ -137,7 +151,16 @@ export default function UpdateBookingForm({ booking }: UpdateBookingFormProps) {
             {state?.errors.dateTo.join(', ')}
           </div>
         )}
-      </div>
+      </div> */}
+      <DatePickerInput
+        id='dateTo'
+        label='Check-out Date'
+        name='dateTo'
+        defaultValue={getDefaultValue('dateTo') as string}
+        error={state?.errors?.dateTo}
+        required
+        venueId={venueId ?? ''}
+      />
 
       {/* Guests */}
       <div className='mb-3'>

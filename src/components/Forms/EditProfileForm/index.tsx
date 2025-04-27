@@ -1,7 +1,7 @@
 'use client'
 
 import { useActionState } from 'react'
-import { editProfileAction } from './action'
+import { editProfileAction } from './editProfileAction'
 import { useState, useEffect } from 'react'
 
 export default function EditProfileForm({ name }: { name: string }) {
