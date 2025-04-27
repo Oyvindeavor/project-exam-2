@@ -2,7 +2,7 @@
 
 import { useActionState } from 'react'
 import { useFormStatus } from 'react-dom'
-import { deleteBookingFormAction } from './DeleteBookingFormAction'
+import { deleteBookingFormAction } from './deleteBookingFormAction'
 
 type ActionState = {
   error?: string
