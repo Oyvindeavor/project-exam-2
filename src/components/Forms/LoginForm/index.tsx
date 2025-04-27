@@ -2,7 +2,7 @@
 'use client'
 
 import { useFormStatus } from 'react-dom'
-import { loginFormAction } from './action'
+import { loginFormAction } from './loginFormAction'
 import { useActionState } from 'react'
 
 const initialState: { error?: string } = { error: undefined }

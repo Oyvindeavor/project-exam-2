@@ -2,7 +2,7 @@
 
 import { useFormStatus } from 'react-dom'
 import { useActionState } from 'react'
-import registerFormAction from './action'
+import registerFormAction from './registerFormAction'
 
 const initialState: { error?: string } = { error: undefined }
 

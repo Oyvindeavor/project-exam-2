@@ -1,5 +1,5 @@
 export const API_KEY = process.env.EXTERNAL_API_KEY
-export const BASE_URL = process.env.EXTERNAL_API_BASE_URL
+export const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
 export const BASE_URL_HOLIDAZE = `${BASE_URL}/holidaze`
 
 export const ENDPOINTS = {
