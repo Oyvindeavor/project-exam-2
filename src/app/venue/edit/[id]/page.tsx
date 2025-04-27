@@ -1,5 +1,5 @@
 import React from 'react'
-import UpdateVenueForm from '@/components/UpdateVenueForm'
+import UpdateVenueForm from '@/components/Forms/UpdateVenueForm'
 
 import fetchVenueById from '@/utils/api/venues/fetchVenueById'
 import type { VenuesResponseSingle } from '@/types/NoroffApi/response/venuesResponse'
@@ -11,7 +11,7 @@ interface EditVenuePageProps {
 }
 
 export default async function EditVenuePage(props: EditVenuePageProps) {
-  const params = await props.params;
+  const params = await props.params
   const { id } = params
   let venueData: VenuesResponseSingle['data'] | null = null
   let fetchError: string | null = null

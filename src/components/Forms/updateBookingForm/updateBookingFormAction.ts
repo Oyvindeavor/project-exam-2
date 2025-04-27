@@ -2,28 +2,13 @@
 
 import { revalidatePath } from 'next/cache'
 
-import { z } from 'zod'
+import { updateBookingSchema } from './updateBookingSchema'
 import updateBooking from '@/utils/api/bookings/updateBooking'
 import type {
   UpdateBookingRequest,
   UpdateBookingResponse,
 } from '@/types/NoroffApi/response/bookingsResponse'
 import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
-
-// --- Zod Schema for Validation ---
-const bookingSchema = z
-  .object({
-    dateFrom: z.string().min(1, 'Date From is required').date('Invalid date format'),
-    dateTo: z.string().min(1, 'Date To is required').date('Invalid date format'),
-    guests: z.coerce
-      .number({ invalid_type_error: 'Guests must be a number' })
-      .int('Guests must be a whole number')
-      .positive('Guests must be positive'),
-  })
-  .refine((data) => new Date(data.dateFrom) < new Date(data.dateTo), {
-    message: 'End date must be after start date',
-    path: ['dateTo'],
-  })
 
 export interface UpdateBookingFormState {
   message: string
@@ -52,7 +37,7 @@ export async function updateBookingAction(
   }
 
   // --- Validate Data ---
-  const validatedFields = bookingSchema.safeParse(rawFormData)
+  const validatedFields = updateBookingSchema.safeParse(rawFormData)
 
   const fieldValuesForState: Partial<UpdateBookingRequest> = {
     dateFrom: rawFormData.dateFrom,
@@ -101,8 +86,7 @@ export async function updateBookingAction(
     revalidatePath('/profile')
     revalidatePath(`/bookings`)
     revalidatePath(`/bookings/${bookingId}`)
-
-    // --- Redirect on Success ---
+    
   } catch (error) {
     console.error('Network or unexpected error during updateBooking call:', error)
     let errorMessage = 'An unexpected error occurred during the update.'

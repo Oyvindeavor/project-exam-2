@@ -2,7 +2,8 @@
 
 import { useActionState } from 'react'
 import CreateBookingButton from './CreateBookingButton'
-import createBookingFormAction from './action'
+import createBookingFormAction from './createBookingFormAction'
+import DatePickerInput from '../../DatePickerInput/DatePickerInput'
 
 const initialState: { error?: string } = { error: undefined }
 
@@ -20,19 +21,39 @@ export default function CreateBookingForm({ venueId }: CreateBookingFormProps) {
       {/* VENUE ID */}
       <input type='hidden' name='venueId' value={venueId} />
 
-      <div className='mb-3'>
+      {/* <div className='mb-3'>
         <label htmlFor='dateFrom' className='form-label'>
           Date From
         </label>
         <input type='date' name='dateFrom' id='dateFrom' className='form-control' required />
-      </div>
+      </div> */}
 
-      <div className='mb-3'>
+      <DatePickerInput
+        id='dateFrom'
+        label='Date From'
+        name='dateFrom'
+        defaultValue={undefined}
+        error={state?.error ? [state.error] : undefined}
+        required
+        venueId={venueId ?? ''}
+      />
+
+      {/* <div className='mb-3'>
         <label htmlFor='dateTo' className='form-label'>
           Date To
         </label>
         <input type='date' name='dateTo' id='dateTo' className='form-control' required />
-      </div>
+      </div> */}
+
+      <DatePickerInput
+        id='dateTo'
+        label='Date To'
+        name='dateTo'
+        defaultValue={undefined}
+        error={state?.error ? [state.error] : undefined}
+        required
+        venueId={venueId ?? ''}
+      />
 
       <div className='mb-3'>
         <label htmlFor='guests' className='form-label'>
@@ -47,13 +68,3 @@ export default function CreateBookingForm({ venueId }: CreateBookingFormProps) {
     </form>
   )
 }
-
-// function CreateBookingButton() {
-//   const { pending } = useFormStatus()
-
-//   return (
-//     <button type='submit' className='btn btn-primary w-100' disabled={pending}>
-//       {pending ? 'Creating Booking…' : 'Create Booking'}
-//     </button>
-//   )
-// }
