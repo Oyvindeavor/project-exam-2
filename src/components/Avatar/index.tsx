@@ -1,11 +1,10 @@
-// src/components/Avatar/index.tsx (or Avatar.tsx)
 'use client'
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styles from './Avatar.module.scss'
-import AvatarSkeleton from './AvatarSkeleton' // Import Skeleton here
-import LogoutButton from '../LogoutButton'
+import AvatarSkeleton from './AvatarSkeleton'
+import LogoutButton from '@/components/LogoutButton'
 
 interface AvatarProps {
   avatarUrl: string
@@ -13,7 +12,6 @@ interface AvatarProps {
 }
 
 export default function Avatar({ avatarUrl, altText = 'User avatar' }: AvatarProps) {
-  // State to track if Bootstrap dropdown JS is ready *within this component*
   const [isBootstrapReady, setIsBootstrapReady] = useState(false)
 
   useEffect(() => {
@@ -28,21 +26,21 @@ export default function Avatar({ avatarUrl, altText = 'User avatar' }: AvatarPro
       })
       .catch((error) => {
         console.error('Avatar: Failed to load Bootstrap JS:', error)
-        if (isMounted) setIsBootstrapReady(true) // Decide error handling
+        if (isMounted) setIsBootstrapReady(true)
       })
     return () => {
       isMounted = false
     }
   }, [])
 
-  // --- Render Skeleton Internally if Bootstrap isn't ready ---
+  // Render Skeleton Internally if Bootstrap isn't ready
   if (!isBootstrapReady) {
     console.log('Avatar: Rendering Skeleton (Waiting for Bootstrap internally)')
     // This component renders its own skeleton initially
     return <AvatarSkeleton />
   }
 
-  // --- Render the actual component structure once Bootstrap JS is loaded ---
+  // Render the actual component structure once Bootstrap JS is loaded
   console.log('Avatar: Rendering full dropdown component.')
   return (
     <div className={`dropdown ${styles.avatarDropdown}`}>
@@ -62,7 +60,7 @@ export default function Avatar({ avatarUrl, altText = 'User avatar' }: AvatarPro
           height={40}
         />
       </button>
-      {/* ... rest of the dropdown menu items ... */}
+      {/* Dropdown menu */}
       <ul
         className='dropdown-menu dropdown-menu-end text-small shadow-sm'
         aria-labelledby='dropdownUserMenu'

@@ -1,18 +1,15 @@
-// src/components/HamburgerMenu/HamburgerMenuWrapper.tsx
 import dynamic from 'next/dynamic'
-import styles from './HamburgerMenu.module.scss' // Ensure path is correct
+import styles from './HamburgerMenu.module.scss' 
 import { isUserLoggedIn } from '@/utils/auth/isUserLoggedIn'
 import { fetchLoggedInUser } from '@/utils/auth/fetchLoggedInUser'
 
-// Define the loading component/element for the dynamic import phase
-// This JSX should visually match LoadingSkeleton in HamburgerMenu.tsx
 const loadingComponent = () => <div className={styles.hamburgerLoading}></div>
 
 // Dynamically import the main HamburgerMenu component
 const HamburgerMenu = dynamic(
-  () => import('./index'), // Assuming './index' exports your HamburgerMenu component
+  () => import('./index'), 
   {
-    loading: loadingComponent, // Shows while JS bundle is loading
+    loading: loadingComponent, 
   }
 )
 

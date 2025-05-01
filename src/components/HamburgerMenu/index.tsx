@@ -2,8 +2,7 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-import { LogIn, UserPlus, User, Settings, LogOut } from 'lucide-react'
+import { LogIn, UserPlus, User, Settings} from 'lucide-react'
 import styles from './HamburgerMenu.module.scss'
 import LogoutButton from '../LogoutButton'
 
@@ -105,16 +104,6 @@ export default function HamburgerMenu({ avatarUrl, profileName, isLoggedIn }: Ha
                   <Link href='/settings' className={`nav-link ${styles.userLink}`}>
                     <Settings size={18} /> Settings
                   </Link>
-                  {/* <button
-                    className={styles.logoutButton}
-                    onClick={() => {
-                      // Add your logout function here
-                      console.log('Logout clicked')
-                    }}
-                  >
-                    <LogOut size={18} /> Logout
-                  </button> */}
-
                   <LogoutButton />
                 </div>
               </div>
