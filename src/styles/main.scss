@@ -49,8 +49,10 @@
 // @import "~bootstrap/scss/popover";
 // @import "~bootstrap/scss/carousel";
 // @import "~bootstrap/scss/spinners";
-// @import "~bootstrap/scss/offcanvas"; // Requires transitions
+@import '~bootstrap/scss/offcanvas'; // Requires transitions
 // @import "~bootstrap/scss/placeholders";
+@import '~bootstrap/scss/dropdown';
+@import '~bootstrap/scss/nav';
 
 // 5. Include utilities API last
 @import '~bootstrap/scss/helpers';

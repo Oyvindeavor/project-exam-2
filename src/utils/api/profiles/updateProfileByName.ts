@@ -6,6 +6,7 @@ import type {
   UpdateProfileResponse,
   UpdateProfileRequest,
 } from '@/types/NoroffApi/response/profileResponse'
+import { revalidateTag } from 'next/cache'
 
 export default async function updateProfileByName(
   name: string,
@@ -29,6 +30,7 @@ export default async function updateProfileByName(
       return errorMessage
     }
 
+    revalidateTag('logged-in-user') // refetches the logged-in user data
     const updatedData: UpdateProfileResponse = await response.json()
     return updatedData
   } catch (error) {

@@ -11,7 +11,7 @@ type CookieData = {
 export async function setAuthCookies({ accessToken, name, venueManager }: CookieData) {
   const cookieStore = await cookies()
   const isProduction = process.env.NODE_ENV === 'production'
-  const cookieMaxAge = 60 * 60 // 1 hour
+  const cookieMaxAge = 60 * 60 * 24 //
 
   const accessTokenCookieOptions = {
     httpOnly: true,
