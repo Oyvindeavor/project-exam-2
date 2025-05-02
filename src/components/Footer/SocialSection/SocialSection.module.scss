@@ -1,0 +1,11 @@
+.socialLogo {
+  transition: all 0.3s ease;
+  width: 40px;
+  height: 40px;
+  &:hover {
+    transform: scale(1.1);
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+}
