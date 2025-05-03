@@ -10,10 +10,10 @@ export default async function NavBar() {
   const isLoggedIn = await isUserLoggedIn()
 
   return (
-    <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
+    <nav className='navbar navbar-expand-lg '>
       <div className='container'>
         {/* Logo */}
-        <Link href='/' className='navbar-brand d-flex align-items-center'>
+        <Link href='/' className='navbar-brand '>
           <Key className='me-2' width={32} height={32} />
           <span className='fs-4'>Holidaze</span>
         </Link>

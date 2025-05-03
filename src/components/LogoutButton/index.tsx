@@ -29,7 +29,7 @@ export default function LogoutButton() {
   }
 
   return (
-    <button className='btn btn-danger' onClick={handleLogout} disabled={isLoading}>
+    <button className='btn btn-outline-danger' onClick={handleLogout} disabled={isLoading}>
       {isLoading ? 'Logging out...' : 'Logout'}
       <LogOut className='ms-2' />
     </button>
