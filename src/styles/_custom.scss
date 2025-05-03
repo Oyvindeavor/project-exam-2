@@ -79,8 +79,6 @@ a:not(.btn):not(.nav-link):not(.dropdown-item):not(.navbar-brand):active,
   border-bottom: var(--bs-border-width) solid var(--bs-border-color);
   box-shadow: none !important;
   background-color: rgba(255, 255, 255, 0.8) !important;
-  -webkit-backdrop-filter: blur(5px); /* Safari support */
-  backdrop-filter: blur(5px);
 }
 .navbar-brand {
   color: var(--bs-dark) !important;
