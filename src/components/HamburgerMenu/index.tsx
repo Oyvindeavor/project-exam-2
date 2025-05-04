@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
-import { LogIn, UserPlus, User, Settings} from 'lucide-react'
+import { LogIn, UserPlus, User, Settings } from 'lucide-react'
 import styles from './HamburgerMenu.module.scss'
 import LogoutButton from '../LogoutButton'
 
@@ -34,7 +34,7 @@ export default function HamburgerMenu({ avatarUrl, profileName, isLoggedIn }: Ha
       </button>
 
       <div
-        className='offcanvas offcanvas-end text-bg-dark'
+        className='offcanvas offcanvas-end '
         tabIndex={-1}
         id='offcanvasNavbar'
         aria-labelledby='offcanvasNavbarLabel'
@@ -54,7 +54,7 @@ export default function HamburgerMenu({ avatarUrl, profileName, isLoggedIn }: Ha
         <div className='offcanvas-body'>
           <ul className='navbar-nav justify-content-end flex-grow-1 pe-3 mb-3 mb-lg-0'>
             <li className='nav-item'>
-              <Link href='/venues' className='nav-link'>
+              <Link href='/venues' className='nav-link '>
                 Venues
               </Link>
             </li>
