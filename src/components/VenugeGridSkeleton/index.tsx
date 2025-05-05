@@ -1,10 +1,9 @@
-// app/venues/components/VenueGridSkeleton.tsx
 import React from 'react'
-// Assuming VenueCardSkeleton exists and renders a placeholder for one card
-import VenueCardSkeleton from '@/components/VenueCard/VenueCardSkeleton' // Adjust path
+
+import VenueCardSkeleton from '@/components/VenueCard/VenueCardSkeleton' 
 
 interface VenueGridSkeletonProps {
-  count?: number // Number of skeletons to show
+  count?: number 
 }
 
 export default function VenueGridSkeleton({ count = 8 }: VenueGridSkeletonProps) {

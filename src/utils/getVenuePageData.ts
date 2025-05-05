@@ -42,8 +42,6 @@ export async function getVenuePageData(searchParams: SearchParams): Promise<Venu
   let error: string | null = null
 
   try {
-    // Fetch from the internal API route
-    // Pass down cookies/headers if your API route needs authentication from the original request
 
     const response = await fetch(apiUrl, {
       method: 'GET',
