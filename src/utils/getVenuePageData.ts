@@ -1,4 +1,3 @@
-// app/venues/lib/getVenuePageData.ts
 import type { Venues } from '@/types/NoroffApi/venueTypes'
 import type { Meta } from '@/types/NoroffApi/shared'
 
@@ -42,7 +41,6 @@ export async function getVenuePageData(searchParams: SearchParams): Promise<Venu
   let error: string | null = null
 
   try {
-
     const response = await fetch(apiUrl, {
       method: 'GET',
       cache: 'no-store', // Ensure fresh data for initial load via API route

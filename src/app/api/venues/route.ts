@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
   const query = searchParams.get('q')?.trim() || ''
   const sort = searchParams.get('sort') || 'created'
   const sortOrder = searchParams.get('sortOrder') === 'asc' ? 'asc' : 'desc'
-  const limit = parseInt(searchParams.get('limit') || '10', 10)
+  const limit = parseInt(searchParams.get('limit') || '10', 12)
   const page = parseInt(searchParams.get('page') || '1', 10)
   const _owner = searchParams.get('_owner') === 'true'
   const _bookings = searchParams.get('_bookings') === 'true'
