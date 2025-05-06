@@ -5,7 +5,7 @@ import styles from './HomePageHero.module.scss'
 export default function HeroSearch() {
   return (
     <section
-      className={`${styles.heroSection} container-fluid text-center`}
+      className={`${styles.heroSection} rounded-3 shadow-lg border container-fluid text-center`}
       aria-labelledby='hero-heading'
     >
       <div className={styles.overlay} aria-hidden='true'></div>

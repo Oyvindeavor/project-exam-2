@@ -1,6 +1,7 @@
 import VenueCard from '@/components/VenueCard'
 import fetchAllVenues from '@/utils/api/venues/fetchAllVenues'
 import HeroSearch from '@/components/Hero/HomePageHero'
+import Divider from '@/components/Divider'
 
 export default async function Home() {
   const { venues, meta } = await fetchAllVenues({
@@ -16,6 +17,7 @@ export default async function Home() {
   return (
     <div>
       <HeroSearch />
+      <Divider />
       <div className='container mt-4'>
         <h2 className='text-center mb-4'>Featured Venues</h2>
         <p className='text-center mb-4'>
@@ -29,6 +31,7 @@ export default async function Home() {
             <VenueCard key={venue.id} venue={venue} />
           ))}
         </div>
+        <Divider />
         <div className='d-flex justify-content-center mt-4'>
           <button className='btn btn-primary' disabled={meta.currentPage >= meta.nextPage}>
             Load More
