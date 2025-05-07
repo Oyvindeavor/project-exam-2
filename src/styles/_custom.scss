@@ -78,10 +78,10 @@ a:not(.btn):not(.nav-link):not(.dropdown-item):not(.navbar-brand):active,
 .navbar {
   border-bottom: var(--bs-border-width) solid var(--bs-border-color);
   box-shadow: none !important;
-  background-color: rgba(255, 255, 255, 0.8) !important;
+  background-color: darkcyan !important;
 }
 .navbar-brand {
-  color: var(--bs-dark) !important;
+  color: var(--bs-secondary-color-subtle) !important;
   font-weight: var(--bs-headings-font-weight);
   transition: transform 0.15s ease-out;
 }
@@ -99,4 +99,21 @@ a:not(.btn):not(.nav-link):not(.dropdown-item):not(.navbar-brand):active,
 .form-control::placeholder {
   color: #94a3b8; // slate-400
   opacity: 1;
+}
+
+/* Carousel */
+.carousel-control-prev,
+.carousel-control-next {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+}
+.carousel-control-next {
+  background-image: linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  padding: 1rem;
+  filter: invert(1) grayscale(100) brightness(2);
 }
