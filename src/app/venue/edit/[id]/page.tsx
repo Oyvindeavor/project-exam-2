@@ -20,7 +20,7 @@ export default async function EditVenuePage(props: EditVenuePageProps) {
 
   try {
     const { venue } = await fetchVenueById(id, { _owner: true })
-    venueData = venue
+    venueData = venue ?? null
     console.log(`EditVenuePage: Successfully fetched venue ${id}`)
   } catch (error) {
     console.error(`EditVenuePage: Failed to fetch venue ${id}:`, error)
