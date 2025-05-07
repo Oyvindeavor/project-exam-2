@@ -86,7 +86,6 @@ export async function updateBookingAction(
     revalidatePath('/profile')
     revalidatePath(`/bookings`)
     revalidatePath(`/bookings/${bookingId}`)
-    
   } catch (error) {
     console.error('Network or unexpected error during updateBooking call:', error)
     let errorMessage = 'An unexpected error occurred during the update.'

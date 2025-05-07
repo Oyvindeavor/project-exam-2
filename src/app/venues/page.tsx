@@ -3,6 +3,8 @@ import VenueListServer from '@/components/VenuesList'
 import VenueGridSkeleton from '@/components/VenugeGridSkeleton'
 import HeroSection from '@/components/SearchSortFilter'
 
+// Data fetching is handled in api/venues/route.ts
+
 interface SearchParams {
   q?: string
   sort?: string

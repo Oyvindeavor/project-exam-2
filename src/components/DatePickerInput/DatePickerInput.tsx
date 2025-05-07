@@ -36,7 +36,7 @@ export default function DatePickerInput({
         const response = await fetchVenueById(venueId, {
           _bookings: true,
         })
-        const bookedDates = (response.venue.bookings ?? []).flatMap((booking: Bookings) => {
+        const bookedDates = (response.venue?.bookings ?? []).flatMap((booking: Bookings) => {
           const startDate = new Date(booking.dateFrom)
           const endDate = new Date(booking.dateTo)
           if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
@@ -57,7 +57,6 @@ export default function DatePickerInput({
     fetchBookedDates()
   }, [venueId])
 
-  // Initialize from defaultValue (ISO date string)
   useEffect(() => {
     if (defaultValue) {
       const parsedDate = new Date(defaultValue)

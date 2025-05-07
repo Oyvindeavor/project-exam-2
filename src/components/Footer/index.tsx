@@ -6,7 +6,7 @@ import QuickLinkSection from './QuickLinksSection'
 
 export default function Footer() {
   return (
-    <footer className='bg-light py-5 mt-auto border-top'>
+    <footer className='bg-primary  py-5 mt-auto border-top'>
       <div className='container'>
         <div className='row row-cols-1 row-cols-sm-2 row-cols-md-5'>
           <div className='col mb-3'>

@@ -21,13 +21,6 @@ export default function CreateBookingForm({ venueId }: CreateBookingFormProps) {
       {/* VENUE ID */}
       <input type='hidden' name='venueId' value={venueId} />
 
-      {/* <div className='mb-3'>
-        <label htmlFor='dateFrom' className='form-label'>
-          Date From
-        </label>
-        <input type='date' name='dateFrom' id='dateFrom' className='form-control' required />
-      </div> */}
-
       <DatePickerInput
         id='dateFrom'
         label='Date From'
@@ -37,13 +30,6 @@ export default function CreateBookingForm({ venueId }: CreateBookingFormProps) {
         required
         venueId={venueId ?? ''}
       />
-
-      {/* <div className='mb-3'>
-        <label htmlFor='dateTo' className='form-label'>
-          Date To
-        </label>
-        <input type='date' name='dateTo' id='dateTo' className='form-control' required />
-      </div> */}
 
       <DatePickerInput
         id='dateTo'
