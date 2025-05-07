@@ -1,4 +1,3 @@
-import { getAuthHeaders } from '@/utils/auth/getAuthHeaders'
 import { ENDPOINTS } from '@/utils/constants/apiConstants'
 import type { VenuesResponse } from '@/types/NoroffApi/response/venuesResponse'
 import type { NoroffApiError } from '@/types/NoroffApi/errorMessage'
@@ -34,11 +33,11 @@ export default async function fetchAllVenues({
 
     const url = `${ENDPOINTS.getVenues}?${queryParams.toString()}`
 
-    const headers = await getAuthHeaders()
-
     const fetchOptions: RequestInit & { next?: { revalidate?: number } } = {
       method: 'GET',
-      headers,
+      headers: {
+        'Content-Type': 'application/json',
+      },
     }
 
     if (typeof revalidate === 'number') {
