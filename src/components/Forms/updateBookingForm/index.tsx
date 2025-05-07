@@ -76,11 +76,7 @@ export default function UpdateBookingForm({ booking }: UpdateBookingFormProps) {
   }
 
   return (
-    <form
-      action={formAction}
-      className='w-100 p-4 border rounded shadow-sm bg-light'
-      style={{ maxWidth: 500, margin: '2rem auto' }}
-    >
+    <form action={formAction} className='w-100 p-4 border rounded shadow-sm bg-light'>
       <h2 className='mb-4 text-center'>Update Booking</h2>
       {/* General API Error Display */}
       {state?.errors?.apiError && (

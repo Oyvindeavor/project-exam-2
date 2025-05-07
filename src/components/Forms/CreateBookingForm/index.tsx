@@ -15,7 +15,7 @@ export default function CreateBookingForm({ venueId }: CreateBookingFormProps) {
   const [state, formAction] = useActionState(createBookingFormAction, initialState)
 
   return (
-    <form action={formAction} className='w-100' style={{ maxWidth: 400 }}>
+    <form action={formAction} className='w-100'>
       <h2 className='mb-4'>Create Booking</h2>
 
       {/* VENUE ID */}

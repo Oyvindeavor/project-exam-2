@@ -10,7 +10,7 @@ export default function CreateVenueForm() {
   })
 
   return (
-    <form action={formAction} className='w-100' style={{ maxWidth: 400 }}>
+    <form action={formAction} className='w-100'>
       <h2 className='mb-4'>Create Venue</h2>
 
       {/* Name*/}

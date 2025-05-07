@@ -12,7 +12,7 @@ export default function LoginForm() {
   const [state, formAction] = useActionState(loginFormAction, initialState)
 
   return (
-    <form action={formAction} className='w-100' style={{ maxWidth: 400 }}>
+    <form action={formAction} className='w-100'>
       <h2 className='mb-4'>Login</h2>
 
       <div className='mb-3'>
