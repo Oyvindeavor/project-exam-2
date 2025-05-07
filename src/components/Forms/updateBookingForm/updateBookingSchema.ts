@@ -40,5 +40,3 @@ export const updateBookingSchema = z
       path: ['dateTo'],
     }
   )
-
-// Rest of your action file (interface, function export) remains the same...

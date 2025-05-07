@@ -15,18 +15,11 @@ export default function CreateBookingForm({ venueId }: CreateBookingFormProps) {
   const [state, formAction] = useActionState(createBookingFormAction, initialState)
 
   return (
-    <form action={formAction} className='w-100' style={{ maxWidth: 400 }}>
+    <form action={formAction} className='w-100'>
       <h2 className='mb-4'>Create Booking</h2>
 
       {/* VENUE ID */}
       <input type='hidden' name='venueId' value={venueId} />
-
-      {/* <div className='mb-3'>
-        <label htmlFor='dateFrom' className='form-label'>
-          Date From
-        </label>
-        <input type='date' name='dateFrom' id='dateFrom' className='form-control' required />
-      </div> */}
 
       <DatePickerInput
         id='dateFrom'
@@ -37,13 +30,6 @@ export default function CreateBookingForm({ venueId }: CreateBookingFormProps) {
         required
         venueId={venueId ?? ''}
       />
-
-      {/* <div className='mb-3'>
-        <label htmlFor='dateTo' className='form-label'>
-          Date To
-        </label>
-        <input type='date' name='dateTo' id='dateTo' className='form-control' required />
-      </div> */}
 
       <DatePickerInput
         id='dateTo'

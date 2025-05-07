@@ -75,7 +75,7 @@ export default function UpdateVenueForm({ venue }: UpdateVenueFormProps) {
   }
 
   return (
-    <form action={formAction} className='w-100' style={{ maxWidth: 600, margin: '0 auto' }}>
+    <form action={formAction} className='w-100'>
       <h2 className='mb-4 text-center'>Update Venue: {venue.name}</h2>
       {state.message && !state.success && (
         <div className='alert alert-danger' role='alert'>

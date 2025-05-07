@@ -31,7 +31,9 @@ export default async function fetchVenueById(
       }
       console.log('Error fetching venue:', errorResponse.errors)
       console.log('Error message:', errorMessage)
-      throw new Error(errorMessage.error)
+      return {
+        error: errorMessage.error,
+      }
     }
 
     const data: VenuesResponseSingle = await response.json()

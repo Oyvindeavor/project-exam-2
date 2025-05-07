@@ -4,7 +4,7 @@ import HeroSearch from '@/components/Hero/HomePageHero'
 import Divider from '@/components/Divider'
 
 export default async function Home() {
-  const { venues, meta } = await fetchAllVenues({
+  const { venues } = await fetchAllVenues({
     sort: 'created',
     sortOrder: 'desc',
     limit: 20,
@@ -32,11 +32,6 @@ export default async function Home() {
           ))}
         </div>
         <Divider />
-        <div className='d-flex justify-content-center mt-4'>
-          <button className='btn btn-primary' disabled={meta.currentPage >= meta.nextPage}>
-            Load More
-          </button>
-        </div>
       </div>
     </div>
   )
