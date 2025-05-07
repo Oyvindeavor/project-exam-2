@@ -43,9 +43,9 @@ export default function Avatar({ avatarUrl, altText = 'User avatar' }: AvatarPro
   // Render the actual component structure once Bootstrap JS is loaded
   console.log('Avatar: Rendering full dropdown component.')
   return (
-    <div className={`dropdown ${styles.avatarDropdown}`}>
+    <div className={`dropdown`}>
       <button
-        className={`btn p-0 border-0 rounded-circle dropdown-toggle ${styles.avatarButton}`}
+        className={`btn p-0 border-0 rounded-circle ${styles.avatarButton}`}
         type='button'
         id='dropdownUserMenu'
         data-bs-toggle='dropdown' // This relies on Bootstrap JS

@@ -16,18 +16,6 @@
   }
 }
 
-.avatarButton {
-  line-height: 0;
-  transition:
-    transform 0.2s ease-out,
-    box-shadow 0.2s ease-out;
-  background-color: transparent;
-}
-
-.avatarButton::after {
-  display: none;
-}
-
 .avatarButton:hover,
 .avatarButton:focus-visible {
   transform: scale(1.1);
