@@ -8,7 +8,13 @@ import VenueHeader from '@/app/venue/[id]/_components/VenueHeader'
 import ErrorDisplay from '@/components/ErrorDisplay'
 import NotFoundDisplay from '@/components/NotFoundDisplay'
 
-export default async function VenuePage({ params }: { params: { id: string } }) {
+interface VenuePageProps {
+  params: {
+    id: string
+  }
+}
+
+export default async function VenuePage({ params }: VenuePageProps) {
   const { id } = params
 
   const { venue, error } = await fetchVenueById(id, { _owner: true, _bookings: true })
