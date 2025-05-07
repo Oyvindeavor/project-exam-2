@@ -1,6 +1,10 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import '@/styles/main.scss'
+import NavBar from '@/components/NavBar'
+import Footer from '@/components/Footer'
+import ToastWrapper from '@/components/ToastProvider/ToastWrapper'
+
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -23,7 +27,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>{children}</body>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} d-flex flex-column min-vh-100 bg-light`}
+      >
+        <ToastWrapper>
+          <NavBar />
+          <main className='container-xxl shadow my-4 flex-grow-1'>{children}</main>
+        </ToastWrapper>
+
+        <Footer />
+      </body>
     </html>
   )
 }

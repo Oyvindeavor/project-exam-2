@@ -1,0 +1,33 @@
+.heroSection {
+  position: relative;
+  background-image: url('/hero-background.svg');
+  background-size: cover;
+  background-position: center bottom;
+  min-height: 30vh;
+  display: flex;
+  align-items: center;
+  color: var(--bs-dark);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.3);
+  z-index: 1;
+}
+
+.contentContainer {
+  position: relative;
+  z-index: 2;
+}
+
+.heading {
+  color: var(--bs-dark);
+}
+
+.subtext {
+  color: var(--bs-secondary);
+}

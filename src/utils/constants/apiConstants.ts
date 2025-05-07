@@ -1,10 +1,10 @@
-export const API_KEY = process.env.EXTERNAL_API_KEY!
-export const BASE_URL = process.env.EXTERNAL_API_BASE_URL!
+export const API_KEY = process.env.EXTERNAL_API_KEY
+export const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
 export const BASE_URL_HOLIDAZE = `${BASE_URL}/holidaze`
 
 export const ENDPOINTS = {
   // AUTH
-  login: `${BASE_URL}/auth/login`,
+  login: `${BASE_URL}/auth/login?_holidaze=true`, // Login endpoint Including the _holidaze optional parameter to get venue manager.
   register: `${BASE_URL}/auth/register`,
 
   // PROFILES
@@ -12,7 +12,7 @@ export const ENDPOINTS = {
   getProfileByName: (name: string) => `${BASE_URL_HOLIDAZE}/profiles/${name}`, // Get a profile by name.
   updateProfileByName: (name: string) => `${BASE_URL_HOLIDAZE}/profiles/${name}`, // Update a profile (bio, venue manager, etc.).
   searchProfiles: (query: string) => `${BASE_URL_HOLIDAZE}/profiles/search?q=${query}`, // Search for profiles.
-  getVenuesByProfile: (name: string) => `${BASE_URL_HOLIDAZE}/profiles/${name}/venues`, // Get venues for a profile.
+  getVenuesByProfileName: (name: string) => `${BASE_URL_HOLIDAZE}/profiles/${name}/venues`, // Get venues for a profile.
   getBookingsByProfile: (name: string) => `${BASE_URL_HOLIDAZE}/profiles/${name}/bookings`, // Get bookings for a profile.
 
   // VENUES
