@@ -9,12 +9,13 @@ import ErrorDisplay from '@/components/ErrorDisplay'
 import NotFoundDisplay from '@/components/NotFoundDisplay'
 
 interface VenuePageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
-export default async function VenuePage({ params }: VenuePageProps) {
+export default async function VenuePage(props: VenuePageProps) {
+  const params = await props.params;
   const { id } = params
 
   const { venue, error } = await fetchVenueById(id, { _owner: true, _bookings: true })

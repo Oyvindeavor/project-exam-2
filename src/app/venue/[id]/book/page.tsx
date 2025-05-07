@@ -1,11 +1,12 @@
 import CreateBookingForm from '@/components/Forms/CreateBookingForm'
 
 interface Props {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
-export default async function BookPage({ params }: Props) {
+export default async function BookPage(props: Props) {
+  const params = await props.params;
   const { id } = params
 
   return (

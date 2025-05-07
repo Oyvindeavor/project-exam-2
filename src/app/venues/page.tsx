@@ -16,10 +16,11 @@ interface SearchParams {
 }
 
 interface VenuesPageProps {
-  searchParams: SearchParams
+  searchParams: Promise<SearchParams>
 }
 
-export default function VenuesPage({ searchParams }: VenuesPageProps) {
+export default async function VenuesPage(props: VenuesPageProps) {
+  const searchParams = await props.searchParams;
   // Extract the current search query from searchParams
   const currentQuery = searchParams.q?.trim() || ''
 
