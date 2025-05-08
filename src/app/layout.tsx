@@ -4,6 +4,7 @@ import '@/styles/main.scss'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import ToastWrapper from '@/components/ToastProvider/ToastWrapper'
+import '@/styles/layout.scss'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -32,7 +33,7 @@ export default function RootLayout({
       >
         <ToastWrapper>
           <NavBar />
-          <main className='container-xxl shadow my-4 flex-grow-1'>{children}</main>
+          <main className='mainLayout container flex-grow-1'>{children}</main>
         </ToastWrapper>
 
         <Footer />

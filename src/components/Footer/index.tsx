@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { Key } from 'lucide-react'
 import SocialSection from './SocialSection'
 import AccountSection from './AccountSection'
 import QuickLinkSection from './QuickLinksSection'
@@ -15,10 +14,8 @@ export default function Footer() {
               className='d-flex align-items-center mb-3 text-light text-decoration-none'
               aria-label='Logo'
             >
-              <Key className='me-2' width={32} height={32} />
-              <span className='fs-5'>Holidaze</span>
+              <img src='/logo.svg' alt='Logo' />
             </Link>
-            <p className='text-light'>© 2025 Company, Inc</p>
           </div>
 
           <div className='col mb-3' />

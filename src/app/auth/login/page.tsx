@@ -1,15 +1,8 @@
 import LoginForm from '@/components/Forms/LoginForm'
 
-import Link from 'next/link'
-
 export default function Login() {
   return (
-    <div className='card'>
-      <p>Login</p>
-      <Link href='/'>Home</Link>
-      <Link href='/auth/register'>register</Link>
-      <Link href={'/profile'}>Profile</Link>
-
+    <div style={{ width: 400, margin: '0 auto', padding: 40 }}>
       <LoginForm />
     </div>
   )

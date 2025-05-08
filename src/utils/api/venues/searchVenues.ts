@@ -17,7 +17,7 @@ export default async function searchVenues(
   {
     sort = 'created',
     sortOrder = 'desc',
-    limit = 10,
+    limit = 20,
     page = 1,
     _owner = false,
     _bookings = false,
@@ -37,6 +37,7 @@ export default async function searchVenues(
       headers: {
         'Content-Type': 'application/json',
       },
+      cache: 'no-store',
     })
 
     if (!response.ok) {

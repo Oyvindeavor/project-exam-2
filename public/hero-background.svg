@@ -1,6 +1,20 @@
-<svg width="100%" height="100%" viewBox="0 0 1440 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100%" height="100%" fill="#f8fafc" />
-  <path d="M0,250 C360,150 1080,350 1440,250 L1440,400 L0,400 Z" fill="#0D9488" fill-opacity="0.6" />
-  <path d="M0,300 C480,220 960,380 1440,300 L1440,400 L0,400 Z" fill="#e2e8f0" fill-opacity="0.5" />
-  <path d="M0,350 C600,300 840,400 1440,360 L1440,400 L0,400 Z" fill="#0F766E" fill-opacity="0.4" />
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1920" height="1080" fill="#08504A"/>
+
+  <path opacity="0.7" d="M-200 1080C-50 950 150 700 400 650C650 600 800 750 1000 800C1200 850 1400 700 1650 600C1900 500 2100 650 2200 800V1080H-200Z" fill="#0B6E66"/>
+
+  <path opacity="0.5" d="M-150 1080C0 1000 200 800 450 780C700 760 850 880 1050 900C1250 920 1450 800 1700 750C1950 700 2150 800 2250 900V1080H-150Z" fill="#10A090"/>
+
+  <path opacity="0.8" d="M1200 0C1150 150 1100 280 1250 350C1400 420 1550 300 1700 250C1850 200 1950 350 2000 500L1920 550V0H1200Z" fill="#FFD7C3"/>
+
+  <path opacity="0.6" d="M0 200C50 280 150 350 300 330C450 310 500 200 600 150C700 100 750 50 800 0H0V200Z" fill="#FFD7C3"/>
+
+  <defs>
+    <pattern id="dotPattern" patternUnits="userSpaceOnUse" width="50" height="50">
+      <circle cx="5" cy="5" r="1" fill="rgba(255,255,255,0.1)"/>
+      <circle cx="30" cy="30" r="1" fill="rgba(255,255,255,0.08)"/>
+    </pattern>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#dotPattern)" opacity="0.5"/>
+
 </svg>

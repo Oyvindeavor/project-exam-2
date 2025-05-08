@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { Key } from 'lucide-react'
 import { isUserLoggedIn } from '@/utils/auth/isUserLoggedIn'
 import { Suspense } from 'react'
 import AvatarSkeleton from '@/components/Avatar/AvatarSkeleton'
@@ -14,8 +13,7 @@ export default async function NavBar() {
       <div className='container'>
         {/* Logo */}
         <Link href='/' className='navbar-brand '>
-          <Key className='me-2' width={32} height={32} />
-          <span className='fs-4'>Holidaze</span>
+          <img src='/logo.svg' alt='Logo' className='logo' width={150} height={60} />
         </Link>
 
         {/* Hamburger Button */}
@@ -27,18 +25,18 @@ export default async function NavBar() {
         <div className='collapse navbar-collapse' id='navbarNav'>
           {/* Navigation Links */}
           <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
-            <li className='nav-item'>
-              <Link href='/venues' className='nav-link' aria-current='page'>
+            <li className='nav-item  '>
+              <Link href='/venues' className='nav-link text-light' aria-current='page'>
                 Venues
               </Link>
             </li>
             <li className='nav-item'>
-              <Link href='/about' className='nav-link'>
+              <Link href='/about' className='nav-link text-light'>
                 About
               </Link>
             </li>
             <li className='nav-item'>
-              <Link href='/contact' className='nav-link'>
+              <Link href='/contact' className='nav-link text-light'>
                 Contact
               </Link>
             </li>
@@ -53,10 +51,10 @@ export default async function NavBar() {
             ) : (
               // Display Login/Signup if not logged in
               <>
-                <Link href='/auth/login' className='btn btn-outline-light me-2'>
+                <Link href='/auth/login' className='btn btn-outline-success text-light me-2'>
                   Login
                 </Link>
-                <Link href='/auth/register' className='btn btn-warning'>
+                <Link href='/auth/register' className='btn btn-outline-warning text-light'>
                   Sign-up
                 </Link>
               </>

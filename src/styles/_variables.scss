@@ -1,5 +1,7 @@
 // --- Color Palette ---
-$primary: #0d9488;
+$primary: rgb(11, 110, 102);
+$primary-darker: rgb(8, 88, 82);
+$primary-text: #ffffff;
 $secondary: #64748b;
 $light: #f8fafc;
 $dark: #0f172a;
@@ -21,7 +23,8 @@ $border-width: 1px;
 
 // --- Links ---
 $link-color: $primary;
-$link-hover-color: #0f766e;
+$link-hover-color: $primary-darker;
+$link-hover-decoration: underline;
 
 // --- Shadows ---
 $box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -83,7 +86,6 @@ $card-bg: #fff;
 $nav-link-padding-y: 0.5rem;
 $nav-link-padding-x: 0.75rem;
 
-// --- Alerts ---
-$alert-bg-scale: 0%;
-$alert-border-scale: 0%;
-$alert-color-scale: 0%;
+$alert-bg-scale: -80%;
+$alert-border-scale: -80%;
+$alert-color-scale: 40%;

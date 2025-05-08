@@ -2,18 +2,21 @@
 
 import Link from 'next/link'
 import { useState, useId, KeyboardEvent } from 'react'
+import styles from '../HomePageHero.module.scss'
 
 export default function HeroInput() {
   const [searchInput, setSearchInput] = useState('')
   const searchId = useId()
   const trimmedInput = searchInput.trim()
+
   const searchHref = trimmedInput ? `/venues?q=${encodeURIComponent(trimmedInput)}` : '/venues'
 
   // Handle keyboard navigation for better accessibility
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault()
-      const searchButton = document.querySelector(`a[href="${searchHref}"]`) as HTMLAnchorElement
+
+      const searchButton = document.getElementById('heroSearchButton') as HTMLAnchorElement
       if (searchButton) {
         searchButton.click()
       }
@@ -21,34 +24,38 @@ export default function HeroInput() {
   }
 
   return (
-    <div className='mb-4' role='search' aria-label='Venue search'>
-      <form className='d-flex justify-content-center' onSubmit={(e) => e.preventDefault()}>
-        <div className='input-group'>
+    <div className={styles.heroInputContainer} role='search' aria-label='Venue search'>
+      <form
+        className={`d-flex justify-content-center ${styles.heroInputForm}`}
+        onSubmit={(e) => e.preventDefault()}
+      >
+        <div className={`input-group ${styles.heroInputGroup}`}>
           <label htmlFor={searchId} className='visually-hidden'>
             Search for venues
           </label>
           <input
             type='search'
             id={searchId}
-            className='form-control me-2'
-            placeholder='Search for venues...'
+            className={`form-control ${styles.heroSearchInput}`}
+            placeholder='E.g., "conference center downtown" or "garden wedding"'
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleKeyDown}
             aria-describedby='search-description'
           />
-          <span id='search-description' className='visually-hidden'>
-            Enter keywords to search for venues and press Enter or click the Search button
-          </span>
           <Link
+            id='heroSearchButton'
             href={searchHref}
-            className='btn btn-primary'
+            className={`btn btn-primary ${styles.heroSearchButton}`}
             role='button'
             aria-label='Search venues'
           >
             Search
           </Link>
         </div>
+        <span id='search-description' className='visually-hidden'>
+          Enter keywords to search for venues and press Enter or click the Search button.
+        </span>
       </form>
     </div>
   )

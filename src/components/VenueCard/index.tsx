@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import style from './VenueCard.module.scss'
-import { Star } from 'lucide-react'
+import { Star, MapPin } from 'lucide-react'
 import Amenities from '../Amenities'
 import type { Venues } from '@/types/NoroffApi/venueTypes'
 import LazyVenueImage from './LazyVenueImage'
@@ -11,43 +11,48 @@ interface VenueCardProps {
 
 export default function VenueCard({ venue }: VenueCardProps) {
   return (
-    <div className='col'>
-      <Link href={`/venue/${venue.id}`}>
-        <div
-          className={`${style.card} card shadow-sm border-0 h-100 position-relative overflow-hidden`}
-        >
-          {venue.media.length > 0 ? (
-            <div className='ratio ratio-4x3'>
-              <LazyVenueImage
-                src={venue.media[0].url}
-                className='ratio ratio-4x3 card-img-top object-fit-cover'
-                alt={venue.media[0].alt || 'Venue Image'}
-              />
-            </div>
-          ) : (
-            <div className='bg-secondary ratio ratio-4x3 text-white d-flex justify-content-center align-items-center'>
-              No Image Available
-            </div>
-          )}
-
-          <div className='card-body'>
-            <h5 className='card-title text-truncate fw-semibold'>{venue?.name}</h5>
-            <p className='card-text text-truncate text-muted small'>{venue?.description}</p>
-            <div className='d-flex justify-content-between align-items-center mb-3'>
-              <span className='text-body-primary'>
-                {venue.rating} <Star fill='gold' color='gold' />
+    <Link href={`/venue/${venue.id}`} className='text-decoration-none'>
+      <div
+        className={`${style.card} card border-2 h-100 position-relative overflow-hidden bg-white`}
+      >
+        {venue.media.length > 0 ? (
+          <div className='ratio ratio-16x9 position-relative'>
+            <LazyVenueImage
+              src={venue.media[0].url}
+              className='card-img-top object-fit-cover'
+              alt={venue.media[0].alt || 'Venue Image'}
+            />
+            <div className={`${style.cardOverlay} position-absolute top-0 end-0 p-3`}>
+              <span className='badge bg-white text-primary rounded-pill shadow-sm'>
+                ${venue?.price}
+                <span className='text-muted'>/night</span>
               </span>
-              <span className='text-muted small'>📍 {venue?.location?.city}</span>
-            </div>
-
-            <Amenities amenities={venue.meta} />
-
-            <div className='d-flex justify-content-end'>
-              <span className='fw-bold fs-5 text-primary'>${venue?.price}</span>
             </div>
           </div>
+        ) : (
+          <div className=' bg-light ratio ratio-16x9 text-muted d-flex justify-content-center align-items-center'>
+            No Image Available
+          </div>
+        )}
+        <div className='card-body p-4'>
+          <div className='d-flex justify-content-between align-items-center mb-4'>
+            <h5 className='card-title fw-bold mb-0 text-truncate'>{venue?.name}</h5>
+            <div className='d-flex align-items-center'>
+              <Star size={16} fill='gold' color='gold' className='me-1' />
+              <span className='fw-medium'>{venue.rating}</span>
+            </div>
+          </div>
+
+          <div className='d-flex align-items-center text-muted small mb-3'>
+            <MapPin size={14} className='me-1' />
+            <span>{venue?.location?.city || 'Location not specified'}</span>
+          </div>
+
+          <p className='card-text text-muted small mb-3 text-truncate'>{venue?.description}</p>
+
+          <Amenities amenities={venue.meta} />
         </div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   )
 }

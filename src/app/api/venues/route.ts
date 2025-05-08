@@ -11,12 +11,12 @@ export async function GET(request: NextRequest) {
   const query = searchParams.get('q')?.trim() || ''
   const sort = searchParams.get('sort') || 'created'
   const sortOrder = searchParams.get('sortOrder') === 'asc' ? 'asc' : 'desc'
-  const limit = parseInt(searchParams.get('limit') || '10', 12)
+  const limit = parseInt(searchParams.get('limit') || '10', 18)
   const page = parseInt(searchParams.get('page') || '1', 10)
   const _owner = searchParams.get('_owner') === 'true'
   const _bookings = searchParams.get('_bookings') === 'true'
 
-  const validatedLimit = isNaN(limit) || limit <= 0 ? 10 : limit
+  const validatedLimit = isNaN(limit) || limit <= 0 ? 18 : limit
   const validatedPage = isNaN(page) || page <= 0 ? 1 : page
 
   const isSearch = query.length > 0
@@ -44,6 +44,7 @@ export async function GET(request: NextRequest) {
         page: validatedPage,
         _owner,
         _bookings,
+        revalidate: 0, // No caching here
       })
       response = {
         venues: fetchResponse.venues?.data ?? fetchResponse.venues ?? [],

@@ -37,15 +37,13 @@ export default async function VenueListServer({ searchParams }: VenueListServerP
 
   return (
     <>
-      <div className='row g-4'>
+      <div className='row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 g-3'>
         {venuesData.map((venue) => (
-          <div key={venue.id} className='col-sm-6 col-md-4 col-lg-3'>
+          <div key={venue.id} className=''>
             <VenueCard venue={venue} />
           </div>
         ))}
       </div>
-
-      {/* Render Pagination using fetched metaData */}
       <PaginationControls metaData={metaData} searchParams={searchParams} />
     </>
   )
