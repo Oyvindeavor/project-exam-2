@@ -67,7 +67,7 @@ export default function DatePickerInput({
   }, [defaultValue])
 
   return (
-    <div className='mb-3 '>
+    <div className='mb-3'>
       <label htmlFor={id} className='form-label'>
         {label}
       </label>
@@ -77,14 +77,14 @@ export default function DatePickerInput({
         onChange={(date) => setSelectedDate(date)}
         dateFormat='yyyy-MM-dd'
         className={`form-control ${error?.length ? 'is-invalid' : ''}`}
-        placeholderText='Select a date'
         required={required}
-        minDate={addDays(new Date(), 1)} // this blocks today + all past dates
-        excludeDates={bookedDates} // Exclude booked dates
+        minDate={addDays(new Date(), 1)}
+        excludeDates={bookedDates}
+        placeholderText='Select a date'
       />
 
       {error?.length && <div className='invalid-feedback d-block'>{error.join(', ')}</div>}
-      {/* Hidden input to submit the ISO date string */}
+
       <input
         type='hidden'
         name={name}
