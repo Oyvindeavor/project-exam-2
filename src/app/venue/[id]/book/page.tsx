@@ -1,4 +1,5 @@
 import CreateBookingForm from '@/components/Forms/CreateBookingForm'
+import fetchVenueById from '@/utils/api/venues/fetchVenueById'
 
 interface Props {
   params: Promise<{
@@ -6,16 +7,16 @@ interface Props {
   }>
 }
 export default async function BookPage(props: Props) {
-  const params = await props.params;
+  const params = await props.params
   const { id } = params
 
-  return (
-    <div className='container'>
-      <div className='card'>
-        <h1 className='mb-4'>Book Venue</h1>
-        <p>Venue ID: {id}</p>
+  // Fetch the venue by ID
+  const { venue } = await fetchVenueById(id)
 
-        <CreateBookingForm venueId={id} />
+  return (
+    <div className='container p-4'>
+      <div className=''>
+        <CreateBookingForm venueId={id} venueName={venue?.name} maxGuests={venue?.maxGuests} />
       </div>
     </div>
   )
