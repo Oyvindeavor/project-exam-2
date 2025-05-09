@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useActionState, useEffect } from 'react'
+import React, { useActionState, useEffect, useRef } from 'react'
 import { useFormStatus } from 'react-dom'
 import { updateBookingAction, UpdateBookingFormState } from './updateBookingFormAction'
 import type { BookingSingleResponse } from '@/types/NoroffApi/response/bookingsResponse'
@@ -20,8 +20,8 @@ function SubmitButton() {
 }
 
 export default function UpdateBookingForm({ booking }: UpdateBookingFormProps) {
-  // Extracting id from the booking by venue
   const venueId = booking.venue?.id
+  const formRef = useRef<HTMLFormElement>(null)
 
   const initialState: UpdateBookingFormState = {
     message: '',
@@ -38,6 +38,7 @@ export default function UpdateBookingForm({ booking }: UpdateBookingFormProps) {
     state: UpdateBookingFormState | undefined,
     formData: FormData
   ) => updateBookingAction(booking.id, state ?? initialState, formData)
+
   const [state, formAction] = useActionState(updateBookingActionWithId, initialState)
 
   useEffect(() => {
@@ -49,6 +50,14 @@ export default function UpdateBookingForm({ booking }: UpdateBookingFormProps) {
       console.log('Form Success Message:', state.message)
     }
   }, [state])
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    if (!formRef.current?.checkValidity()) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+    formRef.current?.classList.add('was-validated')
+  }
 
   const getDefaultValue = (fieldName: keyof NonNullable<UpdateBookingFormState['fieldValues']>) => {
     const stateValue = state?.fieldValues?.[fieldName] ?? ''
@@ -76,15 +85,22 @@ export default function UpdateBookingForm({ booking }: UpdateBookingFormProps) {
   }
 
   return (
-    <form action={formAction} className='w-100 p-4 border rounded shadow-sm bg-light'>
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      action={formAction}
+      className='w-100 p-4 border rounded shadow-sm bg-light needs-validation'
+      noValidate
+    >
       <h2 className='mb-4 text-center'>Update Booking</h2>
-      {/* General API Error Display */}
+
+      {/* Server-side error messages */}
       {state?.errors?.apiError && (
         <div className='alert alert-danger' role='alert'>
           {state.errors.apiError.join(', ')}
         </div>
       )}
-      {/* General Message Display  */}
+
       {state?.message && !state.success && !state.errors?.apiError && (
         <div className='alert alert-danger' role='alert'>
           {state.message}
@@ -97,27 +113,7 @@ export default function UpdateBookingForm({ booking }: UpdateBookingFormProps) {
         </div>
       )}
 
-      {/* Date From */}
-      {/* <div className='mb-3'>
-        <label htmlFor='dateFrom' className='form-label'>
-          Check-in Date
-        </label>
-        <input
-          type='date'
-          name='dateFrom'
-          id='dateFrom'
-          className={`form-control ${state?.errors?.dateFrom ? 'is-invalid' : ''}`}
-          defaultValue={getDefaultValue('dateFrom') as string}
-          aria-describedby='dateFrom-error'
-          required
-        />
-        {state?.errors?.dateFrom && (
-          <div id='dateFrom-error' className='invalid-feedback'>
-            {state?.errors.dateFrom.join(', ')}
-          </div>
-        )}
-      </div> */}
-
+      {/* Date Pickers */}
       <DatePickerInput
         id='dateFrom'
         label='Check-in Date'
@@ -128,26 +124,6 @@ export default function UpdateBookingForm({ booking }: UpdateBookingFormProps) {
         venueId={venueId ?? ''}
       />
 
-      {/* Date To */}
-      {/* <div className='mb-3'>
-        <label htmlFor='dateTo' className='form-label'>
-          Check-out Date
-        </label>
-        <input
-          type='date'
-          name='dateTo'
-          id='dateTo'
-          className={`form-control ${state?.errors?.dateTo ? 'is-invalid' : ''}`}
-          defaultValue={getDefaultValue('dateTo') as string}
-          aria-describedby='dateTo-error'
-          required
-        />
-        {state?.errors?.dateTo && (
-          <div id='dateTo-error' className='invalid-feedback'>
-            {state?.errors.dateTo.join(', ')}
-          </div>
-        )}
-      </div> */}
       <DatePickerInput
         id='dateTo'
         label='Check-out Date'
@@ -158,7 +134,7 @@ export default function UpdateBookingForm({ booking }: UpdateBookingFormProps) {
         venueId={venueId ?? ''}
       />
 
-      {/* Guests */}
+      {/* Guests input */}
       <div className='mb-3'>
         <label htmlFor='guests' className='form-label'>
           Number of Guests
@@ -172,16 +148,13 @@ export default function UpdateBookingForm({ booking }: UpdateBookingFormProps) {
           aria-describedby='guests-error'
           required
           min='1'
-          step='1'
         />
-        {state?.errors?.guests && (
-          <div id='guests-error' className='invalid-feedback'>
-            {state.errors.guests.join(', ')}
-          </div>
-        )}
+        <div className='invalid-feedback'>
+          {state?.errors?.guests?.join(', ') || 'Please enter a valid number of guests.'}
+        </div>
       </div>
 
-      {/* Submit Button */}
+      {/* Submit */}
       <div className='mt-4'>
         <SubmitButton />
       </div>

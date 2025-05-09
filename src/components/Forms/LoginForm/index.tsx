@@ -2,33 +2,51 @@
 
 import { useFormStatus } from 'react-dom'
 import { loginFormAction } from './loginFormAction'
-import { useActionState } from 'react'
+import { useActionState, useRef } from 'react'
 import { useToast } from '@/components/ToastProvider'
 
 const initialState: { error?: string } = { error: undefined }
 
 export default function LoginForm() {
   const [state, formAction] = useActionState(loginFormAction, initialState)
+  const formRef = useRef<HTMLFormElement>(null)
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (!formRef.current?.checkValidity()) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
+    formRef.current?.classList.add('was-validated')
+  }
 
   return (
-    <form action={formAction}>
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      action={formAction}
+      className='needs-validation'
+      noValidate
+    >
       <h1 className='h3 mb-4 fw-normal'>Sign in</h1>
 
-      <div className='form-floating'>
+      {/* Email */}
+      <div className='form-floating mb-3'>
         <input
           type='email'
           name='email'
           id='floatingInput'
-          className='form-control mb-2'
+          className='form-control'
           placeholder='name@stud.noroff.no'
           required
         />
         <label htmlFor='floatingInput' className='form-label'>
           Email
         </label>
+        <div className='invalid-feedback'>Please enter a valid email address.</div>
       </div>
 
-      <div className='form-floating'>
+      {/* Password */}
+      <div className='form-floating mb-3'>
         <input
           type='password'
           name='password'
@@ -40,8 +58,10 @@ export default function LoginForm() {
         <label htmlFor='floatingPassword' className='form-label'>
           Password
         </label>
+        <div className='invalid-feedback'>Password is required.</div>
       </div>
 
+      {/* Server-side error */}
       {state?.error && <div className='alert alert-danger'>{state.error}</div>}
 
       <LoginButton />
