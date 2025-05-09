@@ -5,10 +5,9 @@ import styles from './HomePageHero.module.scss'
 export default function HeroSearch() {
   return (
     <section
-      className={`${styles.heroSection} rounded-3 shadow-lg border container-fluid text-center`}
+      className={`${styles.heroSection} rounded-3 shadow-lg container-fluid text-center`}
       aria-labelledby='hero-heading'
     >
-      <div className={styles.overlay} aria-hidden='true'></div>
       <div className={`container ${styles.contentContainer}`}>
         <div className='row py-lg-5'>
           <div className='col-lg-8 col-md-10 mx-auto'>
@@ -16,16 +15,16 @@ export default function HeroSearch() {
               Find your perfect venue today!
             </h1>
             <p className={styles.subtext}>
-              Discover a wide range of venues tailored to your needs. Whether you&apos;re planning a
-              wedding, corporate event, or a cozy gathering, we have the perfect space for you.
+              Planning a wedding, corporate event, or a cozy gathering? we have the perfect space
+              for you.
             </p>
-            <div className='mb-4'>
+            <div>
               <HeroInput />
             </div>
             <nav aria-label='Primary venue actions' className={styles.buttonGroup}>
               <Link
                 href='/venues'
-                className='btn btn-primary my-2 mx-2'
+                className='btn btn-warning my-2 mx-2'
                 role='button'
                 aria-label='Browse all venues'
               >
@@ -33,7 +32,7 @@ export default function HeroSearch() {
               </Link>
               <Link
                 href='/register-venue'
-                className='btn btn-secondary my-2 mx-2'
+                className='btn btn-info my-2 mx-2'
                 role='button'
                 aria-label='List your venue'
               >

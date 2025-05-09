@@ -8,9 +8,9 @@ interface VenueImageGalleryProps {
 
 export default function VenueImageGallery({ media, venueName }: VenueImageGalleryProps) {
   return (
-    <div className='row mb-2'>
+    <div className={` row mb-2`}>
       <div className='col-12'>
-        <div className='card shadow overflow-hidden rounded-4'>
+        <div className='shadow overflow-hidden rounded-4'>
           <Suspense fallback={<div className='text-center p-5'>Loading images...</div>}>
             {media && media.length > 0 ? (
               <Carousel

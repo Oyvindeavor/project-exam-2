@@ -15,7 +15,7 @@ interface VenuePageProps {
 }
 
 export default async function VenuePage(props: VenuePageProps) {
-  const params = await props.params;
+  const params = await props.params
   const { id } = params
 
   const { venue, error } = await fetchVenueById(id, { _owner: true, _bookings: true })
@@ -29,7 +29,7 @@ export default async function VenuePage(props: VenuePageProps) {
   }
 
   return (
-    <div className='card container-fluid py-4'>
+    <div className='container-fluid py-4'>
       <VenueImageGallery media={venue.media} venueName={venue.name} />
       <VenueHostProfile owner={venue.owner} />
       <div className='container mb-4'>

@@ -2,7 +2,7 @@ export default function VenueCardSkeleton() {
   return (
     <div className='col'>
       <div className={`card shadow-sm border-0 h-100 position-relative overflow-hidden `}>
-        <div className='ratio ratio-4x3 bg-light placeholder-glow'>
+        <div className='ratio ratio-16x9 bg-light placeholder-glow'>
           <div className='placeholder w-100 h-100' />
         </div>
 

@@ -12,7 +12,7 @@ interface VenueHostProfileProps {
 
 export default function VenueHostProfile({ owner }: VenueHostProfileProps) {
   return (
-    <div className='card mb-4 shadow-sm'>
+    <div className='mb-4 mt-4 shadow-sm'>
       <div className='card-body'>
         {owner ? (
           <div className='d-flex align-items-center'>

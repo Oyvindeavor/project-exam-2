@@ -29,7 +29,7 @@ export default function Carousel({ images, alt }: CarouselProps) {
   return (
     <div
       id={carouselId}
-      className='carousel carousel-dark slide'
+      className={`carousel carousel-dark slide`}
       data-bs-ride='carousel'
       aria-label='Venue images'
     >
@@ -42,7 +42,6 @@ export default function Carousel({ images, alt }: CarouselProps) {
               alt={alt[index] || 'venue Image'}
               effect='blur'
               width='100%'
-              height={500}
             />
           </div>
         ))}

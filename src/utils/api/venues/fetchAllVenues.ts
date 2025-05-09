@@ -38,6 +38,7 @@ export default async function fetchAllVenues({
       headers: {
         'Content-Type': 'application/json',
       },
+      cache: 'no-store',
     }
 
     if (typeof revalidate === 'number') {
