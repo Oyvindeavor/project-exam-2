@@ -48,7 +48,7 @@ export default async function VenuePage(props: VenuePageProps) {
       <div className='mb-5'>
         <Location location={venue.location} />
       </div>
-      <BookNow />
+      <BookNow id={id} />
     </div>
   )
 }
