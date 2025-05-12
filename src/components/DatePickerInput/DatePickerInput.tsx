@@ -9,7 +9,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 interface DatePickerInputProps {
   id: string
-  label: string
+  label?: string
   name: string
   defaultValue?: string
   error?: string[]

@@ -34,41 +34,48 @@ export default function CreateBookingForm({
     <form
       ref={formRef}
       action={formAction}
-      className={`needs-validation ${styles.formWrapper}`}
+      className={`needs-validation p-4 bg-white rounded shadow-sm ${styles.formWrapper}`}
       noValidate
       onSubmit={handleSubmit}
     >
-      <h2 className={styles.title}>{venueName}</h2>
+      <h2 className='mb-4'>{venueName}</h2>
 
       <input type='hidden' name='venueId' value={venueId} />
 
-      <DatePickerInput
-        id='dateFrom'
-        label='Date from'
-        name='dateFrom'
-        defaultValue={undefined}
-        error={state?.error ? [state.error] : undefined}
-        required
-        venueId={venueId}
-      />
+      <div className='mb-3'>
+        <label htmlFor='dateFrom' className='form-label'>
+          Date from
+        </label>
+        <DatePickerInput
+          id='dateFrom'
+          name='dateFrom'
+          defaultValue={undefined}
+          error={state?.error ? [state.error] : undefined}
+          required
+          venueId={venueId}
+        />
+      </div>
 
-      <DatePickerInput
-        id='dateTo'
-        label='Date to'
-        name='dateTo'
-        defaultValue={undefined}
-        error={state?.error ? [state.error] : undefined}
-        required
-        venueId={venueId}
-      />
+      <div className='mb-3'>
+        <label htmlFor='dateTo' className='form-label'>
+          Date to
+        </label>
+        <DatePickerInput
+          id='dateTo'
+          name='dateTo'
+          defaultValue={undefined}
+          error={state?.error ? [state.error] : undefined}
+          required
+          venueId={venueId}
+        />
+      </div>
 
-      <div className='form-floating mb-3'>
+      <div className=' mb-3'>
         <input
           type='number'
           name='guests'
           id='guests'
           className='form-control'
-          placeholder='Guests'
           required
           min={1}
           max={maxGuests}
