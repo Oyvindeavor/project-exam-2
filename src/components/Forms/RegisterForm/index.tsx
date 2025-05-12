@@ -24,35 +24,48 @@ export default function RegisterForm() {
       ref={formRef}
       onSubmit={handleSubmit}
       action={formAction}
-      className='w-100 needs-validation'
+      className='needs-validation'
       noValidate
     >
-      <h2 className='mb-4'>Register</h2>
-
       {/* Name */}
-      <div className='mb-3'>
-        <label htmlFor='name' className='form-label'>
-          Name
-        </label>
-        <input type='text' name='name' id='name' className='form-control' required />
+      <div className='form-floating mb-3'>
+        <input
+          type='text'
+          name='name'
+          id='name'
+          className='form-control'
+          placeholder=' '
+          required
+        />
+        <label htmlFor='name'>Name</label>
         <div className='invalid-feedback'>Please enter your name.</div>
       </div>
 
       {/* Email */}
-      <div className='mb-3'>
-        <label htmlFor='email' className='form-label'>
-          Email
-        </label>
-        <input type='email' name='email' id='email' className='form-control' required />
+      <div className='form-floating mb-3'>
+        <input
+          type='email'
+          name='email'
+          id='email'
+          className='form-control'
+          placeholder=' '
+          required
+        />
+        <label htmlFor='email'>Email</label>
         <div className='invalid-feedback'>Please enter a valid email address.</div>
       </div>
 
       {/* Password */}
-      <div className='mb-3'>
-        <label htmlFor='password' className='form-label'>
-          Password
-        </label>
-        <input type='password' name='password' id='password' className='form-control' required />
+      <div className='form-floating mb-3'>
+        <input
+          type='password'
+          name='password'
+          id='password'
+          className='form-control'
+          placeholder=' '
+          required
+        />
+        <label htmlFor='password'>Password</label>
         <div className='invalid-feedback'>Please enter a password.</div>
       </div>
 

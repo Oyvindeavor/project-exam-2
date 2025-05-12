@@ -1,5 +1,6 @@
 import { fetchLoggedInUser } from '@/utils/auth/fetchLoggedInUser'
 import EditProfileModal from '../EditProfileModal'
+import styles from './ProfileHeader.module.scss'
 
 export default async function ProfileHeader() {
   const { profile, error } = await fetchLoggedInUser()
@@ -23,23 +24,17 @@ export default async function ProfileHeader() {
 
   return (
     <div
-      className='card text-white mb-4 shadow-lg'
+      className={`card ${styles.profileCard} shadow-lg`}
       style={{
-        backgroundImage: `url(${profile.banner?.url || '/default-banner.jpg'})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
+        backgroundImage: `url(${profile.banner?.url || '/default-banner.jpg'})`, // < I have no idea how to remove this lint error
       }}
     >
-      <div className='card-body p-4 bg-dark bg-opacity-50 rounded'>
+      <div className={styles.profileOverlay}>
         <div className='d-flex flex-column align-items-center'>
           <img
-            className='rounded-circle border border-3 border-light shadow mb-3'
+            className={styles.profileImage}
             src={profile.avatar?.url || '/default-avatar.png'}
             alt={profile.avatar?.alt || 'Profile Avatar'}
-            width='80'
-            height='80'
-            style={{ objectFit: 'cover' }}
           />
 
           <div className='text-center'>

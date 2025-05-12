@@ -27,7 +27,7 @@ export default function LoginForm() {
       className='needs-validation'
       noValidate
     >
-      <h1 className='h3 mb-4 fw-normal'>Sign in</h1>
+      <h1 className='h3 mb-4 text-center'>Sign In</h1>
 
       {/* Email */}
       <div className='form-floating mb-3'>
@@ -39,9 +39,7 @@ export default function LoginForm() {
           placeholder='name@stud.noroff.no'
           required
         />
-        <label htmlFor='floatingInput' className='form-label'>
-          Email
-        </label>
+        <label htmlFor='floatingInput'>Email</label>
         <div className='invalid-feedback'>Please enter a valid email address.</div>
       </div>
 
@@ -55,9 +53,7 @@ export default function LoginForm() {
           placeholder='Password'
           required
         />
-        <label htmlFor='floatingPassword' className='form-label'>
-          Password
-        </label>
+        <label htmlFor='floatingPassword'>Password</label>
         <div className='invalid-feedback'>Password is required.</div>
       </div>
 
@@ -72,6 +68,7 @@ export default function LoginForm() {
 function LoginButton() {
   const { pending } = useFormStatus()
   const { showToast } = useToast()
+
   return (
     <button
       type='submit'

@@ -31,7 +31,7 @@ export default function CreateVenueForm() {
       </div>
 
       {/* Description */}
-      <div className='form-floating mb-3'>
+      <div className='form-floating mb-3 '>
         <textarea
           name='description'
           id='description'
@@ -39,7 +39,7 @@ export default function CreateVenueForm() {
           placeholder='Venue Description'
           required
           rows={4}
-          style={{ height: '100px' }}
+          style={{ height: '100px' }} // < Unable to move to CSS, as it conflicts with Bootstrap styles
         />
         <label htmlFor='description'>Description</label>
       </div>

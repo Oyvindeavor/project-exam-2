@@ -11,40 +11,45 @@ export default function VenueManagerCard({ venue }: VenueManagerCardProps) {
   const imageAlt = venue.media?.[0]?.alt || `Image of ${venue.name}`
 
   return (
-    <div className='card  shadow-sm'>
-      <div
-        style={{
-          position: 'relative',
-          width: '100%',
-        }}
-      >
-        <img src={imageUrl} alt={imageAlt} className='card-img-top' />
-      </div>
+    <div className='card h-100 shadow-sm'>
+      <img src={imageUrl} alt={imageAlt} className='card-img-top' />
+
       <div className='card-body d-flex flex-column'>
-        <h5 className='card-title text-primary'>{venue.name}</h5>
-        <div className='card-text text-muted small mt-1 mb-3'>
+        <h5 className='card-title text-primary mb-1'>{venue.name}</h5>
+        <div className='card-text text-muted small mb-3'>
           {venue.location?.address && (
-            <p className='mb-1 d-flex align-items-center'>
+            <p className='mb-1'>
               {venue.location.address}
               {venue.location.city ? `, ${venue.location.city}` : ''}
             </p>
           )}
-          <p className='mb-0 d-flex align-items-center'>Max {venue.maxGuests} guests</p>
+          <p className='mb-0'>Max {venue.maxGuests} guests</p>
         </div>
-      </div>
-      <div className='card-footer bg-light border-top-0 pt-3'>
-        <div className='d-grid gap-2 d-sm-flex justify-content-sm-between align-items-sm-center'>
-          <Link href={`/venue/${venue.id}`} className='btn btn-primary btn-sm px-3'>
+
+        <div className='mt-auto d-flex justify-content-between align-items-center'>
+          <Link href={`/venue/${venue.id}`} className='btn btn-primary btn-sm w-100 me-2'>
             View
           </Link>
-          <div className='btn-group btn-group-sm' role='group' aria-label='Venue actions'>
-            <Link
-              href={`/profile/venues/edit/${venue.id}`}
-              className='btn btn-group-sm btn-outline-secondary'
+
+          <div className='dropdown'>
+            <button
+              className='btn btn-sm btn-outline-secondary dropdown-toggle'
+              type='button'
+              data-bs-toggle='dropdown'
+              aria-expanded='false'
             >
-              Edit
-            </Link>
-            <DeleteVenueButton id={venue.id} />
+              Actions
+            </button>
+            <ul className='dropdown-menu dropdown-menu-end'>
+              <li>
+                <Link className='dropdown-item' href={`/profile/venues/edit/${venue.id}`}>
+                  Edit
+                </Link>
+              </li>
+              <li>
+                <DeleteVenueButton id={venue.id} />
+              </li>
+            </ul>
           </div>
         </div>
       </div>

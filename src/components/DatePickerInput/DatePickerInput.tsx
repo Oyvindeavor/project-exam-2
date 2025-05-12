@@ -24,7 +24,7 @@ export default function DatePickerInput({
   defaultValue,
   error,
   required = true,
-  venueId, // Pass the venueId as a prop
+  venueId,
 }: DatePickerInputProps) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [bookedDates, setBookedDates] = useState<Date[]>([])

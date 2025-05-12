@@ -25,7 +25,7 @@ export default async function VenuesPage(props: VenuesPageProps) {
   const currentQuery = searchParams.q?.trim() || ''
 
   return (
-    <main className='container my-4'>
+    <div className='container my-4'>
       <Suspense fallback={<VenueGridSkeleton />}>
         <HeroSection />
       </Suspense>
@@ -39,6 +39,6 @@ export default async function VenuesPage(props: VenuesPageProps) {
       <Suspense fallback={<VenueGridSkeleton />}>
         <VenueListServer searchParams={searchParams} />
       </Suspense>
-    </main>
+    </div>
   )
 }

@@ -35,7 +35,7 @@ export default function LogoutButton({ className }: LogoutButtonProps) {
   return (
     <button className={className} onClick={handleLogout} disabled={isLoading}>
       {isLoading ? 'Logging out...' : 'Logout'}
-      <LogOut className='ms-2' />
+      <LogOut className='ms-2' size={16} />
     </button>
   )
 }

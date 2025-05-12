@@ -6,12 +6,13 @@ import { deleteVenueFormAction } from './deleteVenueFormAction'
 
 type ActionState = {
   error?: string
+  className?: string
 }
 
 function SubmitButton() {
   const { pending } = useFormStatus()
   return (
-    <button type='submit' className='btn btn-sm btn-outline-danger' disabled={pending}>
+    <button type='submit' className='dropdown-item' disabled={pending}>
       {pending ? 'Deleting...' : 'Delete Venue'}
     </button>
   )

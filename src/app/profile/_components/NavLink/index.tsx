@@ -3,19 +3,21 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { UrlObject } from 'url'
+import { type ReactNode } from 'react'
 
 type NavLinkProps = {
   href: string | UrlObject
-  children: React.ReactNode
-  exact?: boolean // For the main profile tab to not match /profile/bookings
+  children: ReactNode
+  exact?: boolean
+  className?: string
 }
 
-export default function NavLink({ href, children, exact = false }: NavLinkProps) {
+export default function NavLink({ href, children, exact = false, className = '' }: NavLinkProps) {
   const pathname = usePathname()
-  const isActive = exact ? pathname === href : pathname.startsWith(href.toString())
+  const isActive = exact ? pathname === href.toString() : pathname.startsWith(href.toString())
 
   return (
-    <Link href={href} className={`nav-link ${isActive ? 'active' : ''}`} passHref>
+    <Link href={href} className={`nav-link ${isActive ? 'active' : ''} ${className}`.trim()}>
       {children}
     </Link>
   )

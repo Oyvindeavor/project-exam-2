@@ -30,9 +30,18 @@ export default async function VenuePage(props: VenuePageProps) {
 
   return (
     <div className='container-fluid py-4'>
-      <VenueImageGallery media={venue.media} venueName={venue.name} />
-      <VenueHostProfile owner={venue.owner} />
+      {/* Image Gallery */}
+      <div className='mb-4'>
+        <VenueImageGallery media={venue.media} venueName={venue.name} />
+      </div>
+
+      {/* Host Profile */}
       <div className='container mb-4'>
+        <VenueHostProfile owner={venue.owner} />
+      </div>
+
+      {/* Venue Info */}
+      <div className='container mb-5'>
         <VenueHeader
           name={venue.name}
           price={venue.price}
@@ -40,15 +49,23 @@ export default async function VenuePage(props: VenuePageProps) {
           rating={venue.rating}
           description={venue.description}
         />
-        <div className='my-4'>
-          <h2 className='h4 mb-3'>Amenities</h2>
+
+        {/* Amenities */}
+        <div className='my-4 border-top pt-4'>
+          <h2 className='h5 mb-3'>Amenities</h2>
           <Amenities amenities={venue.meta} />
         </div>
       </div>
-      <div className='mb-5'>
+
+      {/* Location */}
+      <div className='container mb-5'>
         <Location location={venue.location} />
       </div>
-      <BookNow id={id} />
+
+      {/* Booking Section */}
+      <div className='container mb-5'>
+        <BookNow id={id} />
+      </div>
     </div>
   )
 }
