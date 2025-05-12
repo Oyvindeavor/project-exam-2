@@ -3,7 +3,7 @@ import Link from 'next/link'
 export default function QuickLinkSection() {
   return (
     <div className='col mb-3'>
-      <h2 className='text-light fw-bold  d-flex align-items-center gap-2'>
+      <h2 className='text-light fw-bold h5 d-flex align-items-center gap-2'>
         Quick links <LinkIcon width={20} height={20} />
       </h2>
       <ul className='nav flex-column'>

@@ -7,7 +7,7 @@ import style from './SocialSection.module.scss'
 export default function SocialSection() {
   return (
     <div className='col mb-3'>
-      <h2 className='text-light fw-bold  d-flex align-items-center gap-2'>
+      <h2 className='text-light h5 fw-bold  d-flex align-items-center gap-2'>
         Get in touch
         <Share2 size={20} width={20} />
       </h2>

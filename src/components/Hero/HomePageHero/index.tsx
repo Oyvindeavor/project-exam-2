@@ -25,7 +25,7 @@ export default function HeroSearch() {
             <nav aria-label='Primary venue actions' className={styles.buttonGroup}>
               <Link
                 href='/venues'
-                className='btn btn-warning my-2 mx-2 text-white'
+                className='btn btn-outline-warning my-2 mx-2 text-white'
                 role='button'
                 aria-label='Browse all venues'
               >

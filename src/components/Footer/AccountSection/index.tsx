@@ -10,7 +10,7 @@ export default async function AccountSection() {
 
   return (
     <div className='col mb-3'>
-      <h2 className='text-light fw-bold d-flex align-items-center gap-2'>
+      <h2 className='text-light h5 fw-bold d-flex align-items-center gap-2'>
         Account <CircleUserRound width={20} height={20} />
       </h2>
       <ul className='nav flex-column'>
