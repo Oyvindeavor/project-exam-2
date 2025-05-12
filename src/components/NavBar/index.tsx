@@ -4,6 +4,7 @@ import { Suspense } from 'react'
 import AvatarSkeleton from '@/components/Avatar/AvatarSkeleton'
 import AvatarWrapper from '@/components/Avatar/AvatarWrapper'
 import HamburgerMenuWrapper from '@/components/HamburgerMenu/HamburgerMenuWrapper'
+import { LogIn, UserPlus } from 'lucide-react'
 
 export default async function NavBar() {
   const isLoggedIn = await isUserLoggedIn()
@@ -53,9 +54,11 @@ export default async function NavBar() {
               <>
                 <Link href='/auth/login' className='btn btn-outline-success text-light me-2'>
                   Login
+                  <LogIn className='ms-1' />
                 </Link>
                 <Link href='/auth/register' className='btn btn-outline-warning text-light'>
                   Sign-up
+                  <UserPlus className='ms-1' />
                 </Link>
               </>
             )}

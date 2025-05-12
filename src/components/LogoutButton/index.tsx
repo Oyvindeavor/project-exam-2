@@ -4,7 +4,11 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 import { LogOut } from 'lucide-react'
 
-export default function LogoutButton() {
+interface LogoutButtonProps {
+  className: string
+}
+
+export default function LogoutButton({ className }: LogoutButtonProps) {
   const router = useRouter()
   const [isLoading, setIsLoading] = React.useState(false)
 
@@ -29,7 +33,7 @@ export default function LogoutButton() {
   }
 
   return (
-    <button className='btn btn-outline-danger' onClick={handleLogout} disabled={isLoading}>
+    <button className={className} onClick={handleLogout} disabled={isLoading}>
       {isLoading ? 'Logging out...' : 'Logout'}
       <LogOut className='ms-2' />
     </button>
