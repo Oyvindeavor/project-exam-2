@@ -48,7 +48,7 @@ function HeroSectionContent() {
 
   return (
     <section
-      className={`${styles.heroSection} rounded-3 shadow-lg border container-fluid text-center mb-5`}
+      className={`${styles.heroSection} bg-gradient bg-primary rounded-3 shadow-lg border container-fluid text-center mb-5`}
       aria-labelledby='hero-heading'
     >
       <div className={`container ${styles.contentContainer}`}>
@@ -59,7 +59,7 @@ function HeroSectionContent() {
               className={`${styles.heading} display-5 fw-bold mb-4`}
               tabIndex={-1}
             >
-              Find Your Perfect Venue
+              Search and Sort Venues
             </h1>
             {/* Search and Sort Controls */}
             <div className='d-flex flex-column flex-md-row align-items-md-stretch gap-2 mb-3'>
