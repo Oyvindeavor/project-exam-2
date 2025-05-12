@@ -2,12 +2,13 @@
 import { useEffect } from 'react'
 import EditProfileForm from '@/components/Forms/EditProfileForm'
 import { Edit } from 'lucide-react'
+import type { Profile } from '@/types/NoroffApi/profileTypes'
 
 interface EditProfileModalProps {
-  name: string
+  profile: Profile
 }
 
-export default function EditProfileModal({ name }: EditProfileModalProps) {
+export default function EditProfileModal({ profile }: EditProfileModalProps) {
   useEffect(() => {
     import('bootstrap/js/dist/modal')
   }, [])
@@ -51,7 +52,7 @@ export default function EditProfileModal({ name }: EditProfileModalProps) {
 
             {/* Modal Body */}
             <div className='modal-body'>
-              <EditProfileForm name={name} />
+              <EditProfileForm profile={profile} />
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@ import QuickLinkSection from './QuickLinksSection'
 
 export default function Footer() {
   return (
-    <footer className='bg-primary py-5 mt-auto border-top'>
+    <footer className='bg-primary py-5 mt-5 border-top'>
       <div className='container'>
         <div className='row row-cols-1 row-cols-sm-2 row-cols-md-5'>
           <div className='col mb-3'>
@@ -14,7 +14,7 @@ export default function Footer() {
               className='d-flex align-items-center mb-3 text-light text-decoration-none'
               aria-label='Logo'
             >
-              <img src='/logo.svg' alt='Logo' />
+              <img src='/logo.svg' alt='Logo a stick drawn white arch with a doorway' />
             </Link>
           </div>
 
