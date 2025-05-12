@@ -88,7 +88,7 @@ export default function DatePickerInput({
       <input
         type='hidden'
         name={name}
-        value={selectedDate ? selectedDate.toISOString().split('T')[0] : ''}
+        value={selectedDate ? selectedDate.toLocaleDateString('sv-SE') : ''}
       />
     </div>
   )

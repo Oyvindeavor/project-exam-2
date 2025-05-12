@@ -1,6 +1,7 @@
 import { fetchLoggedInUser } from '@/utils/auth/fetchLoggedInUser'
 import dynamic from 'next/dynamic'
 import AvatarSkeleton from './AvatarSkeleton'
+import isUserVenueManager from '@/utils/auth/isVenueManager'
 
 // Dynamically import the main Avatar Client Component
 const Avatar = dynamic(() => import('./index'), {
@@ -12,8 +13,8 @@ const Avatar = dynamic(() => import('./index'), {
 })
 
 export default async function AvatarWrapper() {
-  // Suspense in NavBar handles waiting for this fetch
   const { profile } = await fetchLoggedInUser()
+  const venueManager = await isUserVenueManager()
 
   if (!profile) return null
 
@@ -22,5 +23,5 @@ export default async function AvatarWrapper() {
     'https://cdn-front.freepik.com/images/ai/image-generator/gallery/pikaso-woman.webp'
   const altText = profile.name || 'User avatar'
 
-  return <Avatar avatarUrl={avatarUrl} altText={altText} />
+  return <Avatar avatarUrl={avatarUrl} altText={altText} venueManager={venueManager} />
 }

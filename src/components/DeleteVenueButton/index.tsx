@@ -11,7 +11,7 @@ type ActionState = {
 function SubmitButton() {
   const { pending } = useFormStatus()
   return (
-    <button type='submit' className='btn btn-outline-danger' disabled={pending}>
+    <button type='submit' className='btn btn-sm btn-outline-danger' disabled={pending}>
       {pending ? 'Deleting...' : 'Delete Venue'}
     </button>
   )

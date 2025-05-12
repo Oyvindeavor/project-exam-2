@@ -9,13 +9,13 @@ import LogoutButton from '@/components/LogoutButton'
 interface AvatarProps {
   avatarUrl: string
   altText?: string
+  venueManager?: boolean
 }
 
-export default function Avatar({ avatarUrl, altText = 'User avatar' }: AvatarProps) {
+export default function Avatar({ avatarUrl, altText = 'User avatar', venueManager }: AvatarProps) {
   const [isBootstrapReady, setIsBootstrapReady] = useState(false)
 
   useEffect(() => {
-    console.log('Avatar: useEffect - Importing Bootstrap JS...')
     let isMounted = true
     import('bootstrap/js/dist/dropdown')
       .then(() => {
@@ -33,22 +33,17 @@ export default function Avatar({ avatarUrl, altText = 'User avatar' }: AvatarPro
     }
   }, [])
 
-  // Render Skeleton Internally if Bootstrap isn't ready
   if (!isBootstrapReady) {
-    console.log('Avatar: Rendering Skeleton (Waiting for Bootstrap internally)')
-    // This component renders its own skeleton initially
     return <AvatarSkeleton />
   }
 
-  // Render the actual component structure once Bootstrap JS is loaded
-  console.log('Avatar: Rendering full dropdown component.')
   return (
     <div className={`dropdown`}>
       <button
         className={`btn p-0 border-0 rounded-circle ${styles.avatarButton}`}
         type='button'
         id='dropdownUserMenu'
-        data-bs-toggle='dropdown' // This relies on Bootstrap JS
+        data-bs-toggle='dropdown'
         aria-expanded='false'
         aria-label='User menu'
       >
@@ -70,12 +65,32 @@ export default function Avatar({ avatarUrl, altText = 'User avatar' }: AvatarPro
             Profile
           </Link>
         </li>
+
+        {venueManager ? (
+          <>
+            <li>
+              <Link className='dropdown-item' href='/profile/venues'>
+                My Venues
+              </Link>
+            </li>
+            <li>
+              <Link className='dropdown-item' href='/profile/create'>
+                Create Venue
+              </Link>
+            </li>
+          </>
+        ) : (
+          <li>
+            <Link className='dropdown-item' href='/profile/bookings'>
+              My Bookings
+            </Link>
+          </li>
+        )}
         <li>
           <hr className='dropdown-divider my-1' />
-        </li>
-        <li>
           <a>
-            <LogoutButton />
+            {/* <a> is intentionally used here since next link wont "reload when navigating" */}
+            <LogoutButton className='dropdown-item' />
           </a>
         </li>
       </ul>

@@ -1,19 +1,18 @@
 'use server'
 
 import { createVenue } from '@/utils/api/venues/createVenue'
-
 import type { CreateVenueRequest } from '@/types/NoroffApi/response/venuesResponse'
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 type ActionResult = {
   error?: string
-  // You could add other fields like 'success' if not redirecting immediately
 }
 
 /**
  * Server Action to handle the creation of a new venue form submission.
  *
- * @param prevState - The state from the previous execution of this action (unused here but required by useActionState).
+ * @param prevState - The state from the previous execution of this action.
  * @param formData - The FormData object containing the submitted form values.
  * @returns Promise<ActionResult> - An object containing an error message if validation or API call fails.
  */
@@ -23,12 +22,10 @@ export default async function createVenueFormAction(
 ): Promise<ActionResult> {
   const name = formData.get('name') as string | null
   const description = formData.get('description') as string | null
-  const mediaurl = formData.get('mediaurl') as string | null
-  const mediaalt = formData.get('mediaalt') as string | null // Correctly get 'mediaalt'
   const priceStr = formData.get('price') as string | null
   const maxGuestsStr = formData.get('maxGuests') as string | null
   const ratingStr = formData.get('rating') as string | null
-  const wifi = formData.get('wifi') === 'on' // Checkboxes submit 'on' when checked
+  const wifi = formData.get('wifi') === 'on'
   const parking = formData.get('parking') === 'on'
   const breakfast = formData.get('breakfast') === 'on'
   const pets = formData.get('pets') === 'on'
@@ -40,6 +37,7 @@ export default async function createVenueFormAction(
   const latStr = formData.get('lat') as string | null
   const lngStr = formData.get('lng') as string | null
 
+  // Validations
   if (!name?.trim()) {
     return { error: 'Venue name is required.' }
   }
@@ -53,35 +51,29 @@ export default async function createVenueFormAction(
     return { error: 'Maximum number of guests is required.' }
   }
 
-  let price: number | undefined = undefined
-  let maxGuests: number | undefined = undefined
-  let rating: number | undefined = undefined // Optional
-  let lat: number | undefined = undefined // Optional
-  let lng: number | undefined = undefined // Optional
+  // Detailed Validations
 
-  // Price (Required)
-  price = parseFloat(priceStr)
+  let rating: number | undefined = undefined
+  let lat: number | undefined = undefined
+  let lng: number | undefined = undefined
+
+  const price = parseFloat(priceStr)
   if (isNaN(price) || price < 0) {
     return { error: 'Price must be a valid non-negative number (e.g., 150.50 or 0).' }
   }
 
-  // Max Guests (Required)
-  maxGuests = parseInt(maxGuestsStr, 10)
+  const maxGuests = parseInt(maxGuestsStr, 10)
   if (isNaN(maxGuests) || maxGuests < 1) {
-    // Must allow at least 1 guest
     return { error: 'Max Guests must be a valid whole number greater than 0.' }
   }
 
-  // Rating (Optional)
   if (ratingStr?.trim()) {
-    // Only parse if a non-empty string was provided
-    rating = parseInt(ratingStr, 10)
+    rating = parseFloat(ratingStr)
     if (isNaN(rating) || rating < 0 || rating > 5) {
-      return { error: 'If provided, Rating must be a whole number between 0 and 5.' }
+      return { error: 'If provided, Rating must be a number between 0 and 5.' }
     }
   }
 
-  // Latitude (Optional)
   if (latStr?.trim()) {
     lat = parseFloat(latStr)
     if (isNaN(lat) || lat < -90 || lat > 90) {
@@ -89,7 +81,6 @@ export default async function createVenueFormAction(
     }
   }
 
-  // Longitude (Optional)
   if (lngStr?.trim()) {
     lng = parseFloat(lngStr)
     if (isNaN(lng) || lng < -180 || lng > 180) {
@@ -97,16 +88,20 @@ export default async function createVenueFormAction(
     }
   }
 
-  // Prepare media array only if URL is provided
-  const mediaPayload = []
-  if (mediaurl?.trim()) {
-    mediaPayload.push({
-      url: mediaurl.trim(),
-      alt: mediaalt?.trim() || `Image for ${name.trim()}`, // Use provided alt text or generate a default
-    })
+  const mediaPayload: { url: string; alt: string }[] = []
+  for (let i = 0; i < 3; i++) {
+    const mediaUrl = formData.get(`media[${i}][url]`) as string | null
+    const mediaAlt = formData.get(`media[${i}][alt]`) as string | null
+
+    if (mediaUrl?.trim()) {
+      mediaPayload.push({
+        url: mediaUrl.trim(),
+        alt: mediaAlt?.trim() || `Image ${i + 1} for ${name.trim()}`,
+      })
+    } else if (mediaAlt?.trim() && !mediaUrl?.trim()) {
+    }
   }
 
-  // Build the final request object according to the expected type
   const payload: CreateVenueRequest = {
     name: name.trim(),
     description: description.trim(),
@@ -115,7 +110,6 @@ export default async function createVenueFormAction(
     maxGuests,
     rating,
     meta: {
-      // Meta fields from checkboxes
       wifi,
       parking,
       breakfast,
@@ -134,18 +128,15 @@ export default async function createVenueFormAction(
 
   try {
     console.log('Attempting to create venue with payload:', JSON.stringify(payload, null, 2))
-    await createVenue(payload)
+    const response = await createVenue(payload)
+    console.log('Venue creation API response:', response)
     console.log('Venue created successfully!')
-
-    // Add redirect here later <------!
   } catch (error) {
     console.error('Server Action Error - Failed to create venue:', error)
-
     const message = error instanceof Error ? error.message : 'An unexpected error occurred.'
     return { error: `Submission failed: ${message}` }
   }
 
   revalidatePath('/profile')
-
-  return { error: 'An unexpected error occurred.' }
+  redirect('/profile/venues')
 }
