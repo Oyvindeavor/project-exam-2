@@ -5,6 +5,7 @@ import Link from 'next/link'
 import styles from './Avatar.module.scss'
 import AvatarSkeleton from './AvatarSkeleton'
 import LogoutButton from '@/components/LogoutButton'
+import { User, Home, PlusCircle, CalendarCheck } from 'lucide-react'
 
 interface AvatarProps {
   avatarUrl: string
@@ -19,13 +20,9 @@ export default function Avatar({ avatarUrl, altText = 'User avatar', venueManage
     let isMounted = true
     import('bootstrap/js/dist/dropdown')
       .then(() => {
-        if (isMounted) {
-          console.log('Avatar: Bootstrap JS loaded.')
-          setIsBootstrapReady(true)
-        }
+        if (isMounted) setIsBootstrapReady(true)
       })
-      .catch((error) => {
-        console.error('Avatar: Failed to load Bootstrap JS:', error)
+      .catch(() => {
         if (isMounted) setIsBootstrapReady(true)
       })
     return () => {
@@ -38,7 +35,7 @@ export default function Avatar({ avatarUrl, altText = 'User avatar', venueManage
   }
 
   return (
-    <div className={`dropdown`}>
+    <div className='dropdown'>
       <button
         className={`btn p-0 border-0 rounded-circle ${styles.avatarButton}`}
         type='button'
@@ -55,13 +52,14 @@ export default function Avatar({ avatarUrl, altText = 'User avatar', venueManage
           height={40}
         />
       </button>
-      {/* Dropdown menu */}
+
       <ul
-        className='dropdown-menu dropdown-menu-end text-small shadow-sm'
+        className='dropdown-menu dropdown-menu-end text-small shadow-sm py-2'
         aria-labelledby='dropdownUserMenu'
       >
         <li>
-          <Link className='dropdown-item' href='/profile'>
+          <Link className='dropdown-item d-flex align-items-center gap-2' href='/profile'>
+            <User size={16} />
             Profile
           </Link>
         </li>
@@ -69,28 +67,43 @@ export default function Avatar({ avatarUrl, altText = 'User avatar', venueManage
         {venueManager ? (
           <>
             <li>
-              <Link className='dropdown-item' href='/profile/venues'>
+              <Link
+                className='dropdown-item d-flex align-items-center gap-2'
+                href='/profile/venues'
+              >
+                <Home size={16} />
                 My Venues
               </Link>
             </li>
             <li>
-              <Link className='dropdown-item' href='/profile/create'>
+              <Link
+                className='dropdown-item d-flex align-items-center gap-2'
+                href='/profile/create'
+              >
+                <PlusCircle size={16} />
                 Create Venue
               </Link>
             </li>
           </>
         ) : (
           <li>
-            <Link className='dropdown-item' href='/profile/bookings'>
+            <Link
+              className='dropdown-item d-flex align-items-center gap-2'
+              href='/profile/bookings'
+            >
+              <CalendarCheck size={16} />
               My Bookings
             </Link>
           </li>
         )}
+
         <li>
-          <hr className='dropdown-divider my-1' />
-          <a>
-            {/* <a> is intentionally used here since next link wont "reload when navigating" */}
-            <LogoutButton className='dropdown-item' />
+          <hr className='dropdown-divider my-2' />
+        </li>
+
+        <li>
+          <a className='dropdown-item d-flex align-items-center gap-2'>
+            <LogoutButton className='dropdown-item d-flex align-items-center gap-2' />
           </a>
         </li>
       </ul>
