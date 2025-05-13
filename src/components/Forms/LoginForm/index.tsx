@@ -3,7 +3,6 @@
 import { useFormStatus } from 'react-dom'
 import { loginFormAction } from './loginFormAction'
 import { useActionState, useRef } from 'react'
-import { useToast } from '@/components/ToastProvider'
 
 const initialState: { error?: string } = { error: undefined }
 
@@ -67,15 +66,9 @@ export default function LoginForm() {
 
 function LoginButton() {
   const { pending } = useFormStatus()
-  const { showToast } = useToast()
 
   return (
-    <button
-      type='submit'
-      className='btn btn-primary w-100'
-      disabled={pending}
-      onClick={() => showToast('Successfully logged in', '', 'success')}
-    >
+    <button type='submit' className='btn btn-primary w-100' disabled={pending}>
       {pending ? 'Logging in…' : 'Login'}
     </button>
   )

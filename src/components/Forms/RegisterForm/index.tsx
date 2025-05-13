@@ -3,7 +3,6 @@
 import { useFormStatus } from 'react-dom'
 import { useActionState, useRef } from 'react'
 import registerFormAction from './registerFormAction'
-import { useToast } from '@/components/ToastProvider'
 
 const initialState: { error?: string } = { error: undefined }
 
@@ -87,15 +86,9 @@ export default function RegisterForm() {
 
 function RegisterButton() {
   const { pending } = useFormStatus()
-  const { showToast } = useToast()
 
   return (
-    <button
-      type='submit'
-      className='btn btn-primary w-100'
-      disabled={pending}
-      onClick={() => showToast('Successfully registered', '', 'success')}
-    >
+    <button type='submit' className='btn btn-primary w-100' disabled={pending}>
       {pending ? 'Registering…' : 'Register'}
     </button>
   )
