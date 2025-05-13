@@ -29,9 +29,7 @@ export default async function RegularUserBookingCards() {
                 <br />
                 <strong>To:</strong> {new Date(booking.dateTo).toLocaleDateString()}
               </p>
-              <Link href={`/bookings/${booking.id}`} className='btn btn-outline-primary btn-sm'>
-                View Details
-              </Link>
+
               <DeleteBookingButton bookingId={booking.id} />
             </div>
           </div>

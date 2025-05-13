@@ -1,5 +1,11 @@
 import { fetchLoggedInUser } from '@/utils/auth/fetchLoggedInUser'
 import VenueManagerCard from '@/components/VenueManagerCard'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'My Venues - Holidaze',
+  description: 'Manage your venues and bookings.',
+}
 
 export default async function ProfileVenues() {
   const { profile } = await fetchLoggedInUser({ venues: true, bookings: true })

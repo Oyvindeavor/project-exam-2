@@ -7,11 +7,17 @@ import VenueHostProfile from '@/app/venue/[id]/_components/VenueHostProfile'
 import VenueHeader from '@/app/venue/[id]/_components/VenueHeader'
 import ErrorDisplay from '@/components/ErrorDisplay'
 import NotFoundDisplay from '@/components/NotFoundDisplay'
+import { Metadata } from 'next'
 
 interface VenuePageProps {
   params: Promise<{
     id: string
   }>
+}
+
+export const metadata: Metadata = {
+  title: `Venue - Holidaze`,
+  description: 'Explore the details of this venue.',
 }
 
 export default async function VenuePage(props: VenuePageProps) {

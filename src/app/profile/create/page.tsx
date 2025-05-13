@@ -1,4 +1,10 @@
 import CreateVenueForm from '@/components/Forms/CreateVenueForm'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Create Venue',
+  description: 'Create a new venue to share with the world.',
+}
 
 export default function CreatePage() {
   return (

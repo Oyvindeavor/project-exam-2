@@ -1,5 +1,4 @@
 import NavigationTabs from './_components/NavigationTabs'
-import ProfileHeader from './_components/ProfileHeader'
 
 interface ProfileLayoutProps {
   children: React.ReactNode
@@ -8,9 +7,6 @@ interface ProfileLayoutProps {
 export default async function ProfileLayout({ children }: ProfileLayoutProps) {
   return (
     <div className='container py-4'>
-      {/* Profile Header */}
-      <ProfileHeader />
-
       {/* Navigation "Tabs"  */}
       <NavigationTabs />
 

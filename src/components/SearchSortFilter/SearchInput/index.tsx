@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import styles from '../SearchSortFilter.module.scss'
 
 interface SearchInputProps {
   initialValue?: string
@@ -16,6 +17,7 @@ export default function SearchInput({
   debounceDelay = 500,
 }: SearchInputProps) {
   const [query, setQuery] = useState(initialValue)
+  const inputId = 'searchInput'
 
   // Debounce Logic
   useEffect(() => {
@@ -25,11 +27,8 @@ export default function SearchInput({
       }
     }, debounceDelay)
 
-    return () => {
-      clearTimeout(timerId)
-    }
+    return () => clearTimeout(timerId)
   }, [query, initialValue, debounceDelay, onSearch])
-  // End Debounce Logic
 
   useEffect(() => {
     setQuery(initialValue)
@@ -39,11 +38,9 @@ export default function SearchInput({
     setQuery(event.target.value)
   }
 
-  // Handle Enter key press
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault()
-
       if (query !== initialValue) {
         onSearch(query)
       }
@@ -51,16 +48,18 @@ export default function SearchInput({
   }
 
   return (
-    <div className='mb-3 mb-md-0 me-md-2 flex-grow-1'>
+    <div className={`${styles.searchInput} form-floating mb-3 mb-md-0`}>
       <input
+        id={inputId}
         type='text'
-        className='form-control form-control-lg'
+        className='form-control form-control-lg shadow-sm'
         placeholder={placeholder}
         aria-label={ariaLabel}
         value={query}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
+      <label htmlFor={inputId}>{placeholder}</label>
     </div>
   )
 }

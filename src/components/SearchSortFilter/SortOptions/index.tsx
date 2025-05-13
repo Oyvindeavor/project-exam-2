@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from '../SearchSortFilter.module.scss'
 
 interface SortOptionsProps {
   initialSortField?: string
@@ -38,29 +39,32 @@ export default function SortOptions({
 
   return (
     <div className='d-flex flex-column flex-sm-row gap-2'>
-      <select
-        className='form-select form-select-lg'
-        aria-label='Sort by field'
-        value={sortField}
-        onChange={handleSortFieldChange}
-      >
-        <option value=''>Sort by...</option>
-        {sortFields.map((field) => (
-          <option key={field.value} value={field.value}>
-            {field.label}
-          </option>
-        ))}
-      </select>
-      <select
-        className='form-select form-select-lg'
-        aria-label='Sort order'
-        value={sortOrder}
-        onChange={handleSortOrderChange}
-        disabled={!sortField}
-      >
-        <option value='desc'>Descending</option>
-        <option value='asc'>Ascending</option>
-      </select>
+      <div className={styles.sortOptions}>
+        <select
+          className='form-select shadow-sm'
+          aria-label='Sort by field'
+          value={sortField}
+          onChange={handleSortFieldChange}
+        >
+          <option value=''>Sort by...</option>
+          {sortFields.map((field) => (
+            <option key={field.value} value={field.value}>
+              {field.label}
+            </option>
+          ))}
+        </select>
+
+        <select
+          className='form-select shadow-sm'
+          aria-label='Sort order'
+          value={sortOrder}
+          onChange={handleSortOrderChange}
+          disabled={!sortField}
+        >
+          <option value='desc'>Descending</option>
+          <option value='asc'>Ascending</option>
+        </select>
+      </div>
     </div>
   )
 }

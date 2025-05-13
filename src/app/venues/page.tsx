@@ -2,6 +2,7 @@ import React, { Suspense } from 'react'
 import VenueListServer from '@/components/VenuesList'
 import VenueGridSkeleton from '@/components/VenugeGridSkeleton'
 import HeroSection from '@/components/SearchSortFilter'
+import { Metadata } from 'next'
 
 // Data fetching is handled in api/venues/route.ts
 
@@ -17,6 +18,11 @@ interface SearchParams {
 
 interface VenuesPageProps {
   searchParams: Promise<SearchParams>
+}
+
+export const metadata: Metadata = {
+  title: 'Venues',
+  description: 'Explore our curated selection of venues, perfect for any occasion.',
 }
 
 export default async function VenuesPage(props: VenuesPageProps) {

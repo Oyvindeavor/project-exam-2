@@ -40,12 +40,6 @@ export default async function ProfileHeader() {
           <div className='text-center'>
             <h1 className='h4 mb-0 fw-semibold'>{profile.name}</h1>
             <p className='mb-0 opacity-75'>{profile.email}</p>
-
-            {profile.bio && (
-              <div className='mt-3 p-3 bg-white text-dark rounded shadow-sm'>
-                <p className='mb-0 fst-italic'>{profile.bio}</p>
-              </div>
-            )}
           </div>
 
           <div className='mt-3'>

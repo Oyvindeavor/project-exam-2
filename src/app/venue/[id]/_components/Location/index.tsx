@@ -61,7 +61,9 @@ export default function Location({ location }: LocationProps) {
               )}
             </div>
           ) : (
-            <div className='alert alert-light text-center'>Location coordinates not available</div>
+            <div className='alert alert-light text-center'>
+              The host has not provided map location details
+            </div>
           )}
         </div>
       </div>

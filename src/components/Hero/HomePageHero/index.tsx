@@ -1,7 +1,5 @@
-import Link from 'next/link'
 import HeroInput from './HeroInput'
 import styles from './HomePageHero.module.scss'
-import { Building } from 'lucide-react'
 
 export default function HeroSearch() {
   return (
@@ -22,17 +20,6 @@ export default function HeroSearch() {
             <div>
               <HeroInput />
             </div>
-            <nav aria-label='Primary venue actions' className={styles.buttonGroup}>
-              <Link
-                href='/venues'
-                className='btn btn-outline-warning my-2 mx-2 text-white'
-                role='button'
-                aria-label='Browse all venues'
-              >
-                Browse venues
-                <Building className='ms-2' />
-              </Link>
-            </nav>
           </div>
         </div>
       </div>

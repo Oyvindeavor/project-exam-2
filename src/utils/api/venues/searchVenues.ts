@@ -10,6 +10,7 @@ interface SearchVenuesOptions {
   page?: number
   _owner?: boolean
   _bookings?: boolean
+  revalidate?: number
 }
 
 export default async function searchVenues(
@@ -21,6 +22,7 @@ export default async function searchVenues(
     page = 1,
     _owner = false,
     _bookings = false,
+    revalidate,
   }: SearchVenuesOptions = {}
 ) {
   try {
@@ -32,13 +34,19 @@ export default async function searchVenues(
     if (_owner) queryParams.append('_owner', 'true')
     if (_bookings) queryParams.append('_bookings', 'true')
     const url = `${ENDPOINTS.searchVenues(query)}&${queryParams.toString()}`
-    const response = await fetch(url, {
+
+    const fetchOptions: RequestInit & { next?: { revalidate?: number } } = {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      cache: 'no-store',
-    })
+    }
+
+    if (typeof revalidate === 'number') {
+      fetchOptions.next = { revalidate }
+    }
+
+    const response = await fetch(url, fetchOptions)
 
     if (!response.ok) {
       const errorResponse: NoroffApiError = await response.json()

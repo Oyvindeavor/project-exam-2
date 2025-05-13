@@ -1,24 +1,37 @@
 // --- Color Palette ---
+// Primary Brand Colors
 $primary: rgb(11, 110, 102);
 $primary-darker: rgb(8, 88, 82);
+$primary-lighter: rgb(20, 184, 166);
 $primary-text: #ffffff;
-$secondary: #64748b;
+
+$secondary: #6366f1;
+$secondary-light: #a5b4fc;
+$tertiary: #f59e0b;
+
+// Neutrals
 $light: #f8fafc;
+$light-gray: #e2e8f0;
+$medium-gray: #94a3b8;
+$dark-gray: #475569;
 $dark: #0f172a;
-$success: #16a34a;
+
+// Feedback Colors
+$success: #10b981;
 $info: #0ea5e9;
 $warning: #f97316;
-$danger: #dc2626;
+$danger: #ef4444;
 
 // --- Backgrounds and Text ---
 $body-bg: #ffffff;
 $body-color: $dark;
+$muted-bg: #f1f5f9;
 
 // --- Borders ---
 $border-color: #e2e8f0;
-$border-radius: 0.375rem;
-$border-radius-sm: 0.2rem;
-$border-radius-lg: 0.5rem;
+$border-radius: 0.5rem;
+$border-radius-sm: 0.3rem;
+$border-radius-lg: 0.75rem;
 $border-width: 1px;
 
 // --- Links ---
@@ -27,29 +40,26 @@ $link-hover-color: $primary-darker;
 $link-hover-decoration: underline;
 
 // --- Shadows ---
-$box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-$box-shadow-sm: 0 1px 1px 0 rgba(0, 0, 0, 0.03);
+$box-shadow:
+  0 1px 3px 0 rgba(0, 0, 0, 0.1),
+  0 1px 2px -1px rgba(0, 0, 0, 0.1);
+$box-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 $box-shadow-lg:
-  0 8px 16px -4px rgba(0, 0, 0, 0.1),
+  0 10px 15px -3px rgba(0, 0, 0, 0.1),
   0 4px 6px -4px rgba(0, 0, 0, 0.1);
-$enable-shadows: false;
+$enable-shadows: true;
 
 // --- Typography ---
 $font-family-sans-serif:
-  'Inter',
+  var(--font-inter),
   system-ui,
   -apple-system,
   'Segoe UI',
   Roboto,
   'Helvetica Neue',
-  'Noto Sans',
-  'Liberation Sans',
-  Arial,
-  sans-serif,
-  'Apple Color Emoji',
-  'Segoe UI Emoji',
-  'Segoe UI Symbol',
-  'Noto Color Emoji';
+  sans-serif;
+
+$headings-font-family: var(--font-outfit);
 $headings-font-weight: 600;
 $line-height-base: 1.5;
 
@@ -89,3 +99,15 @@ $nav-link-padding-x: 0.75rem;
 $alert-bg-scale: -80%;
 $alert-border-scale: -80%;
 $alert-color-scale: 40%;
+
+$theme-colors: (
+  'primary': $primary,
+  'secondary': $secondary,
+  'success': $success,
+  'info': $info,
+  'warning': $warning,
+  'danger': $danger,
+  'light': $light,
+  'dark': $dark,
+  'muted': $muted-bg,
+);

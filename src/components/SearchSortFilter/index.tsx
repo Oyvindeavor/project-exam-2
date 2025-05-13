@@ -8,7 +8,7 @@ import SearchInput from './SearchInput'
 import SortOptions from './SortOptions'
 
 const availableSortFields = [
-  { value: 'created', label: 'Date Created' },
+  { value: 'created', label: 'Date' },
   { value: 'name', label: 'Name' },
   { value: 'price', label: 'Price' },
   { value: 'rating', label: 'Rating' },
@@ -48,39 +48,22 @@ function HeroSectionContent() {
 
   return (
     <section
-      className={`${styles.heroSection} bg-gradient bg-primary rounded-3 shadow-lg border container-fluid text-center mb-5`}
+      className={`${styles.heroSection} bg-primary rounded-3 shadow-lg border container-fluid text-center mb-5`}
       aria-labelledby='hero-heading'
     >
-      <div className={`container ${styles.contentContainer}`}>
-        <div className='row py-5'>
-          <div className='col-lg-10 col-xl-8 mx-auto'>
-            <h1
-              id='hero-heading'
-              className={`${styles.heading} display-5 fw-bold mb-4`}
-              tabIndex={-1}
-            >
-              Search and Sort Venues
-            </h1>
-            {/* Search and Sort Controls */}
-            <div className='d-flex flex-column flex-md-row align-items-md-stretch gap-2 mb-3'>
-              <SearchInput
-                initialValue={currentQuery}
-                onSearch={handleSearch}
-                placeholder='Search venues by name, description...'
-                ariaLabel='Search for venues'
-              />
-            </div>
-            <div className='mb-4'>
-              {/* Wrapper for sort */}
-              <SortOptions
-                initialSortField={currentSortField}
-                initialSortOrder={currentSortOrder}
-                onSortChange={handleSortChange}
-                sortFields={availableSortFields}
-              />
-            </div>
-          </div>
-        </div>
+      <div className={styles.searchSortControls}>
+        <SearchInput
+          initialValue={currentQuery}
+          onSearch={handleSearch}
+          placeholder='Search venues by name, description...'
+          ariaLabel='Search for venues'
+        />
+        <SortOptions
+          initialSortField={currentSortField}
+          initialSortOrder={currentSortOrder}
+          onSortChange={handleSortChange}
+          sortFields={availableSortFields}
+        />
       </div>
     </section>
   )

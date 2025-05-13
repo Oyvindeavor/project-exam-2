@@ -3,11 +3,17 @@ import { cookies } from 'next/headers'
 import UpdateVenueForm from '@/components/Forms/UpdateVenueForm'
 import fetchVenueById from '@/utils/api/venues/fetchVenueById'
 import type { VenuesResponseSingle } from '@/types/NoroffApi/response/venuesResponse'
+import { Metadata } from 'next'
 
 interface EditVenuePageProps {
   params: Promise<{
     id: string
   }>
+}
+
+export const metadata: Metadata = {
+  title: 'Edit Venue - Holidaze',
+  description: 'Edit your venue details.',
 }
 
 function parseJwt(token: string) {
