@@ -18,7 +18,7 @@ export default function EditProfileModal({ profile }: EditProfileModalProps) {
       {/* Trigger Button for Modal */}
       <button
         type='button'
-        className='btn btn-sm'
+        className='btn btn-sm btn-light'
         data-bs-toggle='modal'
         data-bs-target='#editProfileModal'
       >
