@@ -6,7 +6,7 @@ import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
 interface FetchVenueByIdOptions {
   _owner?: boolean
   _bookings?: boolean
-  token?: string // <-- NEW: Token is passed in to check auth + ownership
+  token?: string
 }
 
 function parseJwt(token: string) {
