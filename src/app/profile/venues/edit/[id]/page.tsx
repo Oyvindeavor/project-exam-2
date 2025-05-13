@@ -1,6 +1,6 @@
 import React from 'react'
+import { cookies } from 'next/headers'
 import UpdateVenueForm from '@/components/Forms/UpdateVenueForm'
-
 import fetchVenueById from '@/utils/api/venues/fetchVenueById'
 import type { VenuesResponseSingle } from '@/types/NoroffApi/response/venuesResponse'
 
@@ -10,20 +10,63 @@ interface EditVenuePageProps {
   }>
 }
 
+function parseJwt(token: string) {
+  try {
+    const payload = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString())
+    return payload
+  } catch {
+    return null
+  }
+}
+
 export default async function EditVenuePage(props: EditVenuePageProps) {
   const params = await props.params
   const { id } = params
+  const cookieStore = await cookies()
+  const token = cookieStore.get('accessToken')?.value
+
+  if (!token) {
+    return (
+      <div className='container mt-5'>
+        <div className='alert alert-danger'>
+          <h2>Unauthorized</h2>
+          <p>You must be logged in to access this page.</p>
+        </div>
+      </div>
+    )
+  }
+
+  const user = parseJwt(token)
+  if (!user?.email) {
+    return (
+      <div className='container mt-5'>
+        <div className='alert alert-danger'>
+          <h2>Invalid Token</h2>
+          <p>Unable to verify your identity. Please log in again.</p>
+        </div>
+      </div>
+    )
+  }
+
   let venueData: VenuesResponseSingle['data'] | null = null
   let fetchError: string | null = null
 
-  console.log(`EditVenuePage: Fetching data for venue ID: ${id} using external function`)
-
   try {
-    const { venue } = await fetchVenueById(id, { _owner: true })
+    const { venue } = await fetchVenueById(id, { token, _owner: true })
+
+    if (venue?.owner?.email !== user.email) {
+      return (
+        <div className='container mt-5'>
+          <div className='alert alert-danger'>
+            <h2>Access Denied</h2>
+            <p>You do not have permission to edit this venue.</p>
+          </div>
+        </div>
+      )
+    }
+
     venueData = venue ?? null
-    console.log(`EditVenuePage: Successfully fetched venue ${id}`)
   } catch (error) {
-    console.error(`EditVenuePage: Failed to fetch venue ${id}:`, error)
     fetchError = error instanceof Error ? error.message : 'Failed to load venue data.'
   }
 
@@ -33,7 +76,6 @@ export default async function EditVenuePage(props: EditVenuePageProps) {
         <div className='alert alert-danger' role='alert'>
           <h2>Error Loading Venue</h2>
           <p>{fetchError}</p>
-          <p>Could not load data for venue ID: {id}. Please try again later.</p>
         </div>
       </div>
     )
@@ -42,15 +84,13 @@ export default async function EditVenuePage(props: EditVenuePageProps) {
   if (!venueData) {
     return (
       <div className='container mt-5'>
-        <div className='alert alert-warning' role='alert'>
+        <div className='alert alert-warning'>
           <h2>Venue Not Found</h2>
-          <p>Could not find data for venue ID: {id}.</p>
+          <p>No venue found for ID: {id}</p>
         </div>
       </div>
     )
   }
-
-  console.log(`EditVenuePage: Rendering form for venue ID: ${id}`)
 
   return (
     <div className='container mt-4'>
