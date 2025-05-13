@@ -2,6 +2,12 @@ import { cookies } from 'next/headers'
 import fetchVenuesByProfileName from '@/utils/api/profiles/fetchVenuesByProfileName'
 import VenueManagerBookingsTable from '../_components/BookingsTable'
 import RegularUserBookingCards from '../_components/RegularUserBookingsCard'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'My Bookings - Holidaze',
+  description: 'Manage your bookings and venues.',
+}
 
 export default async function BookingsPage() {
   const cookieStore = await cookies()

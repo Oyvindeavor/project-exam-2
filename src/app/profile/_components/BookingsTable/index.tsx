@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import DeleteBookingButton from '@/components/DeleteBookingButton'
 import type { Venues, Booking } from '@/types/NoroffApi/venueTypes'
+import { formatDate } from 'date-fns'
 
 interface Props {
   venues: Venues[]
@@ -185,13 +186,13 @@ export default function VenueManagerBookingsTable({ venues }: Props) {
                 <div className='d-flex w-100 justify-content-between'>
                   <h5 className='mb-1 text-primary'>{booking.venueName}</h5>
                   <small className='text-muted'>
-                    Booked: {new Date(booking.created).toLocaleDateString()}
+                    Booked: {formatDate(new Date(booking.created), 'dd-MM-yyyy')}
                   </small>
                 </div>
                 <p className='mb-1'>
                   <span className='fw-bold'>Dates:</span>{' '}
-                  {new Date(booking.dateFrom).toLocaleDateString()} -{' '}
-                  {new Date(booking.dateTo).toLocaleDateString()} ({bookingDays} day
+                  {formatDate(new Date(booking.dateFrom), 'dd-MM-yyyy')} -{' '}
+                  {formatDate(new Date(booking.dateTo), 'dd-MM-yyyy')} ({bookingDays} day
                   {bookingDays !== 1 ? 's' : ''})
                 </p>
                 <p className='mb-1'>

@@ -1,7 +1,6 @@
 import VenueCard from '@/components/VenueCard'
 import fetchAllVenues from '@/utils/api/venues/fetchAllVenues'
 import HeroSearch from '@/components/Hero/HomePageHero'
-import Divider from '@/components/Divider'
 
 export default async function Home() {
   const { venues } = await fetchAllVenues({
@@ -17,9 +16,9 @@ export default async function Home() {
   console.log('Venues:', venues)
 
   return (
-    <div>
+    <div className='border-4 border-primary rounded-3 p-4'>
       <HeroSearch />
-      <Divider />
+
       <div className='mt-4'>
         <h2 className='text-center mb-4'>Featured Venues</h2>
         <p className='text-center mb-4'>
@@ -34,7 +33,6 @@ export default async function Home() {
             </div>
           ))}
         </div>
-        <Divider />
       </div>
     </div>
   )

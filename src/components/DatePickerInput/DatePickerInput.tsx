@@ -75,7 +75,7 @@ export default function DatePickerInput({
         id={id}
         selected={selectedDate}
         onChange={(date) => setSelectedDate(date)}
-        dateFormat='yyyy-MM-dd'
+        dateFormat='dd-MM-yyyy'
         className={`form-control ${error?.length ? 'is-invalid' : ''}`}
         required={required}
         minDate={addDays(new Date(), 1)}

@@ -18,6 +18,12 @@ $border-color-dark: rgba(0, 0, 0, 0.1);
   align-items: center;
   border: none;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    height: 25vh;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
 }
 
 .contentContainer {
