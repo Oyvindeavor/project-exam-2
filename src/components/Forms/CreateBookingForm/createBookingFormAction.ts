@@ -2,6 +2,7 @@
 
 import createBooking from '@/utils/api/bookings/createBooking'
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 type ActionResult = {
   error?: string
@@ -41,7 +42,8 @@ export default async function createBookingFormAction(
   }
 
   console.log('Booking created successfully:', result)
-  revalidatePath('venue/[id]/')
+  revalidatePath(`venue/${venueId}/book`)
+  redirect(`/profile/bookings`)
 
   return { error: undefined }
 }

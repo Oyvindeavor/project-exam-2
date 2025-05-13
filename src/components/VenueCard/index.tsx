@@ -36,7 +36,7 @@ export default function VenueCard({ venue }: VenueCardProps) {
         )}
         <div className='card-body p-4'>
           <div className='d-flex justify-content-between align-items-center mb-4'>
-            <h5 className='card-title fw-bold mb-0 text-truncate'>{venue?.name}</h5>
+            <h3 className='card-title h5  mb-0 text-truncate'>{venue?.name}</h3>
             <div className='d-flex align-items-center'>
               <Star size={16} fill='gold' color='gold' className='me-1' />
               <span className='fw-medium'>{venue.rating}</span>

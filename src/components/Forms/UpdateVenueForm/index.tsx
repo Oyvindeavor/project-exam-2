@@ -8,6 +8,16 @@ import {
 } from '@/components/Forms/UpdateVenueForm/updateVenueActions'
 import type { VenuesResponseSingle } from '@/types/NoroffApi/response/venuesResponse'
 
+const AMENITY_KEYS = ['wifi', 'parking', 'breakfast', 'pets'] as const
+type AmenityKeyType = (typeof AMENITY_KEYS)[number]
+
+interface VenueMeta {
+  wifi?: boolean
+  parking?: boolean
+  breakfast?: boolean
+  pets?: boolean
+}
+
 interface UpdateVenueFormProps {
   venue: VenuesResponseSingle['data']
 }
@@ -25,18 +35,39 @@ export default function UpdateVenueForm({ venue }: UpdateVenueFormProps) {
   const initialState: UpdateVenueFormState = {
     message: '',
     errors: {},
-    fieldValues: {},
+    fieldValues: {
+      name: venue.name,
+      description: venue.description,
+      media: venue.media || [],
+      price: venue.price,
+      maxGuests: venue.maxGuests,
+      rating: venue.rating === null ? undefined : venue.rating,
+      meta: (venue.meta as VenueMeta) || {
+        wifi: false,
+        parking: false,
+        breakfast: false,
+        pets: false,
+      },
+      location: venue.location || {
+        address: undefined,
+        city: undefined,
+        zip: undefined,
+        country: undefined,
+        continent: undefined,
+        lat: undefined,
+        lng: undefined,
+      },
+    },
     success: false,
   }
   const updateVenueActionWithId = updateVenueAction.bind(null, venue.id)
   const [state, formAction] = useActionState(updateVenueActionWithId, initialState)
 
   useEffect(() => {
-    console.log('Form State Updated:', state)
     if (state.message && !state.success) {
       console.error('Form Error Message:', state.message)
     }
-    if (state.success) {
+    if (state.success && state.message) {
       console.log('Form Success Message:', state.message)
     }
   }, [state])
@@ -44,42 +75,61 @@ export default function UpdateVenueForm({ venue }: UpdateVenueFormProps) {
   const getDefaultValue = (fieldName: keyof NonNullable<UpdateVenueFormState['fieldValues']>) => {
     return state.fieldValues?.[fieldName] ?? venue[fieldName as keyof typeof venue] ?? ''
   }
-  const getDefaultChecked = (
-    fieldName: keyof NonNullable<
-      UpdateVenueFormState['fieldValues'] & { meta: Record<string, unknown> }['meta']
-    >
-  ) => {
-    const stateValue = state.fieldValues?.meta?.[fieldName as keyof typeof venue.meta]
-    if (stateValue !== undefined) {
-      return stateValue
+
+  const getDefaultChecked = (fieldName: AmenityKeyType): boolean => {
+    const stateMeta = state.fieldValues?.meta as VenueMeta | undefined
+    if (stateMeta && typeof stateMeta === 'object' && fieldName in stateMeta) {
+      return !!stateMeta[fieldName]
     }
-    return venue.meta?.[fieldName as keyof typeof venue.meta] ?? false
+    const venueMeta = venue.meta as VenueMeta | undefined
+    if (venueMeta && typeof venueMeta === 'object' && fieldName in venueMeta) {
+      return !!venueMeta[fieldName]
+    }
+    return false
   }
+
   const getDefaultLocationValue = (
     fieldName: keyof NonNullable<NonNullable<UpdateVenueFormState['fieldValues']>['location']>
   ) => {
-    const stateValue = state.fieldValues?.location?.[fieldName]
-    if (stateValue !== undefined && stateValue !== null) {
-      return stateValue
+    const stateLocation = state.fieldValues?.location
+    if (stateLocation && typeof stateLocation === 'object' && fieldName in stateLocation) {
+      const value = stateLocation[fieldName as keyof typeof stateLocation]
+      return value ?? ''
     }
-    const venueValue = venue.location?.[fieldName]
-    return venueValue ?? ''
+    const venueLocation = venue.location
+    if (venueLocation && typeof venueLocation === 'object' && fieldName in venueLocation) {
+      const value = venueLocation[fieldName as keyof typeof venue.location]
+      return value ?? ''
+    }
+    return ''
   }
-  const getDefaultMediaValue = (fieldName: 'url' | 'alt') => {
-    const stateValue = state.fieldValues?.media?.[0]?.[fieldName]
-    if (stateValue !== undefined) {
-      return stateValue
+
+  const getDefaultMediaValue = (index: number, fieldName: 'url' | 'alt'): string => {
+    const stateMedia = state.fieldValues?.media
+    if (stateMedia && Array.isArray(stateMedia) && stateMedia[index]) {
+      const value = stateMedia[index][fieldName]
+      return value ?? ''
     }
-    const venueValue = venue.media?.[0]?.[fieldName]
-    return venueValue ?? ''
+    const venueMedia = venue.media
+    if (venueMedia && Array.isArray(venueMedia) && venueMedia[index]) {
+      const value = venueMedia[index][fieldName]
+      return value ?? ''
+    }
+    return ''
   }
 
   return (
-    <form action={formAction} className='w-100'>
+    <form action={formAction}>
       <h2 className='mb-4 text-center'>Update Venue: {venue.name}</h2>
-      {state.message && !state.success && (
-        <div className='alert alert-danger' role='alert'>
+
+      {state.message && !state.success && !state.errors?.general && (
+        <div className='alert alert-warning' role='alert'>
           {state.message}
+        </div>
+      )}
+      {state.errors?.general && (
+        <div className='alert alert-danger' role='alert'>
+          {state.errors.general}
         </div>
       )}
       {state.message && state.success && (
@@ -89,356 +139,234 @@ export default function UpdateVenueForm({ venue }: UpdateVenueFormProps) {
       )}
 
       {/* Name */}
-      <div className='mb-3'>
-        <label htmlFor='name' className='form-label'>
-          Name
-        </label>
+      <div className='form-floating mb-3'>
         <input
           type='text'
           name='name'
           id='name'
           className={`form-control ${state.errors?.name ? 'is-invalid' : ''}`}
+          placeholder='Venue Name'
           defaultValue={getDefaultValue('name') as string}
           aria-describedby='name-error'
           required
         />
+        <label htmlFor='name'>Name</label>
         {state.errors?.name && (
           <div id='name-error' className='invalid-feedback'>
-            {state.errors.name.join(', ')}
+            {state.errors.name}
           </div>
         )}
       </div>
+
       {/* Description */}
-      <div className='mb-3'>
-        <label htmlFor='description' className='form-label'>
-          Description
-        </label>
+      <div className='form-floating mb-3'>
         <textarea
           name='description'
           id='description'
           className={`form-control ${state.errors?.description ? 'is-invalid' : ''}`}
+          placeholder='Venue Description'
           defaultValue={getDefaultValue('description') as string}
           aria-describedby='description-error'
           required
           rows={4}
+          style={{ height: '100px' }} // < Unable to move to CSS, as it conflicts with Bootstrap styles
         />
+        <label htmlFor='description'>Description</label>
         {state.errors?.description && (
           <div id='description-error' className='invalid-feedback'>
-            {state.errors.description.join(', ')}
+            {state.errors.description}
           </div>
         )}
       </div>
-      {/* Media Url */}
-      <div className='mb-3'>
-        <label htmlFor='mediaUrl' className='form-label'>
-          Media URL
-        </label>
-        <input
-          type='url'
-          name='mediaUrl'
-          id='mediaUrl'
-          className={`form-control ${state.errors?.mediaUrl ? 'is-invalid' : ''}`}
-          defaultValue={getDefaultMediaValue('url')}
-          aria-describedby='mediaUrl-error'
-        />
-        {state.errors?.mediaUrl && (
-          <div id='mediaUrl-error' className='invalid-feedback'>
-            {state.errors.mediaUrl.join(', ')}
+
+      {/* Media Fields */}
+      <fieldset className='mb-3 border p-3 rounded'>
+        <legend className='form-label fs-6 fw-semibold'>Venue Media (Update up to 3 images)</legend>
+        {[0, 1, 2].map((index) => (
+          <div
+            key={`media-group-${index}`}
+            className={`mb-3 p-2 border rounded bg-light ${index === 2 ? 'mb-0' : ''}`}
+          >
+            <p className='fw-semibold mb-2'>Image {index + 1}</p>
+            <div className='form-floating mb-2'>
+              <input
+                type='url'
+                name={`media[${index}][url]`}
+                id={`mediaUrl${index}`}
+                className={`form-control ${state.errors?.media ? 'is-invalid' : ''}`}
+                placeholder={`https://example.com/image${index + 1}.jpg`}
+                defaultValue={getDefaultMediaValue(index, 'url')}
+                aria-describedby={`mediaUrl${index}-error`}
+              />
+              <label htmlFor={`mediaUrl${index}`}>Image URL {index + 1}</label>
+            </div>
+            <div className='form-floating'>
+              <input
+                type='text'
+                name={`media[${index}][alt]`}
+                id={`mediaAlt${index}`}
+                className='form-control'
+                placeholder={`Alt text for Image ${index + 1}`}
+                defaultValue={getDefaultMediaValue(index, 'alt')}
+                aria-describedby={`mediaAlt${index}-error`}
+              />
+              <label htmlFor={`mediaAlt${index}`}>Alt Text {index + 1}</label>
+            </div>
+          </div>
+        ))}
+        {state.errors?.media && (
+          <div id='media-general-error' className='invalid-feedback d-block mt-2'>
+            {state.errors.media}
           </div>
         )}
-      </div>
-      {/* Media alt */}
-      <div className='mb-3'>
-        <label htmlFor='mediaAlt' className='form-label'>
-          Media Alt Text
-        </label>
-        <input
-          type='text'
-          name='mediaAlt'
-          id='mediaAlt'
-          className={`form-control ${state.errors?.mediaAlt ? 'is-invalid' : ''}`}
-          defaultValue={getDefaultMediaValue('alt')}
-          aria-describedby='mediaAlt-error'
-        />
-        {state.errors?.mediaAlt && (
-          <div id='mediaAlt-error' className='invalid-feedback'>
-            {state.errors.mediaAlt.join(', ')}
-          </div>
-        )}
-      </div>
+      </fieldset>
+
       {/* Price */}
-      <div className='mb-3'>
-        <label htmlFor='price' className='form-label'>
-          Price (per night)
-        </label>
+      <div className='form-floating mb-3'>
         <input
           type='number'
           name='price'
           id='price'
           className={`form-control ${state.errors?.price ? 'is-invalid' : ''}`}
-          defaultValue={getDefaultValue('price') as number}
+          placeholder='Price per night'
+          defaultValue={getDefaultValue('price') as number | string}
           aria-describedby='price-error'
           required
           step='0.01'
+          min='0'
         />
+        <label htmlFor='price'>Price (per night)</label>
         {state.errors?.price && (
           <div id='price-error' className='invalid-feedback'>
-            {state.errors.price.join(', ')}
+            {state.errors.price}
           </div>
         )}
       </div>
+
       {/* Max Guests */}
-      <div className='mb-3'>
-        <label htmlFor='maxGuests' className='form-label'>
-          Max Guests
-        </label>
+      <div className='form-floating mb-3'>
         <input
           type='number'
           name='maxGuests'
           id='maxGuests'
           className={`form-control ${state.errors?.maxGuests ? 'is-invalid' : ''}`}
-          defaultValue={getDefaultValue('maxGuests') as number}
+          placeholder='Maximum Guests'
+          defaultValue={getDefaultValue('maxGuests') as number | string}
           aria-describedby='maxGuests-error'
           required
           step='1'
+          min='1'
         />
+        <label htmlFor='maxGuests'>Max Guests</label>
         {state.errors?.maxGuests && (
           <div id='maxGuests-error' className='invalid-feedback'>
-            {state.errors.maxGuests.join(', ')}
+            {state.errors.maxGuests}
           </div>
         )}
       </div>
+
       {/* Rating */}
-      <div className='mb-3'>
-        <label htmlFor='rating' className='form-label'>
-          Rating (0-5)
-        </label>
+      <div className='form-floating mb-3'>
         <input
           type='number'
           name='rating'
           id='rating'
           className={`form-control ${state.errors?.rating ? 'is-invalid' : ''}`}
-          defaultValue={getDefaultValue('rating') as number | undefined}
+          placeholder='Rating (0-5)'
+          defaultValue={getDefaultValue('rating') as number | string | undefined}
           aria-describedby='rating-error'
           min='0'
           max='5'
           step='0.1'
         />
+        <label htmlFor='rating'>Rating (0-5)</label>
         {state.errors?.rating && (
           <div id='rating-error' className='invalid-feedback'>
-            {state.errors.rating.join(', ')}
+            {state.errors.rating}
           </div>
         )}
       </div>
-      {/* Meta */}
+
       <fieldset className='mb-3 border p-3 rounded'>
-        <legend className='form-label fs-6'>Amenities (Meta)</legend>
-        <div className='form-check'>
-          <input
-            type='checkbox'
-            name='wifi'
-            id='wifi'
-            className={`form-check-input ${state.errors?.wifi ? 'is-invalid' : ''}`}
-            defaultChecked={getDefaultChecked('wifi')}
-            aria-describedby='wifi-error'
-          />
-          <label htmlFor='wifi' className='form-check-label'>
-            Wifi
-          </label>
-          {state.errors?.wifi && (
-            <div id='wifi-error' className='invalid-feedback d-block'>
-              {state.errors.wifi.join(', ')}
-            </div>
-          )}
-        </div>
-        <div className='form-check'>
-          <input
-            type='checkbox'
-            name='parking'
-            id='parking'
-            className={`form-check-input ${state.errors?.parking ? 'is-invalid' : ''}`}
-            defaultChecked={getDefaultChecked('parking')}
-            aria-describedby='parking-error'
-          />
-          <label htmlFor='parking' className='form-check-label'>
-            Parking
-          </label>
-          {state.errors?.parking && (
-            <div id='parking-error' className='invalid-feedback d-block'>
-              {state.errors.parking.join(', ')}
-            </div>
-          )}
-        </div>
-        <div className='form-check'>
-          <input
-            type='checkbox'
-            name='breakfast'
-            id='breakfast'
-            className={`form-check-input ${state.errors?.breakfast ? 'is-invalid' : ''}`}
-            defaultChecked={getDefaultChecked('breakfast')}
-            aria-describedby='breakfast-error'
-          />
-          <label htmlFor='breakfast' className='form-check-label'>
-            Breakfast
-          </label>
-          {state.errors?.breakfast && (
-            <div id='breakfast-error' className='invalid-feedback d-block'>
-              {state.errors.breakfast.join(', ')}
-            </div>
-          )}
-        </div>
-        <div className='form-check'>
-          <input
-            type='checkbox'
-            name='pets'
-            id='pets'
-            className={`form-check-input ${state.errors?.pets ? 'is-invalid' : ''}`}
-            defaultChecked={getDefaultChecked('pets')}
-            aria-describedby='pets-error'
-          />
-          <label htmlFor='pets' className='form-check-label'>
-            Pets Allowed
-          </label>
-          {state.errors?.pets && (
-            <div id='pets-error' className='invalid-feedback d-block'>
-              {state.errors.pets.join(', ')}
-            </div>
-          )}
-        </div>
+        <legend className='form-label fs-6 fw-semibold'>Amenities</legend>
+        {AMENITY_KEYS.map((amenity) => (
+          <div className={`form-check ${amenity !== 'pets' ? 'mb-2' : ''}`} key={amenity}>
+            <input
+              type='checkbox'
+              name={amenity}
+              id={amenity}
+              className='form-check-input'
+              defaultChecked={getDefaultChecked(amenity)}
+            />
+            <label htmlFor={amenity} className='form-check-label text-capitalize'>
+              {amenity === 'pets' ? 'Pets Allowed' : amenity}
+            </label>
+          </div>
+        ))}
       </fieldset>
+
       {/* Location */}
       <fieldset className='mb-3 border p-3 rounded'>
-        <legend className='form-label fs-6'>Location</legend>
-        <div className='mb-3'>
-          <label htmlFor='address' className='form-label'>
-            Address
-          </label>
-          <input
-            type='text'
-            name='address'
-            id='address'
-            className={`form-control ${state.errors?.address ? 'is-invalid' : ''}`}
-            defaultValue={getDefaultLocationValue('address') as string}
-            aria-describedby='address-error'
-          />
-          {state.errors?.address && (
-            <div id='address-error' className='invalid-feedback'>
-              {state.errors.address.join(', ')}
-            </div>
-          )}
-        </div>
-        <div className='mb-3'>
-          <label htmlFor='city' className='form-label'>
-            City
-          </label>
-          <input
-            type='text'
-            name='city'
-            id='city'
-            className={`form-control ${state.errors?.city ? 'is-invalid' : ''}`}
-            defaultValue={getDefaultLocationValue('city') as string}
-            aria-describedby='city-error'
-          />
-          {state.errors?.city && (
-            <div id='city-error' className='invalid-feedback'>
-              {state.errors.city.join(', ')}
-            </div>
-          )}
-        </div>
-        <div className='mb-3'>
-          <label htmlFor='zip' className='form-label'>
-            Zip/Postal Code
-          </label>
-          <input
-            type='text'
-            name='zip'
-            id='zip'
-            className={`form-control ${state.errors?.zip ? 'is-invalid' : ''}`}
-            defaultValue={getDefaultLocationValue('zip') as string}
-            aria-describedby='zip-error'
-          />
-          {state.errors?.zip && (
-            <div id='zip-error' className='invalid-feedback'>
-              {state.errors.zip.join(', ')}
-            </div>
-          )}
-        </div>
-        <div className='mb-3'>
-          <label htmlFor='country' className='form-label'>
-            Country
-          </label>
-          <input
-            type='text'
-            name='country'
-            id='country'
-            className={`form-control ${state.errors?.country ? 'is-invalid' : ''}`}
-            defaultValue={getDefaultLocationValue('country') as string}
-            aria-describedby='country-error'
-          />
-          {state.errors?.country && (
-            <div id='country-error' className='invalid-feedback'>
-              {state.errors.country.join(', ')}
-            </div>
-          )}
-        </div>
-        <div className='mb-3'>
-          <label htmlFor='continent' className='form-label'>
-            Continent
-          </label>
-          <input
-            type='text'
-            name='continent'
-            id='continent'
-            className={`form-control ${state.errors?.continent ? 'is-invalid' : ''}`}
-            defaultValue={getDefaultLocationValue('continent') as string}
-            aria-describedby='continent-error'
-          />
-          {state.errors?.continent && (
-            <div id='continent-error' className='invalid-feedback'>
-              {state.errors.continent.join(', ')}
-            </div>
-          )}
-        </div>
-        <div className='mb-3'>
-          <label htmlFor='lat' className='form-label'>
-            Latitude
-          </label>
+        <legend className='form-label fs-6 fw-semibold'>Location</legend>
+        {(['address', 'city', 'zip', 'country', 'continent'] as const).map((field) => (
+          <div className='form-floating mb-3' key={field}>
+            <input
+              type='text'
+              name={field}
+              id={field}
+              className={`form-control ${state.errors?.[field as keyof UpdateVenueFormState['errors']] ? 'is-invalid' : ''}`}
+              placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+              defaultValue={getDefaultLocationValue(field)}
+              aria-describedby={`${field}-error`}
+            />
+            <label htmlFor={field}>{field.charAt(0).toUpperCase() + field.slice(1)}</label>
+            {state.errors?.[field as keyof UpdateVenueFormState['errors']] && (
+              <div id={`${field}-error`} className='invalid-feedback'>
+                {state.errors[field as keyof UpdateVenueFormState['errors']]}
+              </div>
+            )}
+          </div>
+        ))}
+        {/* Latitude */}
+        <div className='form-floating mb-3'>
           <input
             type='number'
             name='lat'
             id='lat'
             className={`form-control ${state.errors?.lat ? 'is-invalid' : ''}`}
-            defaultValue={getDefaultLocationValue('lat') as number | undefined}
+            placeholder='Latitude (e.g., 60.3913)'
+            defaultValue={getDefaultLocationValue('lat') as number | string | undefined}
             aria-describedby='lat-error'
             step='any'
           />
+          <label htmlFor='lat'>Latitude</label>
           {state.errors?.lat && (
             <div id='lat-error' className='invalid-feedback'>
-              {state.errors.lat.join(', ')}
+              {state.errors.lat}
             </div>
           )}
         </div>
-        <div className='mb-3'>
-          <label htmlFor='lng' className='form-label'>
-            Longitude
-          </label>
+        {/* Longitude */}
+        <div className='form-floating'>
           <input
             type='number'
             name='lng'
             id='lng'
             className={`form-control ${state.errors?.lng ? 'is-invalid' : ''}`}
-            defaultValue={getDefaultLocationValue('lng') as number | undefined}
+            placeholder='Longitude (e.g., 5.3221)'
+            defaultValue={getDefaultLocationValue('lng') as number | string | undefined}
             aria-describedby='lng-error'
             step='any'
           />
+          <label htmlFor='lng'>Longitude</label>
           {state.errors?.lng && (
             <div id='lng-error' className='invalid-feedback'>
-              {state.errors.lng.join(', ')}
+              {state.errors.lng}
             </div>
           )}
         </div>
       </fieldset>
-      {/* Submit Button */}
+
       <div className='mt-4'>
         <SubmitButton />
       </div>

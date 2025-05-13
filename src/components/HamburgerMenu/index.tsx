@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
-import { LogIn, UserPlus, User, Settings } from 'lucide-react'
+import { LogIn, UserPlus, User, Calendar, PlusSquare } from 'lucide-react'
 import styles from './HamburgerMenu.module.scss'
 import LogoutButton from '../LogoutButton'
 
@@ -10,11 +10,16 @@ interface HamburgerMenuProps {
   avatarUrl?: string
   isLoggedIn: boolean | null
   profileName?: string
+  venueManager?: boolean
 }
 
-export default function HamburgerMenu({ avatarUrl, profileName, isLoggedIn }: HamburgerMenuProps) {
+export default function HamburgerMenu({
+  avatarUrl,
+  profileName,
+  isLoggedIn,
+  venueManager,
+}: HamburgerMenuProps) {
   useEffect(() => {
-    // Load Bootstrap Offcanvas JS
     import('bootstrap/js/dist/offcanvas').catch((err) =>
       console.error('Failed to load Bootstrap offcanvas JS:', err)
     )
@@ -34,13 +39,13 @@ export default function HamburgerMenu({ avatarUrl, profileName, isLoggedIn }: Ha
       </button>
 
       <div
-        className='offcanvas offcanvas-end '
+        className='offcanvas bg-primary bg-gradient offcanvas-end'
         tabIndex={-1}
         id='offcanvasNavbar'
         aria-labelledby='offcanvasNavbarLabel'
       >
         <div className='offcanvas-header'>
-          <h5 className='offcanvas-title' id='offcanvasNavbarLabel'>
+          <h5 className='offcanvas-title text-light' id='offcanvasNavbarLabel'>
             Menu
           </h5>
           <button
@@ -51,77 +56,100 @@ export default function HamburgerMenu({ avatarUrl, profileName, isLoggedIn }: Ha
           ></button>
         </div>
 
-        <div className='offcanvas-body'>
-          <ul className='navbar-nav justify-content-end flex-grow-1 pe-3 mb-3 mb-lg-0'>
+        <div className='offcanvas-body d-flex flex-column'>
+          {/* Navigation Links */}
+          <ul className='navbar-nav'>
             <li className='nav-item'>
-              <Link href='/venues' className='nav-link '>
+              <Link href='/venues' className='nav-link text-light'>
                 Venues
               </Link>
             </li>
             <li className='nav-item'>
-              <Link href='/about' className='nav-link'>
+              <Link href='/about' className='nav-link text-light'>
                 About
               </Link>
             </li>
             <li className='nav-item'>
-              <Link href='/contact' className='nav-link'>
+              <Link href='/contact' className='nav-link text-light'>
                 Contact
               </Link>
             </li>
           </ul>
 
-          <hr className='d-lg-none text-white-50' />
+          <hr className='text-white' />
 
-          <div className='d-flex flex-column flex-lg-row align-items-start align-items-lg-center'>
+          {/* User Info or Auth Links */}
+          <div className='d-flex flex-column justify-content-between flex-grow-1'>
             {isLoggedIn === null ? (
-              <div
-                className={`mt-2 mt-lg-0 ms-lg-auto ${styles.avatarSkeleton}`}
-                aria-label='Loading user data'
-              ></div>
+              <div className='placeholder-glow mt-2'>
+                <div
+                  className='placeholder rounded-circle bg-light'
+                  style={{ width: 40, height: 40 }}
+                ></div>
+              </div>
             ) : isLoggedIn && avatarUrl ? (
-              <div className={`mt-2 mt-lg-0 ms-lg-auto ${styles.userSection}`}>
-                <div className={styles.avatarContainer}>
+              <div className='d-flex flex-column gap-3'>
+                <div className='d-flex align-items-center gap-3'>
                   <img
                     src={avatarUrl}
                     alt='User Avatar'
+                    className='rounded-circle border border-light'
                     width={40}
                     height={40}
-                    className={styles.avatar}
                   />
-                  <div className={styles.userInfo}>
-                    <p className={styles.userName}>
-                      {profileName
-                        ? profileName.charAt(0).toUpperCase() + profileName.slice(1)
-                        : 'User'}
-                    </p>
+                  <div className='text-light fw-semibold'>
+                    {profileName
+                      ? profileName.charAt(0).toUpperCase() + profileName.slice(1)
+                      : 'User'}
                   </div>
                 </div>
 
-                <div className={styles.userLinks}>
-                  <Link href='/profile' className={`nav-link ${styles.userLink}`}>
-                    <User size={18} /> Profile
-                  </Link>
-                  <Link href='/settings' className={`nav-link ${styles.userLink}`}>
-                    <Settings size={18} /> Settings
-                  </Link>
-                  <LogoutButton />
-                </div>
+                <ul className='nav flex-column'>
+                  <li className='nav-item'>
+                    <Link href='/profile' className='nav-link text-light'>
+                      <User size={18} className='me-2' /> Profile
+                    </Link>
+                  </li>
+
+                  {venueManager ? (
+                    <>
+                      <li className='nav-item'>
+                        <Link href='/profile/venues' className='nav-link text-light'>
+                          <User size={18} className='me-2' /> My Venues
+                        </Link>
+                      </li>
+                      <li className='nav-item'>
+                        <Link href='/profile/create' className='nav-link text-light'>
+                          <PlusSquare size={18} className='me-2' /> Create Venue
+                        </Link>
+                      </li>
+                    </>
+                  ) : (
+                    <li className='nav-item'>
+                      <Link href='/profile/bookings' className='nav-link text-light'>
+                        <Calendar size={18} className='me-2' /> My Bookings
+                      </Link>
+                    </li>
+                  )}
+                </ul>
+
+                <LogoutButton className='btn btn-sm btn-outline-danger' />
               </div>
             ) : (
-              <>
+              <div className='d-flex flex-column gap-2 mt-3'>
                 <Link
                   href='/auth/login'
-                  className={`btn btn-outline-light w-100 w-lg-auto mb-2 mb-lg-0 me-lg-2 d-flex align-items-center justify-content-center ${styles.authButton}`}
+                  className='btn btn-outline-light d-flex align-items-center justify-content-center'
                 >
                   <LogIn className='me-2' size={18} /> Login
                 </Link>
                 <Link
                   href='/auth/register'
-                  className={`btn btn-warning w-100 w-lg-auto d-flex align-items-center justify-content-center ${styles.authButton}`}
+                  className='btn btn-warning d-flex align-items-center justify-content-center'
                 >
                   <UserPlus className='me-2' size={18} /> Sign-up
                 </Link>
-              </>
+              </div>
             )}
           </div>
         </div>

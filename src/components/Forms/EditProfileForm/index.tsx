@@ -3,8 +3,13 @@
 import { useActionState } from 'react'
 import { editProfileAction } from './editProfileAction'
 import { useState, useEffect } from 'react'
+import type { Profile } from '@/types/NoroffApi/profileTypes'
 
-export default function EditProfileForm({ name }: { name: string }) {
+interface EditProfileFormProps {
+  profile: Profile
+}
+
+export default function EditProfileForm({ profile }: EditProfileFormProps) {
   const initialState = { success: false, message: '' }
   const [submitting, setSubmitting] = useState(false)
   const [state, formAction] = useActionState(editProfileAction, initialState)
@@ -16,57 +21,53 @@ export default function EditProfileForm({ name }: { name: string }) {
   }, [state, submitting])
 
   return (
-    <form
-      action={formAction}
-      onSubmit={() => setSubmitting(true)}
-      className='max-w-md mx-auto space-y-4'
-    >
-      <input type='hidden' name='name' value={name} />
+    <form action={formAction} onSubmit={() => setSubmitting(true)} className=''>
+      <input type='hidden' name='name' value={profile.name} />
 
-      <div>
-        <label className='block font-medium'>Bio</label>
-        <textarea
-          name='bio'
-          className='w-full p-2 border rounded'
-          placeholder='Write your bio here...'
-        />
-      </div>
-
-      <div>
-        <label className='block font-medium'>Avatar URL</label>
+      <div className='form-floating'>
         <input
           name='avatar'
           type='url'
-          className='w-full p-2 border rounded'
+          className='form-control mt-4 mb-4'
           placeholder='Enter your avatar URL'
+          defaultValue={profile.avatar?.url || ''}
+          id='avatar'
         />
+        <label htmlFor='avatar'>Avatar URL</label>
       </div>
 
-      <div>
-        <label className='block font-medium'>Banner URL</label>
+      <div className='form-floating'>
         <input
           name='banner'
           type='url'
-          className='w-full p-2 border rounded'
+          className='form-control'
           placeholder='Enter your banner URL'
+          defaultValue={profile.banner?.url || ''}
+          id='banner'
         />
+        <label htmlFor='banner'>Banner URL</label>
       </div>
 
-      <div className='flex items-center space-x-2'>
-        <input name='venueManager' type='checkbox' id='venueManager' />
-        <label htmlFor='venueManager'>Venue Manager</label>
+      <div className='form-floating'>
+        <textarea
+          name='bio'
+          className='form-control h-auto mt-4 mb-4'
+          placeholder='Write your bio here...'
+          defaultValue={profile.bio || ''}
+          style={{ minHeight: '100px' }}
+          id='bio'
+        />
+        <label htmlFor='bio'>Bio</label>
       </div>
 
-      <button
-        type='submit'
-        className='px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700'
-        disabled={submitting}
-      >
+      <button type='submit' className='btn btn-primary w-100' disabled={submitting}>
         {submitting ? 'Updating...' : 'Update Profile'}
       </button>
 
       {state.message && (
-        <p className={state.success ? 'text-green-600' : 'text-red-600'}>{state.message}</p>
+        <p className={`text-center fw-medium ${state.success ? 'text-success' : 'text-danger'}`}>
+          {state.message}
+        </p>
       )}
     </form>
   )

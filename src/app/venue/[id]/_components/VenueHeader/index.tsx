@@ -4,7 +4,7 @@ interface VenueHeaderProps {
   name: string
   price: number
   maxGuests: number
-  rating?: number // Optional
+  rating?: number
   description: string
 }
 
@@ -16,19 +16,23 @@ export default function VenueHeader({
   description,
 }: VenueHeaderProps) {
   return (
-    <>
-      <h1 className='display-5 fw-bold mb-3'>{name}</h1>
-      <div className='d-flex align-items-center mb-3'>
-        <span className='badge bg-primary me-2'>${price}/night</span>
-        <span className='badge bg-secondary me-2'>{maxGuests} guests</span>
+    <div className='mb-4'>
+      <h1 className='display-5 fw-semibold'>{name}</h1>
+
+      <div className='d-flex flex-wrap align-items-center gap-2 mb-3'>
+        <span className='badge bg-primary'>${price} / night</span>
+        <span className='badge bg-secondary'>
+          {maxGuests} guest{maxGuests !== 1 && 's'}
+        </span>
         {typeof rating === 'number' && rating > 0 && (
-          <span className='text-dark'>
-            <Star className='me-1' fill='gold' color='gold' />
-            {rating} Star
+          <span className='d-flex align-items-center text-warning'>
+            <Star className='me-1' fill='currentColor' />
+            <span className='text-dark'>{rating.toFixed(1)} / 5</span>
           </span>
         )}
       </div>
-      <p className='lead mb-4'>{description}</p>
-    </>
+
+      <p className='lead text-muted'>{description}</p>
+    </div>
   )
 }

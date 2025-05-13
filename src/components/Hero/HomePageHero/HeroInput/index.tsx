@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useState, useId, KeyboardEvent } from 'react'
 import styles from '../HomePageHero.module.scss'
+import { Search } from 'lucide-react'
 
 export default function HeroInput() {
   const [searchInput, setSearchInput] = useState('')
@@ -37,7 +38,7 @@ export default function HeroInput() {
             type='search'
             id={searchId}
             className={`form-control ${styles.heroSearchInput}`}
-            placeholder='E.g., "conference center downtown" or "garden wedding"'
+            placeholder='E.g., "Garden" or "wedding"'
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleKeyDown}
@@ -51,6 +52,7 @@ export default function HeroInput() {
             aria-label='Search venues'
           >
             Search
+            <Search className='ms-2' />
           </Link>
         </div>
         <span id='search-description' className='visually-hidden'>

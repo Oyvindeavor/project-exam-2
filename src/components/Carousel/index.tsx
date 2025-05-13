@@ -35,7 +35,10 @@ export default function Carousel({ images, alt }: CarouselProps) {
     >
       <div className='carousel-inner'>
         {images.map((imgSrc, index) => (
-          <div key={imgSrc || index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
+          <div
+            key={`${index}-${imgSrc}`}
+            className={`carousel-item ${index === 0 ? 'active' : ''}`}
+          >
             <LazyLoadImage
               src={imgSrc}
               className={`d-block w-100 ${styles.carouselImage}`}

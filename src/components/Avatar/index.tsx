@@ -5,27 +5,24 @@ import Link from 'next/link'
 import styles from './Avatar.module.scss'
 import AvatarSkeleton from './AvatarSkeleton'
 import LogoutButton from '@/components/LogoutButton'
+import { User, Home, PlusCircle, CalendarCheck } from 'lucide-react'
 
 interface AvatarProps {
   avatarUrl: string
   altText?: string
+  venueManager?: boolean
 }
 
-export default function Avatar({ avatarUrl, altText = 'User avatar' }: AvatarProps) {
+export default function Avatar({ avatarUrl, altText = 'User avatar', venueManager }: AvatarProps) {
   const [isBootstrapReady, setIsBootstrapReady] = useState(false)
 
   useEffect(() => {
-    console.log('Avatar: useEffect - Importing Bootstrap JS...')
     let isMounted = true
     import('bootstrap/js/dist/dropdown')
       .then(() => {
-        if (isMounted) {
-          console.log('Avatar: Bootstrap JS loaded.')
-          setIsBootstrapReady(true)
-        }
+        if (isMounted) setIsBootstrapReady(true)
       })
-      .catch((error) => {
-        console.error('Avatar: Failed to load Bootstrap JS:', error)
+      .catch(() => {
         if (isMounted) setIsBootstrapReady(true)
       })
     return () => {
@@ -33,22 +30,17 @@ export default function Avatar({ avatarUrl, altText = 'User avatar' }: AvatarPro
     }
   }, [])
 
-  // Render Skeleton Internally if Bootstrap isn't ready
   if (!isBootstrapReady) {
-    console.log('Avatar: Rendering Skeleton (Waiting for Bootstrap internally)')
-    // This component renders its own skeleton initially
     return <AvatarSkeleton />
   }
 
-  // Render the actual component structure once Bootstrap JS is loaded
-  console.log('Avatar: Rendering full dropdown component.')
   return (
-    <div className={`dropdown`}>
+    <div className='dropdown'>
       <button
         className={`btn p-0 border-0 rounded-circle ${styles.avatarButton}`}
         type='button'
         id='dropdownUserMenu'
-        data-bs-toggle='dropdown' // This relies on Bootstrap JS
+        data-bs-toggle='dropdown'
         aria-expanded='false'
         aria-label='User menu'
       >
@@ -60,22 +52,58 @@ export default function Avatar({ avatarUrl, altText = 'User avatar' }: AvatarPro
           height={40}
         />
       </button>
-      {/* Dropdown menu */}
+
       <ul
-        className='dropdown-menu dropdown-menu-end text-small shadow-sm'
+        className='dropdown-menu dropdown-menu-end text-small shadow-sm py-2'
         aria-labelledby='dropdownUserMenu'
       >
         <li>
-          <Link className='dropdown-item' href='/profile'>
+          <Link className='dropdown-item d-flex align-items-center gap-2' href='/profile'>
+            <User size={16} />
             Profile
           </Link>
         </li>
+
+        {venueManager ? (
+          <>
+            <li>
+              <Link
+                className='dropdown-item d-flex align-items-center gap-2'
+                href='/profile/venues'
+              >
+                <Home size={16} />
+                My Venues
+              </Link>
+            </li>
+            <li>
+              <Link
+                className='dropdown-item d-flex align-items-center gap-2'
+                href='/profile/create'
+              >
+                <PlusCircle size={16} />
+                Create Venue
+              </Link>
+            </li>
+          </>
+        ) : (
+          <li>
+            <Link
+              className='dropdown-item d-flex align-items-center gap-2'
+              href='/profile/bookings'
+            >
+              <CalendarCheck size={16} />
+              My Bookings
+            </Link>
+          </li>
+        )}
+
         <li>
-          <hr className='dropdown-divider my-1' />
+          <hr className='dropdown-divider my-2' />
         </li>
+
         <li>
-          <a>
-            <LogoutButton />
+          <a className='dropdown-item d-flex align-items-center gap-2'>
+            <LogoutButton className='dropdown-item d-flex align-items-center gap-2' />
           </a>
         </li>
       </ul>

@@ -12,27 +12,27 @@ interface VenueHostProfileProps {
 
 export default function VenueHostProfile({ owner }: VenueHostProfileProps) {
   return (
-    <div className='mb-4 mt-4 shadow-sm'>
-      <div className='card-body'>
+    <div className='card border-0 shadow-sm mb-4'>
+      <div className='card-body d-flex align-items-center'>
         {owner ? (
-          <div className='d-flex align-items-center'>
+          <>
             <div className='flex-shrink-0'>
               {owner.avatar?.url ? (
                 <img
                   src={owner.avatar.url}
-                  alt={`${owner.avatar.alt} User Avatar`}
-                  className={`${styles.hostAvatar} rounded-circle`}
+                  alt={owner.avatar.alt || `${owner.name}'s avatar`}
+                  className={`${styles.hostAvatar} rounded-circle border`}
                 />
               ) : (
                 <div className='bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white'>
-                  <User className='fs-4' />
+                  <User size={24} />
                 </div>
               )}
             </div>
             <div className='flex-grow-1 ms-3'>
-              <h4 className='h6 mb-1'>{owner.name}</h4>
+              <h5 className='mb-0'>Hosted by {owner.name}</h5>
             </div>
-          </div>
+          </>
         ) : (
           <p className='mb-0 text-muted'>Host information not available</p>
         )}
