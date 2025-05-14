@@ -6,7 +6,7 @@ export default async function NavigationTabs() {
   const venueManager = await isUserVenueManager()
 
   return (
-    <ul className='nav nav-tabs mb-4 gap-2' id='profileTabs'>
+    <ul className='nav nav-tabs nav-fill nav-item mb-4 gap-2' id='profileTabs'>
       <li className='nav-item'>
         <NavLink href='/profile' exact className='nav-link d-flex align-items-center gap-1'>
           <PanelsTopLeft size={18} />
