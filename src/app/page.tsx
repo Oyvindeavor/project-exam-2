@@ -1,6 +1,7 @@
 import HeroSearch from '@/components/Hero/HomePageHero'
 import FiveStarVenues from '@/components/FiveStarVenuesSection'
 import WeddingSection from '@/components/WeddingSection'
+import UnusualSection from '@/components/UnusualSection'
 
 export default async function Home() {
   return (
@@ -11,6 +12,8 @@ export default async function Home() {
       <hr className='divider' />
 
       <WeddingSection />
+
+      <UnusualSection />
     </div>
   )
 }
