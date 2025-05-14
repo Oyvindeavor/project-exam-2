@@ -89,3 +89,21 @@ $overlay-bg: rgba(0, 0, 0, 0.6);
     }
   }
 }
+
+.heroSearchButton {
+  background-color: $primary-color;
+  color: $light-text;
+  padding: 1rem 1.3rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $primary-darker;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
