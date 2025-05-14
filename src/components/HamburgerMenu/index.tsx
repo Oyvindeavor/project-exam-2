@@ -1,10 +1,9 @@
 'use client'
-
-import { useEffect } from 'react'
 import Link from 'next/link'
 import { LogIn, UserPlus, User, Calendar, PlusSquare } from 'lucide-react'
 import styles from './HamburgerMenu.module.scss'
 import LogoutButton from '../LogoutButton'
+import HamburgerToggle from './HamburgerToggle'
 
 interface HamburgerMenuProps {
   avatarUrl?: string
@@ -13,17 +12,17 @@ interface HamburgerMenuProps {
   venueManager?: boolean
 }
 
-// Reusable handler to close offcanvas
-// This function is used to close the offcanvas menu when a link is clicked
-// It needs to stay in here to avoid re-importing offcanvas in every component
+// Client-only offcanvas handler for link clicks
 const handleLinkClick = () => {
-  const offcanvasEl = document.getElementById('offcanvasNavbar')
-  if (offcanvasEl) {
-    import('bootstrap/js/dist/offcanvas')
-      .then(({ default: Offcanvas }) => {
-        Offcanvas.getOrCreateInstance(offcanvasEl).hide()
-      })
-      .catch((err) => console.error('Failed to hide offcanvas after link click:', err))
+  if (typeof window !== 'undefined') {
+    const offcanvasEl = document.getElementById('offcanvasNavbar')
+    if (offcanvasEl) {
+      import('bootstrap/js/dist/offcanvas')
+        .then(({ default: Offcanvas }) => {
+          Offcanvas.getOrCreateInstance(offcanvasEl).hide()
+        })
+        .catch((err) => console.error('Failed to hide offcanvas after link click:', err))
+    }
   }
 }
 
@@ -33,35 +32,20 @@ export default function HamburgerMenu({
   isLoggedIn,
   venueManager,
 }: HamburgerMenuProps) {
-  useEffect(() => {
-    import('bootstrap/js/dist/offcanvas').catch((err) =>
-      console.error('Failed to load Bootstrap offcanvas JS:', err)
-    )
-  }, [])
-
   return (
     <div className={styles.menuContainer}>
-      <button
-        className={`navbar-toggler ${styles.hamburgerButton}`}
-        type='button'
-        data-bs-toggle='offcanvas'
-        data-bs-target='#offcanvasNavbar'
-        aria-controls='offcanvasNavbar'
-        aria-label='Toggle navigation'
-      >
-        <span className='navbar-toggler-icon'></span>
-      </button>
+      <HamburgerToggle />
 
       <div
-        className='offcanvas bg-primary bg-gradient offcanvas-end'
+        className={`${styles.offCanvasMenu} offcanvas offcanvas-end`}
         tabIndex={-1}
         id='offcanvasNavbar'
         aria-labelledby='offcanvasNavbarLabel'
       >
         <div className='offcanvas-header'>
-          <h5 className='offcanvas-title text-light' id='offcanvasNavbarLabel'>
+          <h2 className='h5 offcanvas-title text-light' id='offcanvasNavbarLabel'>
             Menu
-          </h5>
+          </h2>
           <button
             type='button'
             className='btn-close btn-close-white'
@@ -71,7 +55,6 @@ export default function HamburgerMenu({
         </div>
 
         <div className='offcanvas-body d-flex flex-column'>
-          {/* Navigation Links */}
           <ul className='navbar-nav'>
             <li className='nav-item'>
               <Link href='/venues' className='nav-link text-light' onClick={handleLinkClick}>
@@ -92,7 +75,6 @@ export default function HamburgerMenu({
 
           <hr className='text-white' />
 
-          {/* User Info or Auth Links */}
           <div className='d-flex flex-column justify-content-between flex-grow-1'>
             {isLoggedIn === null ? (
               <div className='placeholder-glow mt-2'>
@@ -159,7 +141,7 @@ export default function HamburgerMenu({
                   )}
                 </ul>
 
-                <LogoutButton className='btn btn-sm btn-outline-danger' />
+                <LogoutButton className='btn btn-sm btn-outline-warning ' />
               </div>
             ) : (
               <div className='d-flex flex-column gap-2 mt-3'>

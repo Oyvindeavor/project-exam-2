@@ -6,7 +6,9 @@ export default async function Home() {
   return (
     <div className='border-4 rounded-3 p-4'>
       <HeroSearch />
+      <hr className='divider' />
       <FiveStarVenues />
+      <hr className='divider' />
 
       <WeddingSection />
     </div>

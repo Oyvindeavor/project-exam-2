@@ -17,7 +17,7 @@ export default async function AccountSection() {
         {isLoggedIn ? (
           <>
             <li className='nav-item mb-2'>
-              <Link href='/profile' className='nav-link p-0 text-light'>
+              <Link href='/profile' className='nav-link  p-0 text-light '>
                 Profile
               </Link>
             </li>
