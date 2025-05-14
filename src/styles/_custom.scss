@@ -39,6 +39,8 @@ a:not(.btn):not(.nav-link):not(.dropdown-item):not(.navbar-brand):active {
 // Nav Link specific styling if not in navbar (e.g. .nav component)
 .nav-link {
   color: $link-color;
+  padding: $nav-link-padding-y $nav-link-padding-x;
+  font-family: var(--bs-font-family-sans-serif, $font-family-sans-serif);
 }
 .nav-link:not(.disabled):hover {
   color: $link-hover-color;
@@ -109,6 +111,7 @@ a:not(.btn):not(.nav-link):not(.dropdown-item):not(.navbar-brand):active {
 .navbar .nav-link {
   color: $primary-text;
   padding: $nav-link-padding-y $nav-link-padding-x;
+  font-family: var(--bs-font-family-sans-serif, $font-family-sans-serif);
 }
 .navbar .nav-link:hover,
 .navbar .nav-link:focus {
