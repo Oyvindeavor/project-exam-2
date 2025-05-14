@@ -13,6 +13,20 @@ interface HamburgerMenuProps {
   venueManager?: boolean
 }
 
+// Reusable handler to close offcanvas
+// This function is used to close the offcanvas menu when a link is clicked
+// It needs to stay in here to avoid re-importing offcanvas in every component
+const handleLinkClick = () => {
+  const offcanvasEl = document.getElementById('offcanvasNavbar')
+  if (offcanvasEl) {
+    import('bootstrap/js/dist/offcanvas')
+      .then(({ default: Offcanvas }) => {
+        Offcanvas.getOrCreateInstance(offcanvasEl).hide()
+      })
+      .catch((err) => console.error('Failed to hide offcanvas after link click:', err))
+  }
+}
+
 export default function HamburgerMenu({
   avatarUrl,
   profileName,
@@ -60,17 +74,17 @@ export default function HamburgerMenu({
           {/* Navigation Links */}
           <ul className='navbar-nav'>
             <li className='nav-item'>
-              <Link href='/venues' className='nav-link text-light'>
+              <Link href='/venues' className='nav-link text-light' onClick={handleLinkClick}>
                 Venues
               </Link>
             </li>
             <li className='nav-item'>
-              <Link href='/about' className='nav-link text-light'>
+              <Link href='/about' className='nav-link text-light' onClick={handleLinkClick}>
                 About
               </Link>
             </li>
             <li className='nav-item'>
-              <Link href='/contact' className='nav-link text-light'>
+              <Link href='/contact' className='nav-link text-light' onClick={handleLinkClick}>
                 Contact
               </Link>
             </li>
@@ -106,7 +120,7 @@ export default function HamburgerMenu({
 
                 <ul className='nav flex-column'>
                   <li className='nav-item'>
-                    <Link href='/profile' className='nav-link text-light'>
+                    <Link href='/profile' className='nav-link text-light' onClick={handleLinkClick}>
                       <User size={18} className='me-2' /> Profile
                     </Link>
                   </li>
@@ -114,19 +128,31 @@ export default function HamburgerMenu({
                   {venueManager ? (
                     <>
                       <li className='nav-item'>
-                        <Link href='/profile/venues' className='nav-link text-light'>
+                        <Link
+                          href='/profile/venues'
+                          className='nav-link text-light'
+                          onClick={handleLinkClick}
+                        >
                           <User size={18} className='me-2' /> My Venues
                         </Link>
                       </li>
                       <li className='nav-item'>
-                        <Link href='/profile/create' className='nav-link text-light'>
+                        <Link
+                          href='/profile/create'
+                          className='nav-link text-light'
+                          onClick={handleLinkClick}
+                        >
                           <PlusSquare size={18} className='me-2' /> Create Venue
                         </Link>
                       </li>
                     </>
                   ) : (
                     <li className='nav-item'>
-                      <Link href='/profile/bookings' className='nav-link text-light'>
+                      <Link
+                        href='/profile/bookings'
+                        className='nav-link text-light'
+                        onClick={handleLinkClick}
+                      >
                         <Calendar size={18} className='me-2' /> My Bookings
                       </Link>
                     </li>
@@ -140,12 +166,14 @@ export default function HamburgerMenu({
                 <Link
                   href='/auth/login'
                   className='btn btn-outline-light d-flex align-items-center justify-content-center'
+                  onClick={handleLinkClick}
                 >
                   <LogIn className='me-2' size={18} /> Login
                 </Link>
                 <Link
                   href='/auth/register'
                   className='btn btn-warning d-flex align-items-center justify-content-center'
+                  onClick={handleLinkClick}
                 >
                   <UserPlus className='me-2' size={18} /> Sign-up
                 </Link>
