@@ -49,7 +49,6 @@ function HeroSectionContent() {
   return (
     <section
       className={`${styles.heroSection} bg-primary rounded-3 shadow-lg border container-fluid text-center mb-5`}
-      aria-labelledby='hero-heading'
     >
       <div className={styles.searchSortControls}>
         <SearchInput

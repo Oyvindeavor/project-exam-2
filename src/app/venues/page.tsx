@@ -27,11 +27,11 @@ export const metadata: Metadata = {
 
 export default async function VenuesPage(props: VenuesPageProps) {
   const searchParams = await props.searchParams
-  // Extract the current search query from searchParams
   const currentQuery = searchParams.q?.trim() || ''
 
   return (
     <div className='container my-4'>
+      <h1 className='visually-hidden'>Venues</h1>
       <Suspense fallback={<VenueGridSkeleton />}>
         <HeroSection />
       </Suspense>
