@@ -3,6 +3,7 @@
 import { useFormStatus } from 'react-dom'
 import { useActionState, useRef } from 'react'
 import registerFormAction from './registerFormAction'
+import Link from 'next/link'
 
 const initialState: { error?: string } = { error: undefined }
 
@@ -80,6 +81,14 @@ export default function RegisterForm() {
       {state?.error && <div className='alert alert-danger'>{state.error}</div>}
 
       <RegisterButton />
+
+      <div className='text-center mt-3'>
+        <p>
+          <Link href='/auth/login' className='text-decoration-none'>
+            Already have an account? Login
+          </Link>
+        </p>
+      </div>
     </form>
   )
 }
