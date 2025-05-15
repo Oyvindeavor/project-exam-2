@@ -30,7 +30,7 @@ export default function VenueHostProfile({ owner }: VenueHostProfileProps) {
               )}
             </div>
             <div className='flex-grow-1 ms-3'>
-              <h5 className='mb-0'>Hosted by {owner.name}</h5>
+              <h1 className='h4 mb-0'>Hosted by {owner.name}</h1>
             </div>
           </>
         ) : (
