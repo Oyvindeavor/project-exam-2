@@ -14,7 +14,10 @@ export default function VenueImageGallery({ media, venueName }: VenueImageGaller
           <Suspense fallback={<div className='text-center p-5'>Loading images...</div>}>
             {media && media.length > 0 ? (
               <Carousel
-                alt={media.map((image) => image.alt || `${venueName} image`)}
+                alt={media.map(
+                  (image) =>
+                    `${image.alt} image of ${venueName}` || `${venueName} image of ${venueName}`
+                )}
                 images={media.map((image) => image.url)}
               />
             ) : (

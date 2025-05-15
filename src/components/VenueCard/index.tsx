@@ -20,7 +20,7 @@ export default function VenueCard({ venue }: VenueCardProps) {
             <LazyVenueImage
               src={venue.media[0].url}
               className='card-img-top object-fit-cover'
-              alt={venue.media[0].alt || 'Venue Image'}
+              alt={`${venue.media[0].alt} venue image of ${venue.name}` || `photo of ${venue.name}`} // Added extra alt text to prevent empty or short alt text
             />
             <div className={`${style.cardOverlay} position-absolute top-0 end-0 p-3`}>
               <span className='badge bg-white text-primary rounded-pill shadow-sm'>
