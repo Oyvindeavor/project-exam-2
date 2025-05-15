@@ -14,6 +14,8 @@ export default function Footer() {
               href='/'
               className='d-flex align-items-center mb-3 text-light text-decoration-none'
               aria-label='Logo'
+              title='Logo'
+              role='img'
             >
               <img src='/logo.svg' alt='Logo a stick drawn white arch with a doorway' />
             </Link>

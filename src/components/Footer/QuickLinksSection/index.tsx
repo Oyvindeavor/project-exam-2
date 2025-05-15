@@ -8,11 +8,6 @@ export default function QuickLinkSection() {
       </h2>
       <ul className='nav flex-column'>
         <li className='nav-item mb-2'>
-          <Link href='/' className='nav-link p-0 text-light'>
-            Home
-          </Link>
-        </li>
-        <li className='nav-item mb-2'>
           <Link href='/venues' className='nav-link p-0 text-light'>
             Venues
           </Link>

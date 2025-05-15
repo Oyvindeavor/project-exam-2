@@ -63,11 +63,9 @@ export default function LoginForm() {
       <LoginButton />
 
       <div className='text-center mt-3'>
-        <p>
-          <Link href='/auth/register' className='text-decoration-none'>
-            Don&apos;t have an account? Sign up
-          </Link>
-        </p>
+        <Link href='register' className='text-decoration-none'>
+          Don&apos;t have an account? Sign up
+        </Link>
       </div>
     </form>
   )
