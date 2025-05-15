@@ -3,6 +3,7 @@
 import { useFormStatus } from 'react-dom'
 import { loginFormAction } from './loginFormAction'
 import { useActionState, useRef } from 'react'
+import Link from 'next/link'
 
 const initialState: { error?: string } = { error: undefined }
 
@@ -60,6 +61,14 @@ export default function LoginForm() {
       {state?.error && <div className='alert alert-danger'>{state.error}</div>}
 
       <LoginButton />
+
+      <div className='text-center mt-3'>
+        <p>
+          <Link href='/auth/register' className='text-decoration-none'>
+            Don&apos;t have an account? Sign up
+          </Link>
+        </p>
+      </div>
     </form>
   )
 }

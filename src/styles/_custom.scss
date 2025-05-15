@@ -162,10 +162,6 @@ a:not(.btn):not(.nav-link):not(.dropdown-item):not(.navbar-brand):active {
   filter: invert(1) grayscale(100) brightness(2);
 }
 
-html {
-  overflow: scroll;
-}
-
 main {
   border: var(--bs-border-width, $border-width) solid var(--bs-border-color, $border-color);
 }
