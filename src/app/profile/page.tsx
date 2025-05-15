@@ -1,8 +1,9 @@
-import { fetchLoggedInUser } from '@/utils/auth/fetchLoggedInUser' // cached
-import { Profile } from '@/types/NoroffApi/profileTypes'
+import { fetchLoggedInUser } from '@/utils/auth/fetchLoggedInUser'
 import ProfileHeader from './_components/ProfileHeader'
 import isUserVenueManager from '@/utils/auth/isVenueManager'
 import { Metadata } from 'next'
+import UserActivityAside from '@/components/UserActivityAside'
+import ProfileDetailsSection from '@/components/ProfileDetailsSection'
 
 export const metadata: Metadata = {
   title: 'Profile - Holidaze',
@@ -10,73 +11,36 @@ export const metadata: Metadata = {
 }
 
 export default async function ProfileDefaultPage() {
-  const { profile } = (await fetchLoggedInUser({})) as { profile: Profile | null }
-  const isManager = await isUserVenueManager()
+  const { profile, error } = await fetchLoggedInUser({})
+  const isManager = profile ? await isUserVenueManager() : false
 
-  if (!profile) {
+  if (error || !profile) {
     return (
-      <div className='container mt-5'>
-        <div className='alert alert-danger' role='alert'>
-          Could not load profile information.
+      <div className='container mt-5 py-5'>
+        <div className='alert alert-danger text-center' role='alert'>
+          <h2 className='alert-heading h4'>Profile Unavailable</h2>
+          <p className='mb-0'>
+            We could not load your profile information at this time. Please try again later or
+            contact support if the issue persists.
+          </p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className='container mb-5'>
+    <>
       <ProfileHeader />
+      <div className='container mt-4 mb-5'>
+        <h2 className='visually-hidden'>Profile Details and Activity</h2>
+        <div className='row gx-lg-5'>
+          {/* Use the new ProfileDetailsSection component */}
+          <ProfileDetailsSection profile={profile} />
 
-      <div className='row mt-5'>
-        <div className='col-12 col-lg-8 mb-4'>
-          <div className={`card shadow-sm `}>
-            <div className='card-body p-4'>
-              <h2 className='card-title display-6 mb-4'>
-                <span>Welcome back,</span> {profile.name}!
-              </h2>
-
-              <div className='card-text'>
-                {profile.bio ? (
-                  <p>{profile.bio}</p>
-                ) : (
-                  <div className='alert alert-light border'>
-                    <div className='d-flex align-items-center'>
-                      <span>You have not added a bio yet.</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className='col-12 col-lg-4'>
-          <div className={`card shadow-sm `}>
-            <div className='card-header bg-primary text-white'>
-              <h5 className='mb-0'>Your Activity</h5>
-            </div>
-            <div className='card-body'>
-              <div className='d-flex align-items-center mb-3'>
-                <div className={`me-3 p-3 rounded-circle bg-primary bg-opacity-10 `}></div>
-                <div>
-                  <h6 className='mb-0'>Bookings</h6>
-                  <p className='mb-0 fs-4 fw-bold'>{profile._count.bookings}</p>
-                </div>
-              </div>
-
-              {isManager && (
-                <div className='d-flex align-items-center'>
-                  <div className={`me-3 p-3 rounded-circle bg-success bg-opacity-10`}></div>
-                  <div>
-                    <h6 className='mb-0'>Venues</h6>
-                    <p className='mb-0 fs-4 fw-bold'>{profile._count.venues}</p>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
+          {/* Use the new UserActivityAside component */}
+          <UserActivityAside profile={profile} isManager={isManager} />
         </div>
       </div>
-    </div>
+    </>
   )
 }
