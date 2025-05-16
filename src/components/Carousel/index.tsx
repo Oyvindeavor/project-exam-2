@@ -2,7 +2,6 @@
 
 import { useEffect, useId } from 'react'
 import styles from './Carousel.module.scss'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 
 interface CarouselProps {
@@ -39,12 +38,11 @@ export default function Carousel({ images, alt }: CarouselProps) {
             key={`${index}-${imgSrc}`}
             className={`carousel-item ${index === 0 ? 'active' : ''}`}
           >
-            <LazyLoadImage
+            <img
               src={imgSrc}
               className={`d-block w-100 ${styles.carouselImage}`}
               alt={alt[index] || 'venue Image'}
-              effect='blur'
-              width='100%'
+              loading='eager'
             />
           </div>
         ))}
