@@ -22,7 +22,7 @@ export default async function FiveStarVenues() {
         <div className='row row-cols-1 row-cols-sm-2 row-cold-md-3 row-cols-lg-3 row-cols-xl-3 g-4'>
           {venues.data.map((venue) => (
             <div className='col' key={venue.id}>
-              <VenueCard venue={venue} />
+              <VenueCard venue={venue} lazyLoad={false} />
             </div>
           ))}
         </div>
