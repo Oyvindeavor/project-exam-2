@@ -16,9 +16,7 @@ export default function VenueCard({ venue, lazyLoad = true }: VenueCardProps) {
 
   return (
     <Link href={`/venue/${venue.id}`} className='text-decoration-none'>
-      <div
-        className={`${style.card} card border-2 h-100 position-relative overflow-hidden bg-white`}
-      >
+      <div className={`${style.card} card border-2  position-relative overflow-hidden bg-white`}>
         {hasImages ? (
           <div className='ratio ratio-16x9 position-relative'>
             {lazyLoad ? (
