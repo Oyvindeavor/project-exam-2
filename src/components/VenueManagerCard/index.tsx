@@ -15,7 +15,7 @@ export default function VenueManagerCard({ venue }: VenueManagerCardProps) {
       <img src={imageUrl} alt={imageAlt} className='card-img-top' />
 
       <div className='card-body d-flex flex-column'>
-        <h5 className='card-title text-primary mb-1'>{venue.name}</h5>
+        <h2 className='card-title text-primary mb-1'>{venue.name}</h2>
         <div className='card-text text-muted small mb-3'>
           {venue.location?.address && (
             <p className='mb-1'>
@@ -33,7 +33,7 @@ export default function VenueManagerCard({ venue }: VenueManagerCardProps) {
 
           <div className='dropdown'>
             <button
-              className='btn btn-sm btn-outline-secondary dropdown-toggle'
+              className='btn btn-sm btn-outline-secondary text-dark dropdown-toggle'
               type='button'
               data-bs-toggle='dropdown'
               aria-expanded='false'
