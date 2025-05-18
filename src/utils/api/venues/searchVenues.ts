@@ -53,15 +53,12 @@ export default async function searchVenues(
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to fetch venues',
       }
-      console.log('Error fetching venues:', errorResponse.errors)
-      console.log('Error message:', errorMessage)
       throw new Error(errorMessage.error)
     }
 
     const data: SearchVenuesResponse = await response.json()
     return { venues: data.data, meta: data.meta }
   } catch (error) {
-    console.log('Error fetching venues:', error)
     throw error
   }
 }

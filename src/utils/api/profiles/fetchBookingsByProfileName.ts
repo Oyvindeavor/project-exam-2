@@ -46,14 +46,12 @@ export default async function fetchBookingsByProfile(
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to fetch bookings for profile',
       }
-      console.log('Error fetching bookings:', errorResponse.errors)
       return { error: errorMessage }
     }
 
     const data: ProfileBookingsResponse = await response.json()
     return { bookings: data.data, meta: data.meta }
   } catch (error) {
-    console.log('Error fetching bookings:', error)
     throw error
   }
 }

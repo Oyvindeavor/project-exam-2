@@ -24,8 +24,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  noFooter,
 }: Readonly<{
   children: React.ReactNode
+  noFooter?: boolean
 }>) {
   return (
     <html lang='en'>
@@ -34,7 +36,7 @@ export default function RootLayout({
       >
         <NavBar />
         <main className='mainLayout container flex-grow-1  '>{children}</main>
-        <Footer />
+        {!noFooter && <Footer />}
       </body>
     </html>
   )

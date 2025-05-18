@@ -36,7 +36,6 @@ export default async function fetchBookingById(
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to fetch booking',
       }
-      console.log('Error fetching booking:', errorMessage.error)
       return {
         data: null,
         meta: null,
@@ -47,7 +46,7 @@ export default async function fetchBookingById(
     const data = json as BookingSingleResponse
     return { data: data.data, meta: data.meta, error: null }
   } catch (err) {
-    console.log('Unexpected error fetching booking:', err)
+    console.error('Network error:', err)
     return {
       data: null,
       meta: null,

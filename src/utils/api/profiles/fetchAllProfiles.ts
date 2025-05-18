@@ -43,15 +43,13 @@ export default async function fetchAllProfiles({
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to fetch profiles',
       }
-      console.log('Error fetching profiles:', errorResponse.errors)
-      console.log('Error message:', errorMessage)
+
       return { error: errorMessage }
     }
 
     const data: ProfileResponse = await response.json()
     return { profiles: data.data, meta: data.meta }
   } catch (error) {
-    console.log('Error fetching profiles:', error)
     throw error
   }
 }

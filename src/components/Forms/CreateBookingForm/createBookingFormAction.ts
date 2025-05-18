@@ -20,12 +20,6 @@ export default async function createBookingFormAction(
   if (!venueId || !dateFrom || !dateTo || !guests) {
     return { error: 'All fields are required.' }
   }
-  console.log('Creating booking with data:', {
-    venueId,
-    dateFrom,
-    dateTo,
-    guests,
-  })
 
   const result = await createBooking({
     dateFrom,
@@ -41,9 +35,6 @@ export default async function createBookingFormAction(
     return { error: result.error }
   }
 
-  console.log('Booking created successfully:', result)
   revalidatePath(`venue/${venueId}/book`)
   redirect(`/profile/bookings`)
-
-  return { error: undefined }
 }

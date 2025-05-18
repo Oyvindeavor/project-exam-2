@@ -4,6 +4,8 @@ import styles from './UnusualSection.module.scss'
 export default function UnusualSection() {
   const imageAltText =
     'A grand, historic castle with lush green surroundings, exemplifying an unusual venue type'
+  const imageUrl =
+    'https://img.freepik.com/free-photo/lush-landscape-inveraray-castle-argyll-scotland_493961-354.jpg?uid=R196918893&ga=GA1.1.1860385760.1730962467&semt=ais_hybrid&w=740'
   return (
     <section className='text-center py-5' aria-labelledby='unusual-section-heading'>
       <div className='container'>
@@ -15,7 +17,7 @@ export default function UnusualSection() {
           you covered with a wide variety of venues even unusual ones. Yes, even castles.
         </p>
         <img
-          src='https://img.freepik.com/free-photo/lush-landscape-inveraray-castle-argyll-scotland_493961-354.jpg?uid=R196918893&ga=GA1.1.1860385760.1730962467&semt=ais_hybrid&w=740' // Consider hosting this image locally in your public folder for better control and performance.
+          src={imageUrl}
           alt={imageAltText}
           className={`${styles.imguSection} img-fluid rounded shadow`}
         />

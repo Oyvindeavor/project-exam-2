@@ -26,7 +26,6 @@ export default async function updateProfileByName(
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to update profile',
       }
-      console.log('Error updating profile:', errorResponse.errors)
       return errorMessage
     }
 
@@ -34,7 +33,6 @@ export default async function updateProfileByName(
     const updatedData: UpdateProfileResponse = await response.json()
     return updatedData
   } catch (error) {
-    console.log('Error updating profile:', error)
     throw error
   }
 }

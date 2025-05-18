@@ -6,6 +6,7 @@ import styles from './SearchSortFilter.module.scss'
 
 import SearchInput from './SearchInput'
 import SortOptions from './SortOptions'
+import HeroSectionSkeleton from './Skeleton'
 
 const availableSortFields = [
   { value: 'created', label: 'Date' },
@@ -70,7 +71,9 @@ function HeroSectionContent() {
 
 export default function HeroSection() {
   return (
-    <Suspense fallback={<div>Loading search controls...</div>}>
+    <Suspense fallback={<HeroSectionSkeleton />}>
+      {' '}
+      {/* I need a skeleton here */}
       <HeroSectionContent />
     </Suspense>
   )

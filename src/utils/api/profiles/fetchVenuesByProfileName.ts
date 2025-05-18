@@ -46,14 +46,13 @@ export default async function fetchVenuesByProfileName(
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to fetch venues',
       }
-      console.log('Error fetching venues:', errorResponse.errors)
       return { error: errorMessage }
     }
 
     const data: ProfileVenuesResponse = await response.json()
     return { venues: data.data, meta: data.meta }
   } catch (error) {
-    console.log('Unexpected error fetching venues:', error)
+    console.error('Network error:', error)
     return { error: { error: 'An unexpected error occurred while fetching venues' } }
   }
 }

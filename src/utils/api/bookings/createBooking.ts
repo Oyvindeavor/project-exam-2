@@ -30,14 +30,13 @@ export default async function createBooking(
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to create booking',
       }
-      console.log('Error creating booking:', errorResponse.errors)
       return errorMessage
     } else {
       const data: CreateBookingResponse = await response.json()
       return data
     }
   } catch (error) {
-    console.log('Error creating booking:', error)
+    console.error('Network error:', error)
     return { error: 'An unexpected error occurred' }
   }
 }

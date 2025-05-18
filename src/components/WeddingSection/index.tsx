@@ -48,6 +48,7 @@ export default async function WeddingSection() {
           <h2 id='wedding-section-heading-empty' className='text-center mb-4'>
             Weddings
           </h2>
+
           <p className='text-center mb-4'>Planning a wedding?</p>
           <p>Currently, there are no wedding venues to display that match your criteria.</p>
           <Link href={'/venues/?q=wedding'} className='btn btn-outline-primary mt-4'>
@@ -60,24 +61,28 @@ export default async function WeddingSection() {
 
   return (
     <section
-      className='mt-4 bg bg-body-tertiary rounded-3'
+      className='mt-5 bg-body-tertiary rounded-3 py-5 px-3'
       aria-labelledby='wedding-section-heading'
     >
-      <h2 id='wedding-section-heading' className='text-center mb-4'>
-        Weddings
-      </h2>
-      <p className='text-center mb-4'>Planning a wedding? Find the perfect venue with us.</p>
-      <div className='container rounded-3'>
-        <div className='row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3 g-4'>
+      <div className='container'>
+        <h2 id='wedding-section-heading' className='text-center mb-3'>
+          Weddings
+        </h2>
+        <p className='text-center mb-5 fs-5'>Planning a wedding? Find the perfect venue with us.</p>
+
+        <div className='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mb-4'>
           {venues.map((venue: Venues) => (
             <div className='col' key={venue.id}>
               <VenueCard venue={venue} />
             </div>
           ))}
         </div>
-        <Link href={'/venues/?q=wedding'} className='btn btn-outline-primary mt-4'>
-          View more <span className='visually-hidden'>wedding venues</span>
-        </Link>
+
+        <div className='text-center'>
+          <Link href='/venues/?q=wedding' className='btn btn-outline-primary'>
+            View more <span className='visually-hidden'>wedding venues</span>
+          </Link>
+        </div>
       </div>
     </section>
   )
