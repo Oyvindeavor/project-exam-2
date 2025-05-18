@@ -3,10 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import updateVenueById from '@/utils/api/venues/updateVenue'
-import type {
-  UpdateVenueRequest,
-  UpdateVenueResponse,
-} from '@/types/NoroffApi/response/venuesResponse'
+import type { UpdateVenueRequest } from '@/types/NoroffApi/response/venuesResponse'
 import type { Media as VenueMedia } from '@/types/NoroffApi/shared'
 import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
 

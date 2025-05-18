@@ -4,10 +4,7 @@ import { revalidatePath } from 'next/cache'
 
 import { updateBookingSchema } from './updateBookingSchema'
 import updateBooking from '@/utils/api/bookings/updateBooking'
-import type {
-  UpdateBookingRequest,
-  UpdateBookingResponse,
-} from '@/types/NoroffApi/response/bookingsResponse'
+import type { UpdateBookingRequest } from '@/types/NoroffApi/response/bookingsResponse'
 import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
 
 export interface UpdateBookingFormState {
