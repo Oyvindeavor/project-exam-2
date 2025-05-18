@@ -26,10 +26,12 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/bootstrap": "^5.2.10",
+    "@types/critters-webpack-plugin": "^3.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-lazy-load-image-component": "^1.6.4",
+    "critters-webpack-plugin": "^3.0.2",
     "eslint": "^9",
     "eslint-config-next": "15.2.5",
     "prettier": "^3.5.3",
