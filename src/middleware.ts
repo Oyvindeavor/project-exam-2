@@ -11,7 +11,6 @@ export async function middleware(request: NextRequest) {
   }
 
   if (!token || token === 'undefined') {
-    console.log('No valid token found')
     return redirectToLogin()
   }
 
@@ -24,9 +23,7 @@ export async function middleware(request: NextRequest) {
 
     const currentTime = Math.floor(Date.now() / 1000)
     if (payload.exp && payload.exp < currentTime) {
-      console.log('Token expired')
       const response = redirectToLogin()
-
       response.cookies.set('accessToken', '', { path: '/', maxAge: 0 })
       response.cookies.set('name', '', { path: '/', maxAge: 0 })
       response.cookies.set('venueManager', '', { path: '/', maxAge: 0 })

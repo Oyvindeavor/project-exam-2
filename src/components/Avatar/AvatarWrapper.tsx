@@ -7,7 +7,6 @@ import isUserVenueManager from '@/utils/auth/isVenueManager'
 const Avatar = dynamic(() => import('./index'), {
   loading: () => {
     // This skeleton shows while Avatar JS bundle loads
-    console.log("AvatarWrapper dynamic import: Showing 'loading' skeleton for JS bundle.")
     return <AvatarSkeleton />
   },
 })

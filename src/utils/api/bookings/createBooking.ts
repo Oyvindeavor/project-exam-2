@@ -2,6 +2,7 @@ import { getAuthHeaders } from '@/utils/auth/getAuthHeaders'
 import { ENDPOINTS } from '@/utils/constants/apiConstants'
 import type { NoroffApiError } from '@/types/NoroffApi/errorMessage'
 import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
+import { cookies } from 'next/headers'
 import type {
   CreateBookingRequest,
   CreateBookingResponse,
@@ -10,6 +11,13 @@ import type {
 export default async function createBooking(
   bookingData: CreateBookingRequest
 ): Promise<CreateBookingResponse | ApiErrorResponse> {
+  const cookieStore = await cookies()
+  const venueManager = cookieStore.get('venueManager')?.value === 'true'
+
+  if (venueManager) {
+    return { error: 'Venue managers cannot create bookings' }
+  }
+
   try {
     const response = await fetch(ENDPOINTS.createBooking, {
       method: 'POST',
@@ -22,14 +30,13 @@ export default async function createBooking(
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to create booking',
       }
-      console.log('Error creating booking:', errorResponse.errors)
       return errorMessage
     } else {
       const data: CreateBookingResponse = await response.json()
       return data
     }
   } catch (error) {
-    console.log('Error creating booking:', error)
+    console.error('Network error:', error)
     return { error: 'An unexpected error occurred' }
   }
 }

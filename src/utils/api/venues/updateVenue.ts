@@ -25,14 +25,12 @@ export default async function updateVenueById(
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to update venue',
       }
-      console.log('Error updating venue:', errorResponse.errors)
       return errorMessage
     }
 
     const updatedData: UpdateVenueResponse = await response.json()
     return updatedData
   } catch (error) {
-    console.log('Error updating venue:', error)
     throw error
   }
 }

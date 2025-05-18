@@ -65,10 +65,8 @@ export default function UpdateVenueForm({ venue }: UpdateVenueFormProps) {
 
   useEffect(() => {
     if (state.message && !state.success) {
-      console.error('Form Error Message:', state.message)
     }
     if (state.success && state.message) {
-      console.log('Form Success Message:', state.message)
     }
   }, [state])
 

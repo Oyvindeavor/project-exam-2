@@ -17,9 +17,13 @@ const handleLinkClick = () => {
   if (typeof window !== 'undefined') {
     const offcanvasEl = document.getElementById('offcanvasNavbar')
     if (offcanvasEl) {
+      // Dynamically import Bootstrap's Offcanvas module
       import('bootstrap/js/dist/offcanvas')
         .then(({ default: Offcanvas }) => {
-          Offcanvas.getOrCreateInstance(offcanvasEl).hide()
+          const instance = Offcanvas.getInstance(offcanvasEl)
+          if (instance) {
+            instance.hide()
+          }
         })
         .catch((err) => console.error('Failed to hide offcanvas after link click:', err))
     }
@@ -35,12 +39,12 @@ export default function HamburgerMenu({
   return (
     <div className={styles.menuContainer}>
       <HamburgerToggle />
-
       <div
         className={`${styles.offCanvasMenu} offcanvas offcanvas-end`}
         tabIndex={-1}
         id='offcanvasNavbar'
         aria-labelledby='offcanvasNavbarLabel'
+        role='dialog'
       >
         <div className='offcanvas-header'>
           <h2 className='h5 offcanvas-title text-light' id='offcanvasNavbarLabel'>
@@ -50,11 +54,12 @@ export default function HamburgerMenu({
             type='button'
             className='btn-close btn-close-white'
             data-bs-dismiss='offcanvas'
-            aria-label='Close'
+            aria-label='Close menu'
           ></button>
         </div>
 
         <div className='offcanvas-body d-flex flex-column'>
+          {/* Main navigation links */}
           <ul className='navbar-nav'>
             <li className='nav-item'>
               <Link href='/venues' className='nav-link text-light' onClick={handleLinkClick}>
@@ -75,9 +80,10 @@ export default function HamburgerMenu({
 
           <hr className='text-white' />
 
+          {/* User-specific section (profile, auth links) */}
           <div className='d-flex flex-column justify-content-between flex-grow-1'>
             {isLoggedIn === null ? (
-              <div className='placeholder-glow mt-2'>
+              <div className='placeholder-glow mt-2' aria-hidden='true'>
                 <div
                   className='placeholder rounded-circle bg-light'
                   style={{ width: 40, height: 40 }}
@@ -88,7 +94,7 @@ export default function HamburgerMenu({
                 <div className='d-flex align-items-center gap-3'>
                   <img
                     src={avatarUrl}
-                    alt='User Avatar'
+                    alt={`${profileName || 'User'}'s avatar`}
                     className='rounded-circle border border-light'
                     width={40}
                     height={40}
@@ -103,7 +109,8 @@ export default function HamburgerMenu({
                 <ul className='nav flex-column'>
                   <li className='nav-item'>
                     <Link href='/profile' className='nav-link text-light' onClick={handleLinkClick}>
-                      <User size={18} className='me-2' /> Profile
+                      <User size={18} className='me-2' aria-hidden='true' focusable='false' />
+                      <span>Profile</span>
                     </Link>
                   </li>
 
@@ -115,7 +122,8 @@ export default function HamburgerMenu({
                           className='nav-link text-light'
                           onClick={handleLinkClick}
                         >
-                          <User size={18} className='me-2' /> My Venues
+                          <User size={18} className='me-2' aria-hidden='true' focusable='false' />
+                          <span>My Venues</span>
                         </Link>
                       </li>
                       <li className='nav-item'>
@@ -124,7 +132,13 @@ export default function HamburgerMenu({
                           className='nav-link text-light'
                           onClick={handleLinkClick}
                         >
-                          <PlusSquare size={18} className='me-2' /> Create Venue
+                          <PlusSquare
+                            size={18}
+                            className='me-2'
+                            aria-hidden='true'
+                            focusable='false'
+                          />
+                          <span>Create Venue</span>
                         </Link>
                       </li>
                     </>
@@ -135,13 +149,13 @@ export default function HamburgerMenu({
                         className='nav-link text-light'
                         onClick={handleLinkClick}
                       >
-                        <Calendar size={18} className='me-2' /> My Bookings
+                        <Calendar size={18} className='me-2' aria-hidden='true' focusable='false' />
+                        <span>My Bookings</span>
                       </Link>
                     </li>
                   )}
                 </ul>
-
-                <LogoutButton className='btn btn-sm btn-outline-warning ' />
+                <LogoutButton className='btn btn-sm btn-outline-warning text-light' />
               </div>
             ) : (
               <div className='d-flex flex-column gap-2 mt-3'>
@@ -150,14 +164,16 @@ export default function HamburgerMenu({
                   className='btn btn-outline-light d-flex align-items-center justify-content-center'
                   onClick={handleLinkClick}
                 >
-                  <LogIn className='me-2' size={18} /> Login
+                  <LogIn className='me-2' size={18} aria-hidden='true' focusable='false' />
+                  <span>Login</span>
                 </Link>
                 <Link
                   href='/auth/register'
                   className='btn btn-warning d-flex align-items-center justify-content-center'
                   onClick={handleLinkClick}
                 >
-                  <UserPlus className='me-2' size={18} /> Sign-up
+                  <UserPlus className='me-2' size={18} aria-hidden='true' focusable='false' />
+                  <span>Sign-up</span>
                 </Link>
               </div>
             )}

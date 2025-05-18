@@ -47,7 +47,6 @@ export default async function fetchVenueById(
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to fetch venue',
       }
-      console.log('Error fetching venue:', errorResponse.errors)
       return { error: errorMessage.error }
     }
 
@@ -69,7 +68,6 @@ export default async function fetchVenueById(
 
     return { venue, meta: data.meta }
   } catch (error) {
-    console.log('Error fetching venue:', error)
     throw error
   }
 }

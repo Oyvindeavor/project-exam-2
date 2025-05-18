@@ -38,10 +38,10 @@ export default function EditProfileModal({ profile }: EditProfileModalProps) {
           <div className='modal-content'>
             {/* Modal Header */}
             <div className='modal-header'>
-              <h5 className='modal-title' id='editProfileModalLabel'>
+              <h1 className='modal-title' id='editProfileModalLabel'>
                 Edit Profile
                 <Edit className='ms-2' />
-              </h5>
+              </h1>
               <button
                 type='button'
                 className='btn-close'

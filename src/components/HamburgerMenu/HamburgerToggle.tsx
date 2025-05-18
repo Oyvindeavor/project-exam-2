@@ -5,9 +5,23 @@ import styles from './HamburgerMenu.module.scss'
 
 export default function HamburgerToggle() {
   useEffect(() => {
-    import('bootstrap/js/dist/offcanvas').catch((err) =>
-      console.error('Failed to load Bootstrap offcanvas JS:', err)
-    )
+    const offcanvasPromise = import('bootstrap/js/dist/offcanvas')
+    offcanvasPromise.catch((err) => console.error('Failed to load Bootstrap offcanvas JS:', err))
+
+    const offcanvasElement = document.getElementById('offcanvasNavbar')
+    if (offcanvasElement) {
+      const handleShow = () => {} // empty function to prevent default behavior
+      // This is a workaround to prevent the default behavior of Bootstrap's offcanvas
+      const handleHide = () => {} // empty function to prevent default behavior
+
+      offcanvasElement.addEventListener('show.bs.offcanvas', handleShow)
+      offcanvasElement.addEventListener('hide.bs.offcanvas', handleHide)
+
+      return () => {
+        offcanvasElement.removeEventListener('show.bs.offcanvas', handleShow)
+        offcanvasElement.removeEventListener('hide.bs.offcanvas', handleHide)
+      }
+    }
   }, [])
 
   return (
@@ -16,8 +30,7 @@ export default function HamburgerToggle() {
       type='button'
       data-bs-toggle='offcanvas'
       data-bs-target='#offcanvasNavbar'
-      id='offcanvasNavbarToggle'
-      aria-label='Toggle navigation'
+      aria-label='Toggle navigation menu'
     >
       <span className='navbar-toggler-icon'></span>
     </button>

@@ -42,12 +42,10 @@ export default function UpdateBookingForm({ booking }: UpdateBookingFormProps) {
   const [state, formAction] = useActionState(updateBookingActionWithId, initialState)
 
   useEffect(() => {
-    console.log('Booking Form State Updated:', state)
     if (state?.message && !state?.success) {
       console.error('Form Error Message:', state.message)
     }
     if (state?.success) {
-      console.log('Form Success Message:', state.message)
     }
   }, [state])
 

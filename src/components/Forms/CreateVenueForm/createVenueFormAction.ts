@@ -127,12 +127,8 @@ export default async function createVenueFormAction(
   }
 
   try {
-    console.log('Attempting to create venue with payload:', JSON.stringify(payload, null, 2))
-    const response = await createVenue(payload)
-    console.log('Venue creation API response:', response)
-    console.log('Venue created successfully!')
+    await createVenue(payload)
   } catch (error) {
-    console.error('Server Action Error - Failed to create venue:', error)
     const message = error instanceof Error ? error.message : 'An unexpected error occurred.'
     return { error: `Submission failed: ${message}` }
   }

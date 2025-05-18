@@ -19,12 +19,18 @@ export default async function BookingsPage() {
   const { venues } = await fetchVenuesByProfileName(name, { bookings: true })
 
   if (venueManager) {
-    return <VenueManagerBookingsTable venues={venues || []} />
+    return (
+      <>
+        <h1 className='visually-hidden'>My Bookings</h1>
+        <VenueManagerBookingsTable venues={venues || []} />
+      </>
+    )
   }
 
   return (
-    <div className=''>
+    <>
+      <h1 className='visually-hidden'>My Bookings</h1>
       <RegularUserBookingCards />
-    </div>
+    </>
   )
 }

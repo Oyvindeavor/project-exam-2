@@ -4,10 +4,7 @@ import { revalidatePath } from 'next/cache'
 
 import { updateBookingSchema } from './updateBookingSchema'
 import updateBooking from '@/utils/api/bookings/updateBooking'
-import type {
-  UpdateBookingRequest,
-  UpdateBookingResponse,
-} from '@/types/NoroffApi/response/bookingsResponse'
+import type { UpdateBookingRequest } from '@/types/NoroffApi/response/bookingsResponse'
 import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
 
 export interface UpdateBookingFormState {
@@ -28,8 +25,6 @@ export async function updateBookingAction(
   prevState: UpdateBookingFormState,
   formData: FormData
 ): Promise<UpdateBookingFormState | undefined> {
-  console.log('Update Booking Server Action Triggered. Booking ID:', bookingId)
-
   const rawFormData = {
     dateFrom: formData.get('dateFrom') as string,
     dateTo: formData.get('dateTo') as string,
@@ -46,7 +41,6 @@ export async function updateBookingAction(
   }
 
   if (!validatedFields.success) {
-    console.error('Validation Failed:', validatedFields.error.flatten().fieldErrors)
     return {
       message: 'Validation failed. Please check the fields.',
       errors: validatedFields.error.flatten().fieldErrors,
@@ -63,11 +57,7 @@ export async function updateBookingAction(
   }
 
   try {
-    console.log('Calling updateBooking with ID:', bookingId)
-    console.log('Request Body:', JSON.stringify(dataForApi))
-
     const result = await updateBooking(bookingId, dataForApi)
-
     if (result && typeof result === 'object' && 'error' in result) {
       const errorResult = result as ApiErrorResponse
       console.error('API Error updating booking:', errorResult.error)
@@ -78,9 +68,6 @@ export async function updateBookingAction(
         success: false,
       }
     }
-
-    const updatedData = result as UpdateBookingResponse
-    console.log('Booking Updated Successfully:', updatedData)
 
     // --- Revalidation ---
     revalidatePath('/profile')

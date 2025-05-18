@@ -29,7 +29,7 @@ export default async function Register(
         const errorData: ApiErrorResponse = await response.json()
         errorMessage = errorData?.error ?? errorMessage
       } catch (e) {
-        console.log('Could not parse error JSON from /api/auth/register:', e)
+        errorMessage = String(e)
       }
       return { ok: false, status: response.status, error: errorMessage }
     }
@@ -37,7 +37,7 @@ export default async function Register(
     const data: ApiRegisterSuccessResponse = await response.json()
     return { status: response.status, ok: response.ok, data }
   } catch (error) {
-    console.log('Network or server error during registration:', error)
+    console.error('Network error:', error)
     return { ok: false, status: 500, error: 'Could not connect to registration endpoint.' }
   }
 }
