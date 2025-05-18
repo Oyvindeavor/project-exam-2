@@ -12,7 +12,7 @@ function SubmitButton() {
   const { pending } = useFormStatus()
 
   return (
-    <button type='submit' className='btn btn-outline-danger' disabled={pending}>
+    <button type='submit' className='btn btn-outline-danger text-dark' disabled={pending}>
       {pending ? 'Deleting...' : 'Delete Booking'}
     </button>
   )
@@ -30,7 +30,7 @@ export default function DeleteBookingButton({ bookingId }: { bookingId: string }
       <div className=''>
         <SubmitButton />
       </div>
-      {state?.error && <div className='text-danger mt-2'>{state.error}</div>}
+      {state?.error && <div className='text-dark mt-2'>{state.error}</div>}
     </form>
   )
 }

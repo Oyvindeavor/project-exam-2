@@ -42,15 +42,12 @@ export default async function fetchAllBookings({
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to fetch bookings',
       }
-      console.log('Error fetching bookings:', errorResponse.errors)
-      console.log('Error message:', errorMessage)
       throw new Error(errorMessage.error)
     }
 
     const data: BookingsResponse = await response.json()
     return { data: data, meta: data.meta }
   } catch (error) {
-    console.log('Error fetching bookings:', error)
     throw error
   }
 }

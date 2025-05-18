@@ -1,4 +1,4 @@
-import { Star } from 'lucide-react'
+import { Star, Users } from 'lucide-react'
 
 interface VenueHeaderProps {
   name: string
@@ -16,23 +16,39 @@ export default function VenueHeader({
   description,
 }: VenueHeaderProps) {
   return (
-    <div className='mb-4'>
-      <h1 className='display-5 fw-semibold'>{name}</h1>
+    <section className='mb-5' aria-labelledby='venue-heading'>
+      <h1 id='venue-heading' className='display-4 fw-bold mb-4'>
+        {name}
+      </h1>
 
-      <div className='d-flex flex-wrap align-items-center gap-2 mb-3'>
-        <span className='badge bg-primary'>${price} / night</span>
-        <span className='badge bg-secondary'>
-          {maxGuests} guest{maxGuests !== 1 && 's'}
-        </span>
+      <dl className='row gy-2 gx-5 align-items-center mb-4'>
+        <div className='col-auto'>
+          <dt className='text-muted small'>Price</dt>
+          <dd className='d-flex align-items-center gap-2 fw-semibold fs-5 mb-0'>
+            ${price} <span className='text-muted fs-6'>/ night</span>
+          </dd>
+        </div>
+
+        <div className='col-auto'>
+          <dt className='text-muted small'>Guests</dt>
+          <dd className='d-flex align-items-center  gap-2 fw-semibold fs-5 mb-0'>
+            <Users size={20} className='text-muted' />
+            {maxGuests} guest{maxGuests !== 1 && 's'}
+          </dd>
+        </div>
+
         {typeof rating === 'number' && rating > 0 && (
-          <span className='d-flex align-items-center text-warning'>
-            <Star className='me-1' fill='currentColor' />
-            <span className='text-dark'>{rating.toFixed(1)} / 5</span>
-          </span>
+          <div className='col-auto'>
+            <dt className='text-muted small'>Rating</dt>
+            <dd className='d-flex align-items-center gap-2 fw-semibold fs-5 mb-0'>
+              <Star size={18} fill='gold' color='gold' />
+              {rating.toFixed(1)}
+            </dd>
+          </div>
         )}
-      </div>
+      </dl>
 
       <p className='lead text-muted'>{description}</p>
-    </div>
+    </section>
   )
 }

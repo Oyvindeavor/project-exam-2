@@ -3,10 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import updateVenueById from '@/utils/api/venues/updateVenue'
-import type {
-  UpdateVenueRequest,
-  UpdateVenueResponse,
-} from '@/types/NoroffApi/response/venuesResponse'
+import type { UpdateVenueRequest } from '@/types/NoroffApi/response/venuesResponse'
 import type { Media as VenueMedia } from '@/types/NoroffApi/shared'
 import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
 
@@ -37,8 +34,6 @@ export async function updateVenueAction(
   prevState: UpdateVenueFormState,
   formData: FormData
 ): Promise<UpdateVenueFormState> {
-  console.log('Server Action Triggered (Simplified). Venue ID:', venueId)
-
   const errors: NonNullable<UpdateVenueFormState['errors']> = {}
   const fieldValues: Partial<UpdateVenueRequest> = {}
 
@@ -195,9 +190,6 @@ export async function updateVenueAction(
   }
 
   try {
-    console.log('Calling updateVenueById with ID:', venueId)
-    console.log('Request Body (Validated Manually):', JSON.stringify(payload, null, 2))
-
     const result = await updateVenueById(venueId, payload)
 
     if (
@@ -220,15 +212,11 @@ export async function updateVenueAction(
       }
     }
 
-    const updatedData = result as UpdateVenueResponse
-    console.log('Venue Updated Successfully (Manually Validated):', updatedData)
-
     revalidatePath('/profile/venues')
     revalidatePath(`/venue/${venueId}`)
     revalidatePath(`/profile/venues/edit/${venueId}`)
     revalidatePath('/venues')
   } catch (error) {
-    console.error('Network or unexpected error during updateVenueById call:', error)
     let errorMessage = 'An unexpected error occurred during the update.'
     if (error instanceof Error) {
       errorMessage = error.message

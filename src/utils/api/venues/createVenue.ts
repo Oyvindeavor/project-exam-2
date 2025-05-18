@@ -14,22 +14,11 @@ export async function createVenue(
     body: JSON.stringify(venueData),
   })
 
-  console.log(
-    'Response status:',
-    response.status,
-    'Response URL:',
-    response.url,
-    'Response body:',
-    response.body
-  )
-
   if (!response.ok) {
     const errorResponse: NoroffApiError = await response.json()
     const errorMessage: ApiErrorResponse = {
       error: errorResponse.errors?.[0]?.message || 'Failed to create venue',
     }
-    console.log('Error creating venue:', errorResponse.errors)
-    console.log('Error message:', errorMessage)
     throw new Error(errorMessage.error)
   }
 

@@ -32,14 +32,13 @@ export default async function fetchProfileByName(
       const errorMessage: ApiErrorResponse = {
         error: errorResponse.errors?.[0]?.message || 'Failed to fetch profile',
       }
-      console.log('Error fetching profile:', errorResponse.errors)
       return { error: errorMessage }
     }
 
     const data: ProfileSingleResponse = await response.json()
     return { profile: data.data, meta: data.meta }
   } catch (error) {
-    console.log('Unexpected error fetching profile:', error)
+    console.error('Network error:', error)
     return { error: { error: 'An unexpected error occurred' } }
   }
 }

@@ -5,7 +5,7 @@ export default function HeroSearch() {
   return (
     <section className={`${styles.heroSection} container-fluid`} aria-labelledby='hero-heading'>
       <div className={`container ${styles.contentContainer}`}>
-        <h1 id='hero-heading' className={styles.heading} tabIndex={-1}>
+        <h1 id='hero-heading' className={styles.heading}>
           Find your perfect venue today!
         </h1>
         <p className={styles.subtext}>

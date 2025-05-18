@@ -16,10 +16,6 @@ export default async function deleteVenueById(id: string) {
     const errorMessage: ApiErrorResponse = {
       error: errorResponse.errors?.[0]?.message || 'Failed to fetch venues',
     }
-    console.log('Error Deleting venue', errorResponse.errors)
-    console.log('Error message:', errorMessage)
     throw new Error(errorMessage.error)
   }
-
-  return console.log('Venue deleted successfully:')
 }

@@ -25,7 +25,6 @@ export default async function deleteBooking(
       status: response.status,
     }
   } catch (error) {
-    console.log('Error deleting booking:', error)
     throw error
   }
 }
