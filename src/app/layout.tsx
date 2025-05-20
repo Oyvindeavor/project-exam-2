@@ -3,6 +3,7 @@ import { Outfit, Source_Sans_3 } from 'next/font/google'
 import '@/styles/main.scss'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import '@/styles/layout.scss'
 
 const outfit = Outfit({
@@ -33,6 +34,7 @@ export default function RootLayout({
         <NavBar />
         <main className='mainLayout container flex-grow-1'>{children}</main>
         <Footer />
+        <SpeedInsights />
       </body>
     </html>
   )
