@@ -1,11 +1,14 @@
+'use client'
 import Link from 'next/link'
 import styles from './UnusualSection.module.scss'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/blur.css'
 
 export default function UnusualSection() {
   const imageAltText =
-    'A grand, historic castle with lush green surroundings, exemplifying an unusual venue type'
+    'A grand, historic castle with foggy clouds, exemplifying an unusual venue type'
   const imageUrl =
-    'https://img.freepik.com/free-photo/lush-landscape-inveraray-castle-argyll-scotland_493961-354.jpg?uid=R196918893&ga=GA1.1.1860385760.1730962467&semt=ais_hybrid&w=740'
+    'https://plus.unsplash.com/premium_photo-1661873863027-51b409f112f5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2FzdGxlfGVufDB8fDB8fHww&auto=format&fit=crop&q=60'
 
   return (
     <section
@@ -24,14 +27,17 @@ export default function UnusualSection() {
           with a wide variety of venues… even castles.
         </p>
 
-        <img
+        <LazyLoadImage
+          effect='blur'
           src={imageUrl}
           alt={imageAltText}
           className={`${styles.imguSection} img-fluid rounded-4 shadow mb-4`}
+          loading='lazy'
+          placeholderSrc='https://placehold.co/1200x450?text=Image+Loading'
         />
 
         <div className='mt-4'>
-          <Link href='/venues' className='btn btn-outline-primary px-4 py-2 fw-bold'>
+          <Link href='/venues' className='btn btn-outline-primary  text-dark px-4 py-2 fw-bold'>
             Browse All Venues
           </Link>
         </div>

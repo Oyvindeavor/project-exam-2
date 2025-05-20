@@ -4,6 +4,7 @@ import { LogIn, UserPlus, User, Calendar, PlusSquare } from 'lucide-react'
 import styles from './HamburgerMenu.module.scss'
 import LogoutButton from '../LogoutButton'
 import HamburgerToggle from './HamburgerToggle'
+import Logo from '@/components/Logo'
 
 interface HamburgerMenuProps {
   avatarUrl?: string
@@ -48,7 +49,7 @@ export default function HamburgerMenu({
       >
         <div className='offcanvas-header'>
           <h2 className='h5 offcanvas-title text-light' id='offcanvasNavbarLabel'>
-            Menu
+            <Logo />
           </h2>
           <button
             type='button'

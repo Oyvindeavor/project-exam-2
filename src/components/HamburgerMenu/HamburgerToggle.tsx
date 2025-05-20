@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { MenuIcon } from 'lucide-react'
 import styles from './HamburgerMenu.module.scss'
 
 export default function HamburgerToggle() {
@@ -32,7 +33,9 @@ export default function HamburgerToggle() {
       data-bs-target='#offcanvasNavbar'
       aria-label='Toggle navigation menu'
     >
-      <span className='navbar-toggler-icon'></span>
+      <span className=''>
+        <MenuIcon size={30} className={`text-light`} />
+      </span>
     </button>
   )
 }

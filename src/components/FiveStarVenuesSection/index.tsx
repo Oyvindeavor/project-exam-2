@@ -92,7 +92,7 @@ export default async function FiveStarVenues() {
         <div className='mt-5 text-center'>
           <Link
             href='/venues/?sort=rating&sortOrder=desc'
-            className='btn btn-gradient-gold px-4 py-2 fw-bold'
+            className='btn btn-outline-primary  text-dark px-4 py-2 fw-bold'
           >
             View More
             <span className='visually-hidden'> five star venues with high ratings</span>

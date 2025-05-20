@@ -26,6 +26,16 @@ export default async function NavBar() {
                 Venues
               </Link>
             </li>
+            <li className='nav-item'>
+              <Link href='/about' className='nav-link text-light' aria-current='page'>
+                About
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <Link href='/contact' className='nav-link text-light' aria-current='page'>
+                Contact
+              </Link>
+            </li>
           </ul>
 
           {/* Avatar and Auth Links */}
@@ -37,11 +47,11 @@ export default async function NavBar() {
             ) : (
               // Display Login/Signup if not logged in
               <>
-                <Link href='/auth/login' className='btn btn-sm btn-outline-success text-light me-2'>
+                <Link href='/auth/login' className='btn btn-outline-success text-light me-2'>
                   Login
                   <LogIn className='ms-1' size={16} aria-hidden='true' focusable='false' />
                 </Link>
-                <Link href='/auth/register' className='btn btn-sm btn-outline-warning text-light'>
+                <Link href='/auth/register' className='btn btn-outline-warning text-light '>
                   Sign-up
                   <UserPlus className='ms-1' size={16} aria-hidden='true' focusable='false' />
                 </Link>

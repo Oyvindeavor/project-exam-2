@@ -28,6 +28,7 @@ export default function VenueCard({ venue, lazyLoad = true }: VenueCardProps) {
                     ? `${venue.media[0].alt} venue image of ${venue.name}`
                     : fallbackAlt
                 }
+                placeholderSrc='https://placehold.co/600x400?text=Image+Loading'
               />
             ) : (
               <img

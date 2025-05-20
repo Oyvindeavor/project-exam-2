@@ -87,7 +87,10 @@ export default async function WeddingSection() {
         </div>
 
         <div className='text-center mt-4'>
-          <Link href='/venues/?q=wedding' className='btn btn-gradient-gold px-4 py-2 fw-bold'>
+          <Link
+            href='/venues/?q=wedding'
+            className='btn btn-outline-primary  text-dark px-4 py-2 fw-bold'
+          >
             View More
             <span className='visually-hidden'> wedding venues</span>
           </Link>
