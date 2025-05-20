@@ -64,6 +64,7 @@ a:not(.btn):not(.nav-link):not(.dropdown-item):not(.navbar-brand):active {
   color: var(--bs-secondary-color-subtle);
   background-color: var(--bs-secondary-bg-subtle);
   border-color: var(--bs-secondary-bg-subtle);
+  font-family: var(--bs-font-family-sans-serif, $font-family-sans-serif);
 }
 .btn-secondary:hover {
   color: var(--bs-secondary-color-subtle);
@@ -163,5 +164,7 @@ a:not(.btn):not(.nav-link):not(.dropdown-item):not(.navbar-brand):active {
 }
 
 main {
-  border: var(--bs-border-width, $border-width) solid var(--bs-border-color, $border-color);
+  border-radius: var(--bs-border-radius, $border-radius);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
 }

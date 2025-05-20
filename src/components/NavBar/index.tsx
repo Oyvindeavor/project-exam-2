@@ -4,6 +4,7 @@ import { Suspense } from 'react'
 import AvatarSkeleton from '@/components/Avatar/AvatarSkeleton'
 import AvatarWrapper from '@/components/Avatar/AvatarWrapper'
 import HamburgerMenuWrapper from '@/components/HamburgerMenu/HamburgerMenuWrapper'
+import Logo from '@/components/Logo'
 import { LogIn, UserPlus } from 'lucide-react'
 
 export default async function NavBar() {
@@ -13,15 +14,7 @@ export default async function NavBar() {
     <nav className='navbar navbar-expand-lg' aria-label='Main navigation'>
       <div className='container'>
         {/* Logo */}
-        <Link href='/' className='navbar-brand' aria-label='Homepage - YourAppName'>
-          <img
-            src='/logo.svg'
-            alt='Logo a stick drawn white arch with a doorway'
-            className='logo'
-            width={150}
-            height={60}
-          />
-        </Link>
+        <Logo />
         <div className='d-lg-none'>
           <HamburgerMenuWrapper />
         </div>
@@ -31,16 +24,6 @@ export default async function NavBar() {
             <li className='nav-item'>
               <Link href='/venues' className='nav-link text-light' aria-current='page'>
                 Venues
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link href='/about' className='nav-link text-light'>
-                About
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link href='/contact' className='nav-link text-light'>
-                Contact
               </Link>
             </li>
           </ul>
