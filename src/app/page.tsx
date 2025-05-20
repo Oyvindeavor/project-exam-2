@@ -2,6 +2,9 @@ import HeroSearch from '@/components/Hero/HomePageHero'
 import FiveStarVenues from '@/components/FiveStarVenuesSection'
 import WeddingSection from '@/components/WeddingSection'
 import UnusualSection from '@/components/UnusualSection'
+import FeaturesSection from '@/components/FeaturesSection'
+import AboutSection from '@/components/AboutSection'
+import ContactUs from '@/components/ContactUs'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -12,22 +15,27 @@ export const metadata: Metadata = {
 export default async function Home() {
   return (
     <>
-      <div className='border-4 rounded-3 p-4'>
-        <section aria-label='Hero Search and Site Introduction'>
-          <HeroSearch />
-        </section>
-        <hr className='divider' />
-        <section aria-label='Five Star Venues'>
-          <FiveStarVenues />
-        </section>
-        <hr className='divider' />
-        <section aria-label='Wedding Venues'>
-          <WeddingSection />
-        </section>
-        <section aria-label='Unusual Venues'>
-          <UnusualSection />
-        </section>
-      </div>
+      <section aria-label='Hero Search and Site Introduction'>
+        <HeroSearch />
+      </section>
+      <section aria-label='Features Section'>
+        <FeaturesSection />
+      </section>
+      <section aria-label='Five Star Venues'>
+        <FiveStarVenues />
+      </section>
+      <section aria-label='Wedding Venues'>
+        <WeddingSection />
+      </section>
+      <section aria-label='Unusual Venues'>
+        <UnusualSection />
+      </section>
+      <section aria-label='About Us'>
+        <AboutSection />
+      </section>
+      <section aria-label='Contact Us'>
+        <ContactUs />
+      </section>
     </>
   )
 }

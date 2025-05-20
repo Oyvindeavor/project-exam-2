@@ -1,5 +1,4 @@
 import { fetchLoggedInUser } from '@/utils/auth/fetchLoggedInUser'
-import ProfileHeader from './_components/ProfileHeader'
 import isUserVenueManager from '@/utils/auth/isVenueManager'
 import { Metadata } from 'next'
 import UserActivityAside from '@/components/UserActivityAside'
@@ -30,14 +29,10 @@ export default async function ProfileDefaultPage() {
 
   return (
     <>
-      <ProfileHeader />
       <div className='container mt-4 mb-5'>
         <h2 className='visually-hidden'>Profile Details and Activity</h2>
         <div className='row gx-lg-5'>
-          {/* Use the new ProfileDetailsSection component */}
           <ProfileDetailsSection profile={profile} />
-
-          {/* Use the new UserActivityAside component */}
           <UserActivityAside profile={profile} isManager={isManager} />
         </div>
       </div>

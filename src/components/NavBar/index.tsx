@@ -4,6 +4,7 @@ import { Suspense } from 'react'
 import AvatarSkeleton from '@/components/Avatar/AvatarSkeleton'
 import AvatarWrapper from '@/components/Avatar/AvatarWrapper'
 import HamburgerMenuWrapper from '@/components/HamburgerMenu/HamburgerMenuWrapper'
+import Logo from '@/components/Logo'
 import { LogIn, UserPlus } from 'lucide-react'
 
 export default async function NavBar() {
@@ -13,15 +14,7 @@ export default async function NavBar() {
     <nav className='navbar navbar-expand-lg' aria-label='Main navigation'>
       <div className='container'>
         {/* Logo */}
-        <Link href='/' className='navbar-brand' aria-label='Homepage - YourAppName'>
-          <img
-            src='/logo.svg'
-            alt='Logo a stick drawn white arch with a doorway'
-            className='logo'
-            width={150}
-            height={60}
-          />
-        </Link>
+        <Logo />
         <div className='d-lg-none'>
           <HamburgerMenuWrapper />
         </div>
@@ -34,12 +27,12 @@ export default async function NavBar() {
               </Link>
             </li>
             <li className='nav-item'>
-              <Link href='/about' className='nav-link text-light'>
+              <Link href='/about' className='nav-link text-light' aria-current='page'>
                 About
               </Link>
             </li>
             <li className='nav-item'>
-              <Link href='/contact' className='nav-link text-light'>
+              <Link href='/contact' className='nav-link text-light' aria-current='page'>
                 Contact
               </Link>
             </li>
@@ -54,11 +47,11 @@ export default async function NavBar() {
             ) : (
               // Display Login/Signup if not logged in
               <>
-                <Link href='/auth/login' className='btn btn-sm btn-outline-success text-light me-2'>
+                <Link href='/auth/login' className='btn btn-outline-success text-light me-2'>
                   Login
                   <LogIn className='ms-1' size={16} aria-hidden='true' focusable='false' />
                 </Link>
-                <Link href='/auth/register' className='btn btn-sm btn-outline-warning text-light'>
+                <Link href='/auth/register' className='btn btn-outline-warning text-light '>
                   Sign-up
                   <UserPlus className='ms-1' size={16} aria-hidden='true' focusable='false' />
                 </Link>

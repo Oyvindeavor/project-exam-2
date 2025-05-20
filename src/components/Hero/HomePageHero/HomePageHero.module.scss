@@ -13,7 +13,6 @@ $overlay-bg: rgba(0, 0, 0, 0.6);
 
   background-size: cover;
   color: $light-text;
-  padding: 4rem 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,8 +20,9 @@ $overlay-bg: rgba(0, 0, 0, 0.6);
   text-align: center;
   border-radius: 1rem;
 
-  @media (max-width: 768px) {
-    padding: 3rem 1rem;
+  @media screen and (max-width: 768px) {
+    min-height: 25vh;
+    border-radius: 0rem;
   }
 }
 
@@ -30,28 +30,6 @@ $overlay-bg: rgba(0, 0, 0, 0.6);
   max-width: 800px;
   margin: 0 auto;
   z-index: 2;
-}
-
-.heading {
-  font-size: 2.8rem;
-  font-weight: 800;
-  margin-bottom: 1rem;
-  color: $light-text;
-
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
-}
-
-.subtext {
-  font-size: 1.25rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-  color: lighten($light-text, 10%);
-
-  @media (max-width: 768px) {
-    font-size: 1.05rem;
-  }
 }
 
 .heroInputContainer {
@@ -70,22 +48,10 @@ $overlay-bg: rgba(0, 0, 0, 0.6);
     flex-grow: 1;
     padding: 0.9rem 1rem;
     font-size: 1rem;
-    color: $dark-text;
+    color: $primary-darker;
 
     &:focus {
       outline: none;
-    }
-  }
-
-  .btn {
-    background-color: $primary-color;
-    color: $light-text;
-    padding: 0.9rem 1.3rem;
-    font-weight: 500;
-    border: none;
-
-    &:hover {
-      background-color: $primary-darker;
     }
   }
 }
@@ -104,6 +70,5 @@ $overlay-bg: rgba(0, 0, 0, 0.6);
   }
 
   @media (max-width: 768px) {
-    width: 100%;
   }
 }

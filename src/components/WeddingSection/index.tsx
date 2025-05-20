@@ -3,6 +3,8 @@ import Link from 'next/link'
 import VenueCard from '@/components/VenueCard'
 import type { Venues } from '@/types/NoroffApi/venueTypes'
 import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
+import { PartyPopper } from 'lucide-react'
+import styles from './WeddingSection.module.scss'
 
 interface SearchResult {
   venues?: Venues[]
@@ -61,14 +63,20 @@ export default async function WeddingSection() {
 
   return (
     <section
-      className='mt-5 bg-body-tertiary rounded-3 py-5 px-3'
+      className={`${styles.weddingSection} mt-5 py-5 px-3 rounded-4`}
       aria-labelledby='wedding-section-heading'
     >
       <div className='container'>
-        <h2 id='wedding-section-heading' className='text-center mb-3'>
-          Weddings
-        </h2>
-        <p className='text-center mb-5 fs-5'>Planning a wedding? Find the perfect venue with us.</p>
+        <div className='text-center mb-5'>
+          <h2 id='wedding-section-heading' className='section-title mb-3'>
+            Dream Wedding Venues
+            <PartyPopper className='text-gold mb-3' size={40} />
+          </h2>
+
+          <p className='lead text-muted'>
+            Planning your special day? Find the perfect venue with elegance, style, and charm.
+          </p>
+        </div>
 
         <div className='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mb-4'>
           {venues.map((venue: Venues) => (
@@ -78,11 +86,16 @@ export default async function WeddingSection() {
           ))}
         </div>
 
-        <div className='text-center'>
-          <Link href='/venues/?q=wedding' className='btn btn-outline-primary'>
-            View more <span className='visually-hidden'>wedding venues</span>
+        <div className='text-center mt-4'>
+          <Link
+            href='/venues/?q=wedding'
+            className='btn btn-outline-primary  text-dark px-4 py-2 fw-bold'
+          >
+            View More
+            <span className='visually-hidden'> wedding venues</span>
           </Link>
         </div>
+        <hr className='divider' />
       </div>
     </section>
   )

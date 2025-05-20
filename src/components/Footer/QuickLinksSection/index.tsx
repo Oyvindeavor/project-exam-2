@@ -14,8 +14,8 @@ export default function QuickLinkSection() {
         </li>
 
         <li className='nav-item mb-2'>
-          <Link href='/faqs' className='nav-link p-0 text-light'>
-            FAQs
+          <Link href='/faq' className='nav-link p-0 text-light'>
+            FAQ
           </Link>
         </li>
         <li className='nav-item mb-2'>

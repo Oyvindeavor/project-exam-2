@@ -5,17 +5,12 @@
 }
 
 .hamburgerButton {
-  border: none;
   padding: 0.5rem;
   transition: all 0.2s ease;
 
-  &:focus {
-    box-shadow: none;
-    outline: none;
-  }
-
   &:hover {
     opacity: 0.8;
+    transform: scale(1.05);
   }
 }
 

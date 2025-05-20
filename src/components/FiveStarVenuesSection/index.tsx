@@ -3,6 +3,7 @@ import Link from 'next/link'
 import VenueCard from '@/components/VenueCard'
 import type { VenuesResponse } from '@/types/NoroffApi/response/venuesResponse'
 import type { ApiErrorResponse } from '@/types/MyApi/ApiErrorResponse'
+import { Star } from 'lucide-react'
 import type { Venues } from '@/types/NoroffApi/venueTypes'
 
 interface FetchResult {
@@ -63,25 +64,41 @@ export default async function FiveStarVenues() {
 
   return (
     <section
-      className='mt-4 bg bg-body-tertiary rounded-3'
+      className='five-star-section  px-3 rounded-4'
       aria-labelledby='five-star-venues-heading'
     >
-      <h2 id='five-star-venues-heading' className='text-center mb-4'>
-        Five Star Venues
-      </h2>
-      <p className='text-center mb-4'>Be a star for a day, book one of our 5 star venues.</p>
+      <div className='container'>
+        <div className='text-center'>
+          <h2
+            id='five-star-venues-heading'
+            className='section-title mb-3 d-flex justify-content-center align-items-center gap-2'
+          >
+            Five Star Venues
+            <Star size={28} fill='gold' color='gold' />
+          </h2>
+          <p className='lead mb-5 text-muted'>
+            Be a star for a day — book one of our luxury-rated venues.
+          </p>
+        </div>
 
-      <div className='container rounded-3'>
-        <div className='row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3 g-4'>
+        <div className='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4'>
           {venues.data.map((venue: Venues) => (
             <div className='col' key={venue.id}>
               <VenueCard venue={venue} lazyLoad={false} />
             </div>
           ))}
         </div>
-        <Link href={'/venues/?sort=rating&sortOrder=desc'} className='btn btn-outline-primary mt-4'>
-          View more <span className='visually-hidden'>five star venues with high ratings</span>
-        </Link>
+
+        <div className='mt-5 text-center'>
+          <Link
+            href='/venues/?sort=rating&sortOrder=desc'
+            className='btn btn-outline-primary  text-dark px-4 py-2 fw-bold'
+          >
+            View More
+            <span className='visually-hidden'> five star venues with high ratings</span>
+          </Link>
+        </div>
+        <hr className='divider' />
       </div>
     </section>
   )

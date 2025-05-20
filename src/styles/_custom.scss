@@ -64,6 +64,7 @@ a:not(.btn):not(.nav-link):not(.dropdown-item):not(.navbar-brand):active {
   color: var(--bs-secondary-color-subtle);
   background-color: var(--bs-secondary-bg-subtle);
   border-color: var(--bs-secondary-bg-subtle);
+  font-family: var(--bs-font-family-sans-serif, $font-family-sans-serif);
 }
 .btn-secondary:hover {
   color: var(--bs-secondary-color-subtle);
@@ -122,17 +123,6 @@ a:not(.btn):not(.nav-link):not(.dropdown-item):not(.navbar-brand):active {
   font-weight: bold;
 }
 
-// Navbar Toggler Icon
-.navbar-toggler {
-  border-color: rgba($primary-text, 0.25);
-}
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.75)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-}
-.navbar-toggler:hover .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-}
-
 // Alert styling adjustments
 .alert {
   box-shadow: none;
@@ -163,5 +153,7 @@ a:not(.btn):not(.nav-link):not(.dropdown-item):not(.navbar-brand):active {
 }
 
 main {
-  border: var(--bs-border-width, $border-width) solid var(--bs-border-color, $border-color);
+  border-radius: var(--bs-border-radius, $border-radius);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
 }
