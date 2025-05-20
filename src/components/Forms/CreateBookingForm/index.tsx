@@ -42,35 +42,40 @@ export default function CreateBookingForm({
 
       <input type='hidden' name='venueId' value={venueId} />
 
-      <div className='mb-3'>
-        <label htmlFor='dateFrom' className='form-label'>
-          Date from
-        </label>
-        <DatePickerInput
-          id='dateFrom'
-          name='dateFrom'
-          defaultValue={undefined}
-          error={state?.error ? [state.error] : undefined}
-          required
-          venueId={venueId}
-        />
+      <div className='row mb-3'>
+        <div className='col-12 col-md-6 mb-3 mb-md-0'>
+          <label htmlFor='dateFrom' className='form-label'>
+            Date from
+          </label>
+          <DatePickerInput
+            id='dateFrom'
+            name='dateFrom'
+            defaultValue={undefined}
+            error={state?.error ? [state.error] : undefined}
+            required
+            venueId={venueId}
+          />
+        </div>
+
+        <div className='col-12 col-md-6'>
+          <label htmlFor='dateTo' className='form-label'>
+            Date to
+          </label>
+          <DatePickerInput
+            id='dateTo'
+            name='dateTo'
+            defaultValue={undefined}
+            error={state?.error ? [state.error] : undefined}
+            required
+            venueId={venueId}
+          />
+        </div>
       </div>
 
       <div className='mb-3'>
-        <label htmlFor='dateTo' className='form-label'>
-          Date to
+        <label htmlFor='guests' className='form-label'>
+          Guests (max: {maxGuests})
         </label>
-        <DatePickerInput
-          id='dateTo'
-          name='dateTo'
-          defaultValue={undefined}
-          error={state?.error ? [state.error] : undefined}
-          required
-          venueId={venueId}
-        />
-      </div>
-
-      <div className=' mb-3'>
         <input
           type='number'
           name='guests'
@@ -80,7 +85,6 @@ export default function CreateBookingForm({
           min={1}
           max={maxGuests}
         />
-        <label htmlFor='guests'>Guests (max: {maxGuests})</label>
         <div className='invalid-feedback'>Please enter a valid number of guests.</div>
       </div>
 

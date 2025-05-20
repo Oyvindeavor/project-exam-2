@@ -18,8 +18,9 @@ export default function ContactUs() {
               Contact Us
             </h2>
             <p className='lead text-muted mb-4'>
-              Here at Holidaze We’re dedicated to helping you find the perfect venue — no matter the
-              occasion we make venue booking simple, stylish, and stress-free.
+              We are here to help you with any questions or concerns you may have. Our team is
+              dedicated to providing you with the best support possible. Please feel free to reach
+              out to us at any time.
             </p>
 
             <Link href='/contact' className='btn btn-outline-primary fw-bold px-4 py-2'>
