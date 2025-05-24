@@ -4,7 +4,6 @@ import WeddingSection from '@/components/WeddingSection'
 import UnusualSection from '@/components/UnusualSection'
 import FeaturesSection from '@/components/FeaturesSection'
 import AboutSection from '@/components/AboutSection'
-import ContactUs from '@/components/ContactUs'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -21,20 +20,21 @@ export default async function Home() {
       <section aria-label='Features Section'>
         <FeaturesSection />
       </section>
+      <hr className='mt-5 mb-4' />
       <section aria-label='Five Star Venues'>
         <FiveStarVenues />
       </section>
+      <hr />
       <section aria-label='Wedding Venues'>
         <WeddingSection />
       </section>
+      <hr />
       <section aria-label='Unusual Venues'>
         <UnusualSection />
       </section>
+      <hr />
       <section aria-label='About Us'>
         <AboutSection />
-      </section>
-      <section aria-label='Contact Us'>
-        <ContactUs />
       </section>
     </>
   )

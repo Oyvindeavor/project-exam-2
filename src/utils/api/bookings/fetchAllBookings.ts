@@ -13,6 +13,33 @@ interface fetchAllBookingsOptions {
   _venue?: boolean
 }
 
+/**
+ * Fetches a paginated list of bookings from the API with optional sorting and population of related data.
+ *
+ * @param {fetchAllBookingsOptions} [options] - Options for fetching bookings.
+ * @param {string} [options.sort='created'] - Field to sort the bookings by.
+ * @param {string} [options.sortOrder='desc'] - Order to sort the bookings ('asc' or 'desc').
+ * @param {number} [options.limit=10] - Number of bookings to fetch per page.
+ * @param {number} [options.page=1] - Page number to fetch.
+ * @param {boolean} [options._customer=false] - Whether to include customer details in the response.
+ * @param {boolean} [options._venue=false] - Whether to include venue details in the response.
+ * @returns {Promise<{ data: BookingsResponse; meta: BookingsResponse['meta'] }>} An object containing the bookings data and metadata.
+ * @throws {Error} Throws an error if the API request fails.
+ *
+ * @example
+ * ```typescript
+ * const { data, meta } = await fetchAllBookings({
+ *   sort: 'date',
+ *   sortOrder: 'asc',
+ *   limit: 5,
+ *   page: 1,
+ *   _customer: true,
+ *   _venue: true,
+ * })
+ * console.log('Fetched bookings:', data)
+ * console.log('Metadata:', meta)
+ * ```
+ */
 export default async function fetchAllBookings({
   sort = 'created',
   sortOrder = 'desc',

@@ -13,6 +13,33 @@ interface fetchAllProfilesOptions {
   venues?: boolean
 }
 
+/**
+ * Fetches a list of user profiles from the API with optional sorting, pagination, and inclusion of related bookings or venues.
+ *
+ * @param {fetchAllProfilesOptions} [options] - Options for fetching profiles.
+ * @param {string} [options.sort='created'] - The field to sort the profiles by.
+ * @param {string} [options.sortOrder='desc'] - The order to sort the profiles ('asc' or 'desc').
+ * @param {number} [options.limit=10] - The maximum number of profiles to fetch per page.
+ * @param {number} [options.page=1] - The page number to fetch.
+ * @param {boolean} [options.bookings=false] - Whether to include bookings data in the profiles.
+ * @param {boolean} [options.venues=false] - Whether to include venues data in the profiles.
+ * @returns {Promise<{ profiles?: Profile[]; meta?: Meta; error?: ApiErrorResponse }>} An object containing the profiles, meta information, or an error message.
+ * @throws Will throw an error if the fetch operation fails unexpectedly.
+ *
+ * @example
+ * ```typescript
+ * const { profiles, meta } = await fetchAllProfiles({
+ *   sort: 'name',
+ *   sortOrder: 'asc',
+ *   limit: 5,
+ *   page: 1,
+ *   bookings: true,
+ *   venues: true,
+ * })
+ * console.log('Fetched profiles:', profiles)
+ * console.log('Metadata:', meta)
+ * ```
+ */
 export default async function fetchAllProfiles({
   sort = 'created',
   sortOrder = 'desc',

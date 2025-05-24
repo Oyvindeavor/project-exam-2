@@ -10,7 +10,7 @@ export default function Footer() {
       <div className='container'>
         <div className='row row-cols-1 row-cols-sm-1  row-cols-md-4 row-cols-lg-5'>
           <div className='col mb-3'>
-            <Logo />
+            <Logo ariaLabel='Home - homepage footer section' />
           </div>
 
           <div className='col mb-3' />

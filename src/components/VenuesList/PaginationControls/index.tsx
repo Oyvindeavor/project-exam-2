@@ -47,7 +47,7 @@ export default function PaginationControls({ metaData, searchParams }: Paginatio
               href={generatePageLink('/venues', searchParams, metaData.previousPage)}
               className='page-link'
               aria-label='Previous'
-              scroll={false}
+              scroll={true}
               prefetch={false}
             >
               <span aria-hidden='true'>&laquo;</span> Previous
@@ -74,7 +74,7 @@ export default function PaginationControls({ metaData, searchParams }: Paginatio
               href={generatePageLink('/venues', searchParams, metaData.nextPage)}
               className='page-link'
               aria-label='Next'
-              scroll={false}
+              scroll={true}
               prefetch={false}
             >
               Next <span aria-hidden='true'>&raquo;</span>

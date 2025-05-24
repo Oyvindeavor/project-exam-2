@@ -15,6 +15,8 @@ type ActionResult = {
  * @param prevState - The state from the previous execution of this action.
  * @param formData - The FormData object containing the submitted form values.
  * @returns Promise<ActionResult> - An object containing an error message if validation or API call fails.
+ *
+ * @throws Will throw an error if the API call fails or if validation fails.
  */
 export default async function createVenueFormAction(
   prevState: ActionResult | undefined,

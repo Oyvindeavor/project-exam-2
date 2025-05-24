@@ -13,6 +13,25 @@ type BookingByIdResult =
   | { data: BookingSingleResponse['data']; meta: BookingSingleResponse['meta']; error: null }
   | { data: null; meta: null; error: string }
 
+/**
+ * Fetches a booking by its ID from the API, with optional inclusion of customer and venue details.
+ *
+ * @param id - The unique identifier of the booking to fetch.
+ * @param options - Optional parameters to include related customer and venue data.
+ * @param options._customer - If true, includes customer details in the response.
+ * @param options._venue - If true, includes venue details in the response.
+ * @returns A promise that resolves to an object containing the booking data, meta information, and any error encountered.
+ *
+ * @example
+ * ```typescript
+ * const result = await fetchBookingById('booking123', { _customer: true, _venue: false });
+ * if (result.error) {
+ *   // handle error
+ * } else {
+ *   // access result.data and result.meta
+ * }
+ * ```
+ */
 export default async function fetchBookingById(
   id: string,
   { _customer = false, _venue = false }: fetchBookingByIdOptions = {}

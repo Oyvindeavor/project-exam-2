@@ -1,9 +1,10 @@
-export default function loading() {
+export default function Loading() {
   return (
-    <div className='text-center'>
+    <div className='text-center mt-5'>
       <div
-        className='spinner-grow text-primary text-center'
+        className='spinner-border text-primary'
         style={{ width: '5rem', height: '5rem' }}
+        role='status'
       >
         <span className='visually-hidden'>Loading...</span>
       </div>

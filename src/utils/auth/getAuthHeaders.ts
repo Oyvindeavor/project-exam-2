@@ -1,21 +1,16 @@
-/*
-@ Reusable headers that can be used in API requests gets the access token from cookies
-api key from environment variables
-
-Note: This is a server component, so you can use it in any server component or API route. 
-Will not work in client.
-
-@example
- const headers = await getHeaders()
-
-const res = await fetch(`${API_BASE_URL}/profiles`, {
-  method: 'GET',
-  headers,
-}
-*/
-
 import { cookies } from 'next/headers'
 
+/**
+ * Asynchronously generates authentication headers for API requests.
+ *
+ * Retrieves the `accessToken` from cookies and the external API key from environment variables.
+ * Constructs and returns a headers object containing:
+ * - `Content-Type: application/json`
+ * - `X-Noroff-API-Key` with the API key value (if available)
+ * - `Authorization: Bearer <accessToken>` if an access token is present
+ *
+ * @returns {Promise<HeadersInit>} A promise that resolves to the headers object for authenticated requests.
+ */
 export const getAuthHeaders = async () => {
   const accessToken = (await cookies()).get('accessToken')?.value
   const apiKey = process.env.EXTERNAL_API_KEY

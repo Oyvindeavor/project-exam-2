@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'About Us - Holidaze',
+  description:
+    'Learn more about Holidaze and our mission to connect you with unforgettable venues.',
+}
+
 export default function AboutUsPage() {
   return (
     <div className='container py-5'>

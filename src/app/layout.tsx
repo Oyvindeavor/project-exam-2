@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${outfit.variable} ${sourceSans.variable} d-flex flex-column min-vh-100`}>
+      <body className={`${outfit.variable} ${sourceSans.variable} d-flex flex-column min-vh-100 `}>
         <NavBar />
         <main className='mainLayout container flex-grow-1'>{children}</main>
         <Footer />

@@ -21,7 +21,7 @@ interface VenuesPageProps {
 }
 
 export const metadata: Metadata = {
-  title: 'Venues',
+  title: 'Venues - Holidaze',
   description: 'Explore our curated selection of venues, perfect for any occasion.',
 }
 

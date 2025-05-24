@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
         page: validatedPage,
         _owner,
         _bookings,
-        revalidate: 0, // No caching here
+        revalidate: 0,
       })
       response = {
         venues: fetchResponse.venues?.data ?? fetchResponse.venues ?? [],

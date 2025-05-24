@@ -1,5 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * Middleware function for Next.js that protects certain routes by verifying the presence and validity of a JWT access token in cookies.
+ *
+ * - Checks if the requested path is protected (e.g., `/profile` or `/venue/:id/book`).
+ * - If the route is not protected, the request proceeds as normal.
+ * - If the route is protected and no valid token is found, redirects the user to the login page.
+ * - If a token is present, decodes and validates its expiration.
+ * - If the token is expired, clears relevant cookies and redirects to login.
+ * - Handles malformed tokens and logs errors.
+ *
+ * @param request - The incoming Next.js request object.
+ * @returns A `NextResponse` object that either allows the request to proceed or redirects to the login page.
+ */
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get('accessToken')?.value
 

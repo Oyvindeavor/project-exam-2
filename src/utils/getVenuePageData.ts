@@ -19,6 +19,35 @@ interface VenuePageData {
   validatedPage: number
 }
 
+/**
+ * Fetches venue page data from the API based on the provided search parameters.
+ *
+ * Constructs a query string from the given `searchParams`, sends a GET request to the `/api/venues` endpoint,
+ * and returns the venues data, metadata, any error encountered, the search query, and the validated page number.
+ *
+ * @param searchParams - The parameters used to filter, sort, and paginate the venues.
+ * @returns A promise that resolves to an object containing:
+ *   - `venuesData`: An array of venues matching the search criteria.
+ *   - `metaData`: Metadata about the venues result set (e.g., pagination info).
+ *   - `error`: An error message if the request fails, otherwise `null`.
+ *   - `query`: The trimmed search query string.
+ *   - `validatedPage`: The validated page number (defaults to 1 if invalid).
+ *
+ * @throws Will not throw, but will return an error message in the result object if the fetch fails.
+ *
+ * @example
+ * const searchParams = {
+ *   q: 'wedding',
+ *   sort: 'rating',
+ *   sortOrder: 'desc',
+ *   limit: '10',
+ *   page: '1',
+ *   _owner: 'true',
+ *   _bookings: 'true',
+ * }
+ *
+ * const { venuesData, metaData, error, query, validatedPage } = await getVenuePageData(searchParams)
+ */
 export async function getVenuePageData(searchParams: SearchParams): Promise<VenuePageData> {
   const query = searchParams.q?.trim() || ''
   const page = parseInt(searchParams.page || '1', 10)
@@ -43,17 +72,16 @@ export async function getVenuePageData(searchParams: SearchParams): Promise<Venu
   try {
     const response = await fetch(apiUrl, {
       method: 'GET',
-      cache: 'no-store', // Ensure fresh data for initial load via API route
+      cache: 'no-store',
     })
 
     if (!response.ok) {
-      // Try to parse error message from API route response
       let errorMessage = `API request failed with status ${response.status}`
       try {
         const errorBody = await response.json()
         errorMessage = errorBody.message || errorMessage
       } catch {
-        /* ignore json parsing error */
+        errorMessage = `API request failed with status ${response.status}`
       }
       throw new Error(errorMessage)
     }

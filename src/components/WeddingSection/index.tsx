@@ -95,7 +95,6 @@ export default async function WeddingSection() {
             <span className='visually-hidden'> wedding venues</span>
           </Link>
         </div>
-        <hr className='divider' />
       </div>
     </section>
   )

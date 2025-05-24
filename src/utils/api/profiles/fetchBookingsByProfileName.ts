@@ -13,6 +13,34 @@ interface FetchBookingsOptions {
   venue?: boolean
 }
 
+/**
+ * Fetches bookings associated with a specific profile name.
+ *
+ * @param name - The profile name to fetch bookings for.
+ * @param options - Optional parameters to customize the fetch request.
+ * @param options.sort - The field to sort the bookings by (default: 'created').
+ * @param options.sortOrder - The order to sort the bookings ('asc' or 'desc', default: 'desc').
+ * @param options.limit - The maximum number of bookings to return per page (default: 10).
+ * @param options.page - The page number to fetch (default: 1).
+ * @param options.customer - Whether to include customer details in the response (default: false).
+ * @param options.venue - Whether to include venue details in the response (default: false).
+ * @returns An object containing the bookings and meta information, or an error message if the request fails.
+ * @throws Will throw an error if the fetch operation fails unexpectedly.
+ *
+ * @example
+ * ```typescript
+ * const { bookings, meta } = await fetchBookingsByProfile('oyvind', {
+ *   sort: 'date',
+ *   sortOrder: 'asc',
+ *   limit: 5,
+ *   page: 1,
+ *   customer: true,
+ *   venue: true,
+ * })
+ * console.log('Fetched bookings:', bookings)
+ * console.log('Metadata:', meta)
+ * ```
+ */
 export default async function fetchBookingsByProfile(
   name: string,
   {

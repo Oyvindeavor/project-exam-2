@@ -34,7 +34,7 @@ export default function BookingListItem({
       </div>
       <p className='mb-1'>
         <span className='fw-semibold'>Dates:</span>
-        {formatDate(new Date(booking.dateFrom), 'dd MMM yyyy')}
+        {formatDate(new Date(booking.dateFrom), 'dd MMM yyyy')} -{' '}
         {formatDate(new Date(booking.dateTo), 'dd MMM yyyy')}
         <span className='text-muted ms-1'>
           ({bookingDays} day{bookingDays !== 1 ? 's' : ''})

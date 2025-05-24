@@ -14,7 +14,7 @@ Welcome to Holidaze, a Next.js application for discovering and booking unique ve
 
 ## Live Demo
 
-[https://holidaze-two-steel.vercel.app/](link)
+[Holidaze](https://holidaze-two-steel.vercel.app/)
 
 ## Getting Started
 
@@ -102,7 +102,7 @@ Open http://localhost:3000 with your browser to see the result.
 - Forms & Validation: React Hook Form (patterns)
 - Mapping: @vis.gl/react-google-maps
 - Date Handling: React Datepicker, date-fns
-- Image Optimization: React Lazy Load Image Component
+- Image Optimization: React Lazy Load Image Component (unfortunately next image cant be used effectively because of user provided image urls)
 - Linting & Formatting: ESLint, Prettier
 
 #### Key Directory Explanations:
@@ -129,6 +129,7 @@ The application employs a robust token-based authentication system with a focus 
 - The accessToken is HttpOnly (inaccessible to client-side JavaScript), Secure (in production), and SameSite=Strict for enhanced security.
 - Middleware Protection: src/middleware.ts intercepts requests to protected routes, validating the accessToken (including its expiration) on the server. Unauthorized or expired sessions are redirected to the login page.
 - Server-Side Utilities: Functions in src/utils/auth/ provide helpers for checking login status, retrieving authenticated headers for API calls, and fetching logged-in user data securely on the server.
+- The user login data is cached and updated via revalidate when needed eg when users update the avatar, bio etc. Allowing for a ssr state and only one fetch on login for user data.
 
 ### Security Highlights:
 
@@ -149,11 +150,3 @@ This project is architected with a server-first approach, leveraging Next.js's A
 - Backend logic for data fetching, mutations, and authentication is handled by server-side API Routes (src/app/api/) and Server Actions (functions marked with "use server";).
 - Server Actions are used extensively for form submissions (e.g., creating a venue, booking a venue, updating a profile), allowing Client Components to directly call server-side logic without manual API endpoint setup.
 - Benefits: This server-centric model improves Time to First Byte (TTFB), enhances SEO by providing fully rendered HTML to crawlers, and simplifies data fetching and mutation logic by co-locating it with server-side code.
-
-## Learn More About Next.js
-
-To learn more about Next.js, take a look at the following resources:
-
-- Next.js Documentation - learn about Next.js features and API.
-- Learn Next.js - an interactive Next.js tutorial.
-  You can check out the Next.js GitHub repository - your feedback and contributions are welcome!

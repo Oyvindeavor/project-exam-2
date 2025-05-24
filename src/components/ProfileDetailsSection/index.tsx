@@ -4,6 +4,17 @@ interface ProfileDetailsSectionProps {
   profile: Profile
 }
 
+/**
+ * Renders a section displaying the user's profile details, including a welcome message and bio.
+ *
+ * @param profile - The profile object containing user details such as name and bio.
+ * @returns A section element with the user's name and bio, or a placeholder if the bio is missing.
+ *
+ * @example
+ * <ProfileDetailsSection profile={{ name: 'Oyvind', bio: 'Software Developer' }} />
+ * // Renders: "Welcome back, John Doe! Your bio: Software Developer"
+ *
+ */
 export default function ProfileDetailsSection({ profile }: ProfileDetailsSectionProps) {
   return (
     <section className='col-12 col-lg-7 mb-4 mb-lg-0' aria-labelledby='profileDetailsHeading'>

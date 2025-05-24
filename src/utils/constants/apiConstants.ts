@@ -1,6 +1,45 @@
+/**
+ * API Constants
+ * This module contains constants and endpoints for the API used in the application.
+ * It includes the base URL, API key, and various endpoints for authentication,
+ * profiles, venues, and bookings.
+ * The constants are derived from environment variables for flexibility and security.
+ * The endpoints are constructed using the base URL and specific paths for each resource.
+ * This allows for easy access and management of API endpoints throughout the application.
+ * The API key is used for authentication and should be kept secure.
+ * The base URL is the root URL for the API, and it can be configured for different environments (e.g., development, production).
+ * The endpoints are organized by resource type, making it easy to find and use the appropriate endpoint for each API call.
+ * The API key and base URL are loaded from environment variables to keep sensitive information out of the codebase.
+ * This module is intended to be used in conjunction with other modules that handle API requests and responses.
+ *
+ */
+
 export const API_KEY = process.env.EXTERNAL_API_KEY
 export const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
 export const BASE_URL_HOLIDAZE = `${BASE_URL}/holidaze`
+
+/**
+ * @example
+ * ```typescript
+ * import {endpoints} from '@/utils/constants/apiConstants'
+ * import {getAuthHeaders} from '@/utils/auth/getAuthHeaders'
+ *
+ * const fetchVenues = async () => {
+ *   const response = await fetch(endpoints.getVenues, {
+ *     method: 'GET',
+ *     headers: await getAuthHeaders(),
+ *   })
+ *   if (!response.ok) {
+ *     throw new Error('Failed to fetch venues')
+ *   }
+ *   const data = await response.json()
+ *   return data
+ *  })
+ *
+ * const venues = await fetchVenues()
+ * console.log(venues)
+ * }
+ */
 
 export const ENDPOINTS = {
   // AUTH

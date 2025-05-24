@@ -98,7 +98,6 @@ export default async function FiveStarVenues() {
             <span className='visually-hidden'> five star venues with high ratings</span>
           </Link>
         </div>
-        <hr className='divider' />
       </div>
     </section>
   )
