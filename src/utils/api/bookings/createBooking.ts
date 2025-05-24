@@ -8,6 +8,43 @@ import type {
   CreateBookingResponse,
 } from '@/types/NoroffApi/response/bookingsResponse'
 
+/**
+ * Creates a new booking by sending a POST request to the booking API endpoint.
+ *
+ * This function checks if the current user is a venue manager (by inspecting cookies).
+ * Venue managers are not allowed to create bookings and will receive an error response.
+ * For other users, it attempts to create a booking with the provided booking data.
+ *
+ * @param bookingData - The booking details to be sent in the request body.
+ * @returns A promise that resolves to either a successful booking response or an error response.
+ *
+ * @remarks
+ * - Requires authentication headers, which are retrieved via `getAuthHeaders()`.
+ * - Handles both API and network errors.
+ * - Returns a specific error if the user is a venue manager.
+ *
+ * @throws {ApiErrorResponse} If the API returns an error response.
+ * @throws {NoroffApiError} If the API returns a Noroff-specific error.
+ * @throws {Error} If a network error occurs.
+ *
+ * @example
+ * ```typescript
+ * const bookingData: CreateBookingRequest = {
+ *   // ... booking details
+ * }
+ * createBooking(bookingData)
+ *   .then(response => {
+ *     if ('error' in response) {
+ *       console.error('Error creating booking:', response.error)
+ *     } else {
+ *       console.log('Booking created successfully:', response)
+ *     }
+ *   })
+ *   .catch(error => {
+ *     console.error('Unexpected error:', error)
+ *   })
+ * ```
+ */
 export default async function createBooking(
   bookingData: CreateBookingRequest
 ): Promise<CreateBookingResponse | ApiErrorResponse> {

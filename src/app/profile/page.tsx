@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 }
 
 export default async function ProfileDefaultPage() {
-  const { profile, error } = await fetchLoggedInUser({})
+  const { profile, error } = await fetchLoggedInUser({ bookings: true, venues: true })
   const isManager = profile ? await isUserVenueManager() : false
 
   if (error || !profile) {

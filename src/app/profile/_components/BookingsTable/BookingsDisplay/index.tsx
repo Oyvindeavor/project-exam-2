@@ -24,7 +24,7 @@ export default function BookingsDisplay({
     <div className='list-group'>
       {processedBookings.map((booking) => (
         <BookingListItem
-          key={booking.id} // Key is crucial here for list rendering
+          key={booking.id}
           booking={booking}
           calculateBookingDurationInDays={calculateBookingDurationInDays}
         />

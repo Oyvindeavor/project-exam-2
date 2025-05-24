@@ -1,32 +1,3 @@
-/**
- * Fetches the logged-in user's profile from the Noroff API.
- * This function is designed to be used ONLY in Server Components or Route Handlers
- * as it relies on `next/headers`.
- * It retrieves the user's name from cookies and constructs the API endpoint accordingly.
- * It also handles optional query parameters for including bookings and venues in the response.
- * The function caches the result to optimize performance.
- * Which means you can call this function in as many components as you want
- * and it will only fetch the data once.
- * to update the cache, you can use the `revalidateTag` function from `next/cache`eg when a user updates their profile.
- *
- * @param {Object} options - Options for fetching the profile.
- * @param {boolean} options.bookings - Whether to include bookings in the response.
- * @param {boolean} options.venues - Whether to include venues in the response.
- * @returns {Promise<{ profile?: Profile; error?: ApiErrorResponse }>}
- *         - The profile data if successful, or an error message if not.
- *
- * @throws {Error} If an unexpected error occurs during the fetch.
- *
- * @example getting the logged in user profile data
- * const { profile} = await fetchLoggedInUser({ bookings: true, venues: true });
- *
- *
- * @example using this function in multiple components
- * const { profile, error } = await fetchLoggedInUser();
- *
- *
- */
-
 import { cache } from 'react'
 import { cookies } from 'next/headers'
 import { getAuthHeaders } from '@/utils/auth/getAuthHeaders'
@@ -40,6 +11,23 @@ interface fetchProfileByNameOptions {
   venues?: boolean
 }
 
+/**
+ * Fetches the currently logged-in user's profile using the username stored in cookies.
+ * Optionally includes bookings and/or venues in the response. The function is cached for performance.
+ * It uses the `cache` function from React to optimize performance by caching the result.
+ * To update the cache, you can use the `revalidate` with the tag 'logged-in-user'.
+ * eg when a user updates their profile, you can call `revalidateTag('logged-in-user')` to refresh the cache.
+ *
+ * @param options - Options to include bookings and/or venues in the profile response.
+ * @param options.bookings - If true, includes the user's bookings in the response.
+ * @param options.venues - If true, includes the user's venues in the response.
+ * @returns An object containing either the user's profile and meta information, or an error object.
+ * @throws Will throw an error if the fetch operation fails or if the API returns an error response.
+ *
+ *
+ * @example
+ * const { profile, meta, error } = await fetchLoggedInUser({ bookings: true, venues: false });
+ */
 export const fetchLoggedInUser = cache(
   async ({ bookings = false, venues = false }: fetchProfileByNameOptions = {}) => {
     try {

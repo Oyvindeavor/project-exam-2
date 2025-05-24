@@ -13,6 +13,40 @@ interface fetchAllVenuesOptions {
   revalidate?: number
 }
 
+/**
+ * Fetches a list of venues from the API with optional sorting, pagination, and inclusion of owner or bookings data.
+ *
+ * @param {fetchAllVenuesOptions} [options] - Options to customize the fetch request.
+ * @param {string} [options.sort='created'] - The field to sort the venues by.
+ * @param {string} [options.sortOrder='desc'] - The order to sort the venues ('asc' or 'desc').
+ * @param {number} [options.limit=10] - The maximum number of venues to fetch per page.
+ * @param {number} [options.page=1] - The page number to fetch.
+ * @param {boolean} [options._owner=false] - Whether to include owner information in the response.
+ * @param {boolean} [options._bookings=false] - Whether to include bookings information in the response.
+ * @param {number} [options.revalidate] - Optional revalidation time for caching (if supported).
+ * @returns {Promise<{ venues: VenuesResponse, meta: VenuesResponse['meta'] }>} An object containing the venues and metadata.
+ * @throws {Error} Throws an error if the fetch fails or the API returns an error response.
+ *
+ * @example
+ * const { venues, meta } = await fetchAllVenues({
+ *   sort: 'name',
+ *   sortOrder: 'asc',
+ *   limit: 20,
+ *   page: 2,
+ *   _owner: true,
+ *   _bookings: true,
+ *   revalidate: 60,
+ * })
+ * console.log('Fetched venues:', venues)
+ * console.log('Metadata:', meta)
+ *
+ * @example
+ * const { venues, meta } = await fetchAllVenues({})
+ * console.log('Fetched venues:', venues)
+ * console.log('Metadata:', meta)
+ *
+ *
+ */
 export default async function fetchAllVenues({
   sort = 'created',
   sortOrder = 'desc',

@@ -41,14 +41,14 @@ export default function HamburgerMenu({
     <div className={styles.menuContainer}>
       <HamburgerToggle />
       <div
-        className={`${styles.offCanvasMenu} offcanvas offcanvas-end`}
+        className={`${styles.offCanvasMenu} d-lg-none offcanvas offcanvas-end`}
         tabIndex={-1}
         id='offcanvasNavbar'
         aria-labelledby='offcanvasNavbarLabel'
         role='dialog'
       >
         <div className='offcanvas-header'>
-          <h2 className='h5 offcanvas-title text-light' id='offcanvasNavbarLabel'>
+          <h2 className='h5 offcanvas-title t' id='offcanvasNavbarLabel'>
             <Logo />
           </h2>
           <button

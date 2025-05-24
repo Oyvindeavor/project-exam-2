@@ -3,7 +3,7 @@ import React from 'react'
 
 const Loading: React.FC = () => {
   return (
-    <div className='d-flex justify-content-center align-items-center vh-100 bg-light'>
+    <div className='d-flex justify-content-center align-items-center min-vh-100   bg-light'>
       <div className='text-center'>
         <div
           className='spinner-border text-primary'

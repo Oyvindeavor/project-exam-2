@@ -10,7 +10,6 @@ $overlay-bg: rgba(0, 0, 0, 0.6);
   position: relative;
   background: url('/hero-bg.svg') no-repeat center center;
   background-color: rgb(11, 110, 102);
-
   background-size: cover;
   color: $light-text;
   display: flex;
@@ -21,9 +20,13 @@ $overlay-bg: rgba(0, 0, 0, 0.6);
   border-radius: 1rem;
 
   @media screen and (max-width: 768px) {
-    min-height: 30vh;
+    min-height: 50vh;
     border-radius: 0rem;
   }
+}
+
+.heading {
+  font-family: var(--font-outfit);
 }
 
 .contentContainer {
@@ -46,13 +49,16 @@ $overlay-bg: rgba(0, 0, 0, 0.6);
   input {
     border: none;
     flex-grow: 1;
-    padding: 0.9rem 1rem;
     font-size: 1rem;
     color: $primary-darker;
 
     &:focus {
       outline: none;
     }
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 1rem;
   }
 }
 
@@ -70,5 +76,7 @@ $overlay-bg: rgba(0, 0, 0, 0.6);
   }
 
   @media (max-width: 768px) {
+    padding: 0.1rem 1rem;
+    font-size: 0.9rem;
   }
 }

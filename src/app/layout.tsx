@@ -4,6 +4,7 @@ import '@/styles/main.scss'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import ScrollToTop from '@/components/ScrollToTop'
 import '@/styles/layout.scss'
 
 const outfit = Outfit({
@@ -30,8 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${outfit.variable} ${sourceSans.variable} d-flex flex-column min-vh-100`}>
+      <body className={`${outfit.variable} ${sourceSans.variable} d-flex flex-column min-vh-100 `}>
         <NavBar />
+        {/* <ScrollToTop /> */}
         <main className='mainLayout container flex-grow-1'>{children}</main>
         <Footer />
         <SpeedInsights />

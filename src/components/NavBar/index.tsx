@@ -18,7 +18,7 @@ export default async function NavBar() {
         <div className='d-lg-none'>
           <HamburgerMenuWrapper />
         </div>
-        <div className='collapse navbar-collapse' id='navbarNav'>
+        <div className='d-none d-lg-flex navbar-collapse' id='navbarNav'>
           {/* Navigation Links List */}
           <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
             <li className='nav-item'>

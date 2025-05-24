@@ -1,15 +1,23 @@
 import Link from 'next/link'
 import styles from './Logo.module.scss'
-export default function Logo() {
+
+interface LogoProps {
+  alt?: string
+  ariaLabel?: string
+}
+
+export default function Logo({ alt, ariaLabel }: LogoProps) {
   return (
     <Link
       href='/'
       className='navbar-brand d-flex align-items-center gap-2 text-decoration-none'
-      aria-label='Homepage - Holidaze'
+      aria-label={ariaLabel ?? 'Homepage - Holidaze'}
     >
       <img
         src='/holidaze_logo5.svg'
-        alt='Holidaze Logo - 2 circles on top of each other with a small house in the middle'
+        alt={
+          alt ?? 'Holidaze Logo - 2 circles on top of each other with a small house in the middle'
+        }
         className='logo'
         width={30}
         height={30}
