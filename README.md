@@ -155,3 +155,6 @@ This project is architected with a server-first approach, leveraging Next.js's A
 - Backend logic for data fetching, mutations, and authentication is handled by server-side API Routes (src/app/api/) and Server Actions (functions marked with "use server";).
 - Server Actions are used extensively for form submissions (e.g., creating a venue, booking a venue, updating a profile), allowing Client Components to directly call server-side logic without manual API endpoint setup.
 - Benefits: This server-centric model improves Time to First Byte (TTFB), enhances SEO by providing fully rendered HTML to crawlers, and simplifies data fetching and mutation logic by co-locating it with server-side code.
+<img width="1244" alt="Screenshot 2025-05-25 at 10 13 55" src="https://github.com/user-attachments/assets/ee3960bf-32be-4f49-bdfc-6871c5663867" />
+
+
