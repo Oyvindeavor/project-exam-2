@@ -29,29 +29,6 @@ To get a local copy up and running, follow these simple steps.
 - Node.js (v18.18.0 or later recommended)
 - npm, yarn, pnpm, or bun
 
-### Environment Variables
-
-Before running the application, you'll need to set up your environment variables. Either copy the provided .env.local to the root or Create a .env.local file in the root of the project and add the following variables:
-
-```env
-EXTERNAL_API_KEY=your_actual_external_api_key_here
-NEXT_PUBLIC_API_BASE_URL=https://v2.api.noroff.dev
-NEXT_PUBLIC_BASE_URL=http://localhost:3000
-GOOGLE_MAPS_API_KEY=your_actual_google_maps_api_key_here
-```
-
-Replace the placeholder values with your actual API keys. Do not include spaces before or after the = sign.
-
-- EXTERNAL_API_KEY: Your API key for the external service.
-
-- GOOGLE_MAPS_API_KEY: Your Google Maps API key.
-
-- NEXT_PUBLIC_API_BASE_URL: Base URL for the Noroff API.
-
-- NEXT_PUBLIC_BASE_URL: Base URL for your local Next.js app.
-
-Make sure this file is placed at the root of your project.
-
 ### Installation
 
 Clone the repo:
@@ -77,6 +54,29 @@ pnpm install
 or
 bun install
 ```
+
+### Environment Variables
+
+Before running the application, you'll need to set up your environment variables. Either copy the provided .env.local to the root or Create a .env.local file in the root of the project and add the following variables:
+
+```env
+EXTERNAL_API_KEY=your_actual_external_api_key_here
+NEXT_PUBLIC_API_BASE_URL=https://v2.api.noroff.dev
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+GOOGLE_MAPS_API_KEY=your_actual_google_maps_api_key_here
+```
+
+Replace the placeholder values with your actual API keys. Do not include spaces before or after the = sign.
+
+- EXTERNAL_API_KEY: Your API key for the external service.
+
+- GOOGLE_MAPS_API_KEY: Your Google Maps API key.
+
+- NEXT_PUBLIC_API_BASE_URL: Base URL for the Noroff API.
+
+- NEXT_PUBLIC_BASE_URL: Base URL for your local Next.js app.
+
+Make sure this file is placed at the root of your project.
 
 ### Running the Development Server
 
