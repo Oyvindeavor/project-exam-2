@@ -97,6 +97,7 @@ export default function CreateVenueForm() {
                     required
                     step='1'
                     min='1'
+                    max={100}
                   />
                   <label htmlFor='maxGuests'>Max Guests *</label>
                   <div className='invalid-feedback'>Please enter the maximum number of guests.</div>

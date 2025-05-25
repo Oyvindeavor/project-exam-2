@@ -7,7 +7,6 @@ export default function FeaturesSection() {
         {/* Section Header */}
         <div className='row mb-5'>
           <div className='col-12 text-center'>
-            <h2 className='display-6 fw-bold text-dark mb-3'>Why Choose Holidaze?</h2>
             <p className='lead text-muted'>Everything you need for seamless venue booking</p>
             <div className='bg-primary mx-auto mb-4' style={{ width: '60px', height: '3px' }}></div>
           </div>
