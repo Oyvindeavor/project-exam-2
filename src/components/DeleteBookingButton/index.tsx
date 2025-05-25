@@ -2,35 +2,60 @@
 
 import { useActionState } from 'react'
 import { useFormStatus } from 'react-dom'
+import { useState, useRef } from 'react'
 import { deleteBookingFormAction } from './DeleteBookingFormAction'
+import ConfirmDeleteModal from '@/components/ConfirmDeleteModal'
 
-type ActionState = {
-  error?: string
-}
-
-function SubmitButton() {
+function SubmitButton({ onClick }: { onClick: () => void }) {
   const { pending } = useFormStatus()
 
   return (
-    <button type='submit' className='btn btn-outline-danger text-dark' disabled={pending}>
+    <button
+      type='button'
+      className='btn btn-outline-danger text-dark'
+      disabled={pending}
+      onClick={onClick}
+    >
       {pending ? 'Deleting...' : 'Delete Booking'}
     </button>
   )
 }
 
 export default function DeleteBookingButton({ bookingId }: { bookingId: string }) {
-  const deleteWithId = async (): Promise<ActionState> => {
-    return deleteBookingFormAction(bookingId)
+  const [showModal, setShowModal] = useState(false)
+  const [state, formAction] = useActionState(async () => await deleteBookingFormAction(bookingId), {
+    error: undefined,
+  })
+
+  const formRef = useRef<HTMLFormElement>(null)
+
+  const openModal = () => setShowModal(true)
+  const closeModal = () => setShowModal(false)
+
+  const confirmDelete = () => {
+    if (formRef.current) {
+      formRef.current.requestSubmit()
+    }
+    setShowModal(false)
   }
 
-  const [state, formAction] = useActionState(deleteWithId, { error: undefined })
-
   return (
-    <form action={formAction}>
-      <div className=''>
-        <SubmitButton />
-      </div>
+    <>
+      <form ref={formRef} action={formAction}>
+        <SubmitButton onClick={openModal} />
+      </form>
+
       {state?.error && <div className='text-dark mt-2'>{state.error}</div>}
-    </form>
+
+      <ConfirmDeleteModal
+        show={showModal}
+        onClose={closeModal}
+        onConfirm={confirmDelete}
+        title='Delete Booking'
+        bodyText='Are you sure you want to delete this booking? This action cannot be undone.'
+        confirmText='Delete Booking'
+        cancelText='Cancel'
+      />
+    </>
   )
 }

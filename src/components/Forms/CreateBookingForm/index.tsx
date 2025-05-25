@@ -14,11 +14,7 @@ interface CreateBookingFormProps {
   maxGuests?: number
 }
 
-export default function CreateBookingForm({
-  venueId,
-  maxGuests,
-  venueName,
-}: CreateBookingFormProps) {
+export default function CreateBookingForm({ venueId, maxGuests }: CreateBookingFormProps) {
   const [state, formAction] = useActionState(createBookingFormAction, initialState)
   const formRef = useRef<HTMLFormElement>(null)
 
@@ -38,8 +34,6 @@ export default function CreateBookingForm({
       noValidate
       onSubmit={handleSubmit}
     >
-      <h2 className='mb-4'>{venueName}</h2>
-
       <input type='hidden' name='venueId' value={venueId} />
 
       <div className='row mb-3'>

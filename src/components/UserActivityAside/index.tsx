@@ -17,20 +17,7 @@ export default function UserActivityAside({ profile, isManager }: UserActivityAs
           </h3>
         </div>
         <div className='card-body p-4'>
-          <div className='d-flex align-items-center mb-3 pb-3 border-bottom'>
-            <div
-              className={`${styles.iconDiv} me-3 p-2 d-flex align-items-center justify-content-center rounded-circle bg-primary-subtle`}
-              aria-hidden='true'
-            >
-              <Briefcase />
-            </div>
-            <div>
-              <h4 className='h6 mb-0 text-dark fw-semibold'>Bookings</h4>
-              <p className='fw-bold text-dark mb-0'>{profile._count.bookings}</p>
-            </div>
-          </div>
-
-          {isManager && (
+          {isManager ? (
             <div className='d-flex align-items-center'>
               <div
                 className={`${styles.iconDiv} me-3 p-2 d-flex align-items-center justify-content-center rounded-circle bg-primary-subtle`}
@@ -43,8 +30,20 @@ export default function UserActivityAside({ profile, isManager }: UserActivityAs
                 <p className='fw-bold text-dark mb-0'>{profile._count.venues}</p>
               </div>
             </div>
-          )}
-          {!isManager && profile._count.bookings === 0 && (
+          ) : profile._count.bookings > 0 ? (
+            <div className='d-flex align-items-center'>
+              <div
+                className={`${styles.iconDiv} me-3 p-2 d-flex align-items-center justify-content-center rounded-circle bg-primary-subtle`}
+                aria-hidden='true'
+              >
+                <Briefcase />
+              </div>
+              <div>
+                <h4 className='h6 mb-0 text-dark fw-semibold'>Bookings</h4>
+                <p className='fw-bold text-dark mb-0'>{profile._count.bookings}</p>
+              </div>
+            </div>
+          ) : (
             <div className='text-center text-muted p-3'>
               <p className='mb-0'>No activity to show yet.</p>
             </div>
