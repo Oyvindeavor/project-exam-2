@@ -78,7 +78,7 @@ export default function RegisterForm() {
           aria-describedby='name-error-message'
           title='Please enter your full name (at least 2 characters).'
         />
-        <label htmlFor='registerNameInput'>Full Name</label>
+        <label htmlFor='registerNameInput'>Username</label>
         <div id='name-error-message' className='invalid-feedback'>
           Please enter your name (at least 2 characters).
         </div>
@@ -98,7 +98,7 @@ export default function RegisterForm() {
           title='Email must be a valid @stud.noroff.no address.'
           aria-describedby='email-error-message'
         />
-        <label htmlFor='registerEmailInput'>Email address</label>
+        <label htmlFor='registerEmailInput'>Email (@stud.noroff.no)</label>
         <div id='email-error-message' className='invalid-feedback'>
           Please enter a valid Noroff email address
         </div>
