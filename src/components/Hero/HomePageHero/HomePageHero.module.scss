@@ -66,9 +66,8 @@ $overlay-bg: rgba(0, 0, 0, 0.6);
   background-color: $primary-color;
   color: $light-text;
   padding: 1rem 1.3rem;
-  font-weight: 500;
+  font-weight: bold;
   border: none;
-  border-radius: 0.5rem;
   cursor: pointer;
 
   &:hover {
@@ -76,7 +75,7 @@ $overlay-bg: rgba(0, 0, 0, 0.6);
   }
 
   @media (max-width: 768px) {
-    padding: 0.1rem 1rem;
+    padding: 0.1rem 2rem;
     font-size: 0.9rem;
   }
 }

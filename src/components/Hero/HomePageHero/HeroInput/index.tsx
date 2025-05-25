@@ -53,7 +53,7 @@ export default function HeroInput() {
             role='button'
             aria-label='Search venues'
           >
-            <SearchIcon className='ms-2' aria-hidden='true' size={22} />
+            <SearchIcon className='ms-1' aria-hidden='true' size={25} />
           </Link>
         </div>
 
