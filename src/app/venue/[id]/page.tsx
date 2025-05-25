@@ -7,6 +7,7 @@ import VenueHostProfile from '@/app/venue/[id]/_components/VenueHostProfile'
 import VenueHeader from '@/app/venue/[id]/_components/VenueHeader'
 import ErrorDisplay from '@/components/ErrorDisplay'
 import NotFoundDisplay from '@/components/NotFoundDisplay'
+import Calendar from '@/components/Calendar'
 import { Metadata } from 'next'
 
 interface VenuePageProps {
@@ -66,6 +67,16 @@ export default async function VenuePage(props: VenuePageProps) {
       {/* Location */}
       <div className='container mb-5'>
         <Location location={venue.location} />
+      </div>
+      {/* Availability Calendar */}
+      <div className='container mb-5'>
+        <h2 className='h5 mb-3'>Availability</h2>
+
+        <div className='card shadow-sm'>
+          <div className='card-body d-flex justify-content-center'>
+            <Calendar bookings={venue.bookings ?? []} />
+          </div>
+        </div>
       </div>
 
       {/* Booking Section */}
