@@ -2,10 +2,9 @@
 
 Welcome to Holidaze, a Next.js application for discovering and booking unique venues. This platform allows users to register, browse venues, manage their bookings, and for venue managers, to list and manage their properties. The project is built with a strong emphasis on Server-Side Rendering (SSR) and modern Next.js features for optimal performance and user experience. Accessibility and SEO is a top priority as well as speed. Careful considerations have been made to limit the amount of js needed for initial load.
 
-### Homepage Preview  
+### Homepage Preview
+
 [![Homepage Screenshot](https://github.com/user-attachments/assets/69f76311-83f0-4201-a983-eaf8a3ddf071)](https://github.com/user-attachments/assets/69f76311-83f0-4201-a983-eaf8a3ddf071)
-
-
 
 ## Features
 
@@ -35,17 +34,23 @@ To get a local copy up and running, follow these simple steps.
 Before running the application, you'll need to set up your environment variables. Either copy the provided .env.local to the root or Create a .env.local file in the root of the project and add the following variables:
 
 ```env
-Base URL for your application (e.g., http://localhost:3000 for development)
-NEXT_PUBLIC_BASE_URL=http://localhost:3000
-Base URL for the Noroff API
+EXTERNAL_API_KEY=your_actual_external_api_key_here
 NEXT_PUBLIC_API_BASE_URL=https://v2.api.noroff.dev
-API Key for the external Noroff API
-EXTERNAL_API_KEY=your_noroff_api_key_here
-Google Maps API Key (Needed for displaying maps for venue managers that have displayed LAT and LNG)
-Maps_API_KEY=your_Maps_api_key_here
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+GOOGLE_MAPS_API_KEY=your_actual_google_maps_api_key_here
 ```
 
-Replace your_noroff_api_key_here and your_Maps_api_key_here with your actual API keys.
+Replace the placeholder values with your actual API keys. Do not include spaces before or after the = sign.
+
+- EXTERNAL_API_KEY: Your API key for the external service.
+
+- GOOGLE_MAPS_API_KEY: Your Google Maps API key.
+
+- NEXT_PUBLIC_API_BASE_URL: Base URL for the Noroff API.
+
+- NEXT_PUBLIC_BASE_URL: Base URL for your local Next.js app.
+
+Make sure this file is placed at the root of your project.
 
 ### Installation
 
@@ -155,7 +160,5 @@ This project is architected with a server-first approach, leveraging Next.js's A
 - Backend logic for data fetching, mutations, and authentication is handled by server-side API Routes (src/app/api/) and Server Actions (functions marked with "use server";).
 - Server Actions are used extensively for form submissions (e.g., creating a venue, booking a venue, updating a profile), allowing Client Components to directly call server-side logic without manual API endpoint setup.
 - Benefits: This server-centric model improves Time to First Byte (TTFB), enhances SEO by providing fully rendered HTML to crawlers, and simplifies data fetching and mutation logic by co-locating it with server-side code.
-<img width="1244" alt="Screenshot 2025-05-25 at 10 13 55" src="https://github.com/user-attachments/assets/ee3960bf-32be-4f49-bdfc-6871c5663867" />
-<img width="1244" alt="Screenshot 2025-05-25 at 10 24 16" src="https://github.com/user-attachments/assets/63dceb83-426d-4cb7-98e4-a2b1d4f5815a" />
-
-
+  <img width="1244" alt="Screenshot 2025-05-25 at 10 13 55" src="https://github.com/user-attachments/assets/ee3960bf-32be-4f49-bdfc-6871c5663867" />
+  <img width="1244" alt="Screenshot 2025-05-25 at 10 24 16" src="https://github.com/user-attachments/assets/63dceb83-426d-4cb7-98e4-a2b1d4f5815a" />
