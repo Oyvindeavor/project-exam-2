@@ -32,16 +32,11 @@ export default function ConfirmDeleteModal({
   if (!show) return null
 
   return (
-    <div
-      className='modal d-block'
-      tabIndex={-1}
-      role='dialog'
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-    >
+    <div className='modal d-block' tabIndex={-1} role='dialog'>
       <div className='modal-dialog modal-dialog-centered' role='document'>
         <div className='modal-content'>
           <div className='modal-header'>
-            <h5 className='modal-title'>{title}</h5>
+            <h3 className='modal-title h5'>{title}</h3>
             <button
               type='button'
               className='btn-close'

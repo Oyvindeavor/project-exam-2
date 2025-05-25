@@ -54,7 +54,6 @@ export default function EditProfileForm({ profile }: EditProfileFormProps) {
           className='form-control h-auto mt-4 mb-4'
           placeholder='Write your bio here...'
           defaultValue={profile.bio || ''}
-          style={{ minHeight: '100px' }}
           id='bio'
         />
         <label htmlFor='bio'>Bio</label>
