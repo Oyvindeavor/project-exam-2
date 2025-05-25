@@ -20,6 +20,11 @@ export default async function registerFormAction(
     return { error: 'All fields are required.' }
   }
 
+  const noroffEmailRegex = /^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$/
+  if (!noroffEmailRegex.test(email)) {
+    return { error: 'Email must be a valid @stud.noroff.no address.' }
+  }
+
   const result = await Register(name, email, password, venueManager)
 
   if (!result.ok) {

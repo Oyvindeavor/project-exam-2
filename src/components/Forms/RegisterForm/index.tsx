@@ -13,14 +13,29 @@ interface RegisterFormState {
 const initialState: RegisterFormState = { error: undefined }
 
 export default function RegisterForm() {
-  const [state, formAction] = useActionState(registerFormAction, initialState)
+  const [state, formAction] = useActionState<RegisterFormState, FormData>(
+    registerFormAction,
+    initialState
+  )
   const formRef = useRef<HTMLFormElement>(null)
   const nameInputRef = useRef<HTMLInputElement>(null)
   const emailInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
+    const form = formRef.current
+
     if (state?.error) {
-      nameInputRef.current?.focus()
+      // Remove Bootstrap validation class
+      if (form?.classList.contains('was-validated')) {
+        form.classList.remove('was-validated')
+      }
+
+      // Focus logic depending on error type
+      if (state.error.toLowerCase().includes('email')) {
+        emailInputRef.current?.focus()
+      } else {
+        nameInputRef.current?.focus()
+      }
     }
   }, [state?.error])
 
@@ -34,8 +49,8 @@ export default function RegisterForm() {
         if (firstInvalidField) {
           firstInvalidField.focus()
         }
+        form.classList.add('was-validated')
       }
-      form.classList.add('was-validated')
     } else {
       event.preventDefault()
     }
@@ -77,15 +92,15 @@ export default function RegisterForm() {
           name='email'
           id='registerEmailInput'
           className='form-control'
-          placeholder='name@example.com'
+          placeholder='name@stud.noroff.no'
           required
-          pattern='^[^@\s]+@(?:stud\.)?noroff\.(?:no|com)$'
-          title='Email must be a valid @noroff.no, @stud.noroff.no, @noroff.com, or @stud.noroff.com address.'
+          pattern='^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$'
+          title='Email must be a valid @stud.noroff.no address.'
           aria-describedby='email-error-message'
         />
         <label htmlFor='registerEmailInput'>Email address</label>
         <div id='email-error-message' className='invalid-feedback'>
-          Please enter a valid email address.
+          Please enter a valid Noroff email address
         </div>
       </div>
 
