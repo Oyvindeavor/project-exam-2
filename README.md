@@ -2,6 +2,11 @@
 
 Welcome to Holidaze, a Next.js application for discovering and booking unique venues. This platform allows users to register, browse venues, manage their bookings, and for venue managers, to list and manage their properties. The project is built with a strong emphasis on Server-Side Rendering (SSR) and modern Next.js features for optimal performance and user experience. Accessibility and SEO is a top priority as well as speed. Careful considerations have been made to limit the amount of js needed for initial load.
 
+### Homepage Preview  
+[![Homepage Screenshot](https://github.com/user-attachments/assets/69f76311-83f0-4201-a983-eaf8a3ddf071)](https://github.com/user-attachments/assets/69f76311-83f0-4201-a983-eaf8a3ddf071)
+
+
+
 ## Features
 
 - User Authentication: Secure registration and login for users and venue managers.
