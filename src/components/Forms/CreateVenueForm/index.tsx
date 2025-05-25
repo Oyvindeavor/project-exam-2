@@ -4,7 +4,6 @@ import { useActionState } from 'react'
 import createVenueFormAction from './createVenueFormAction'
 import { CreateVenueButton } from './CreateVenueButton'
 import {
-  LucideBuilding,
   Info,
   Images,
   Wifi,
@@ -61,10 +60,7 @@ export default function CreateVenueForm() {
                     placeholder='Venue Name'
                     required
                   />
-                  <label htmlFor='name'>
-                    <LucideBuilding className='me-1' />
-                    Venue Name *
-                  </label>
+                  <label htmlFor='name'>Venue Name *</label>
                   <div className='invalid-feedback'>Please provide a venue name.</div>
                 </div>
               </div>
@@ -111,11 +107,10 @@ export default function CreateVenueForm() {
                   <textarea
                     name='description'
                     id='description'
-                    className='form-control'
+                    className='form-control h-auto'
                     placeholder='Venue Description'
                     required
                     rows={4}
-                    style={{ height: '120px' }}
                   />
                   <label htmlFor='description'>Description *</label>
                   <div className='invalid-feedback'>

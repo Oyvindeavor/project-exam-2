@@ -85,10 +85,7 @@ export default function HamburgerMenu({
           <div className='d-flex flex-column justify-content-between flex-grow-1'>
             {isLoggedIn === null ? (
               <div className='placeholder-glow mt-2' aria-hidden='true'>
-                <div
-                  className='placeholder rounded-circle bg-light'
-                  style={{ width: 40, height: 40 }}
-                ></div>
+                <div className='placeholder rounded-circle bg-light'></div>
               </div>
             ) : isLoggedIn && avatarUrl ? (
               <div className='d-flex flex-column gap-3'>

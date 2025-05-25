@@ -161,13 +161,12 @@ export default function UpdateVenueForm({ venue }: UpdateVenueFormProps) {
         <textarea
           name='description'
           id='description'
-          className={`form-control ${state.errors?.description ? 'is-invalid' : ''}`}
+          className={`form-control h-auto ${state.errors?.description ? 'is-invalid' : ''}`}
           placeholder='Venue Description'
           defaultValue={getDefaultValue('description') as string}
           aria-describedby='description-error'
           required
           rows={4}
-          style={{ height: '100px' }} // < Unable to move to CSS, as it conflicts with Bootstrap styles
         />
         <label htmlFor='description'>Description</label>
         {state.errors?.description && (
