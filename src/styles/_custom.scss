@@ -122,6 +122,22 @@ a:not(.btn):not(.nav-link):not(.dropdown-item):not(.navbar-brand):active {
   font-weight: bold;
 }
 
+.navbar-toggler {
+  border-color: rgba($primary-text, 0.5);
+  color: $primary-text;
+}
+
+.navbar-toggler:hover {
+  background-color: rgba($primary-text, 0.1);
+  color: $primary-text;
+
+  transform: scale(1.05);
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
 // Alert styling adjustments
 .alert {
   box-shadow: none;

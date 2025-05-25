@@ -153,7 +153,7 @@ export default function HamburgerMenu({
                     </li>
                   )}
                 </ul>
-                <LogoutButton className='btn btn-sm btn-outline-warning text-light' />
+                <LogoutButton className='btn btn-md btn-warning' />
               </div>
             ) : (
               <div className='d-flex flex-column gap-2 mt-3'>
